@@ -1,6 +1,6 @@
-imap jj <Esc>
+inoremap jj <Esc>
 
-nmap s <C-W>
+nnoremap s <C-W>
 
 syntax on
 autocmd BufEnter *.tpp :setlocal filetype=cpp
@@ -30,4 +30,4 @@ set incsearch
 
 au BufRead,BufNewFile makefile set noexpandtab
 
-let check="MY VIMRC LOADED"
+let check="VIMRC LOADED"
