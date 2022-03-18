@@ -2,6 +2,7 @@
 " key bindings
 inoremap jj <Esc>
 nnoremap s <C-W>
+vnoremap . <Esc>
 
 " indentation
 set autoindent
