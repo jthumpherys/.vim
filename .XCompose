@@ -58,3 +58,9 @@
 
 <Multi_key> <d> <d> : "∂"
 <Multi_key> <i> <i> : "∫"
+
+
+<Multi_key> <asciitilde> <asciitilde> : "≈"
+<Multi_key> <equal> <asciitilde> : "≅"
+<Multi_key> <asciitilde> <equal> : "≅"
+
