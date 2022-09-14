@@ -1,3 +1,14 @@
+# Math stuff
+<Multi_key> <d> <d> : "∂"
+<Multi_key> <i> <i> : "∫"
+
+<Multi_key> <asciitilde> <asciitilde> : "≈"
+<Multi_key> <equal> <asciitilde> : "≅"
+<Multi_key> <asciitilde> <equal> : "≅"
+
+<Multi_key> <bar> <bar> : "‖"
+
+
 # GREEK CAPITAL LETTERS
 <Multi_key> <G> <A> : "Α"    U0391    # GREEK CAPITAL LETTER ALPHA
 <Multi_key> <G> <B> : "Β"    U0392    # GREEK CAPITAL LETTER BETA
@@ -56,11 +67,39 @@
 <Multi_key> <g> <q> <x> : "ξ"    U03BE    # GREEK SMALL LETTER XI
 
 
-<Multi_key> <d> <d> : "∂"
-<Multi_key> <i> <i> : "∫"
-
-
-<Multi_key> <asciitilde> <asciitilde> : "≈"
-<Multi_key> <equal> <asciitilde> : "≅"
-<Multi_key> <asciitilde> <equal> : "≅"
+# subscript letters
+<Multi_key> <a> <underscore> : "ₐ"
+<Multi_key> <underscore> <a> : "ₐ"
+<Multi_key> <e> <underscore> : "ₑ"
+<Multi_key> <underscore> <e> : "ₑ"
+<Multi_key> <h> <underscore> : "ₕ"
+<Multi_key> <underscore> <h> : "ₕ"
+<Multi_key> <i> <underscore> : "ᵢ"
+<Multi_key> <underscore> <i> : "ᵢ"
+<Multi_key> <j> <underscore> : "ⱼ"
+<Multi_key> <underscore> <j> : "ⱼ"
+<Multi_key> <k> <underscore> : "ₖ"
+<Multi_key> <underscore> <k> : "ₖ"
+<Multi_key> <l> <underscore> : "ₗ"
+<Multi_key> <underscore> <l> : "ₗ"
+<Multi_key> <m> <underscore> : "ₘ"
+<Multi_key> <underscore> <m> : "ₘ"
+<Multi_key> <n> <underscore> : "ₙ"
+<Multi_key> <underscore> <n> : "ₙ"
+<Multi_key> <o> <underscore> : "ₒ"
+<Multi_key> <underscore> <o> : "ₒ"
+<Multi_key> <p> <underscore> : "ₚ"
+<Multi_key> <underscore> <p> : "ₚ"
+<Multi_key> <r> <underscore> : "ᵣ"
+<Multi_key> <underscore> <r> : "ᵣ"
+<Multi_key> <s> <underscore> : "ₛ"
+<Multi_key> <underscore> <s> : "ₛ"
+<Multi_key> <t> <underscore> : "ₜ"
+<Multi_key> <underscore> <t> : "ₜ"
+<Multi_key> <u> <underscore> : "ᵤ"
+<Multi_key> <underscore> <u> : "ᵤ"
+<Multi_key> <v> <underscore> : "ᵥ"
+<Multi_key> <underscore> <v> : "ᵥ"
+<Multi_key> <x> <underscore> : "ₓ"
+<Multi_key> <underscore> <x> : "ₓ"
 
