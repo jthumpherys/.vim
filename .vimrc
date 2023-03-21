@@ -4,6 +4,8 @@ inoremap jj <Esc>
 nnoremap s <C-W>
 vnoremap . <Esc>
 
+cmap w!! w !sudo tee > /dev/null %
+
 " indentation
 set autoindent
 filetype plugin indent on
@@ -29,3 +31,4 @@ autocmd BufEnter *.tpp :setlocal filetype=cpp
 au BufRead,BufNewFile makefile set noexpandtab
 
 let check="VIMRC LOADED"
+
