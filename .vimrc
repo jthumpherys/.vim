@@ -21,8 +21,8 @@ set nowrap
 set incsearch
 set noerrorbells
 set belloff=all
-set colorcolumn=100
-highlight ColorColumn ctermbg=13
+"set colorcolumn=100
+"highlight ColorColumn ctermbg=13
 
 " C++
 autocmd BufEnter *.tpp :setlocal filetype=cpp
