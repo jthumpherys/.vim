@@ -15,28 +15,48 @@ Plug 'junegunn/vim-plug'
 
 Plug('nvim-treesitter/nvim-treesitter', {['do'] = vim.fn['TSUpdate#']})
 
+-- fuzzy search ig?
 Plug 'nvim-lua/plenary.nvim'
-Plug('nvim-telescope/telescope.nvim', {tag = '0.1.1'})
+Plug 'nvim-telescope/telescope.nvim'
 
+-- directory tree
 Plug 'nvim-tree/nvim-tree.lua'
 
+-- colorschemes
+Plug 'EdenEast/nightfox.nvim'
+
+-- indention markers
 Plug 'lukas-reineke/indent-blankline.nvim'
 
-Plug 'EdenEast/nightfox.nvim'
+-- highlight matching keywords under cursor
+Plug 'RRethy/vim-illuminate'
+
+-- absolute/relative line number toggling
+Plug 'sitiom/nvim-numbertoggle'
+
+-- current line highlighting
+Plug 'mvllow/modes.nvim'
+
+-- status line
+Plug 'nvim-tree/nvim-web-devicons'
+Plug 'freddiehaddad/feline.nvim'
 
 vim.call('plug#end')
 
+
+vim.cmd("colorscheme carbonfox")
+
+
+vim.cmd('PlugUpdate')
+vim.cmd('q')
 
 for plug in pairs(vim.g.plugs) do
   local ok, err = os.rename(plug_path .. '/' .. plug, plug_path .. '/' .. plug)
   if not ok then
     vim.cmd('PlugInstall')
-    print(plug)
     break
   end
 end
-
--- vim.cmd('PlugUpdate')
 
 
 -- nvim-treesitter setup
@@ -59,4 +79,23 @@ require("nvim-tree").setup {
     highlight_git = true,
   },
 }
+
+
+-- indent-blankline setup
+require("indent_blankline").setup {
+  show_current_context = true,
+}
+
+
+-- illuminate configuration
+require('illuminate').configure {
+  providers = {'treesitter'},
+
+  modes_allowlist = {'n'},
+
+  min_count_to_highlight = 2,
+}
+
+
+require('modes').setup()
 
