@@ -37,6 +37,9 @@ Plug 'sitiom/nvim-numbertoggle'
 -- current line highlighting
 Plug 'mvllow/modes.nvim'
 
+-- comment toggling
+Plug 'terrortylor/nvim-comment'
+
 -- status line
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'freddiehaddad/feline.nvim'
@@ -98,4 +101,5 @@ require('illuminate').configure {
 
 
 require('modes').setup()
+require('nvim_comment').setup()
 
