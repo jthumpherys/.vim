@@ -5,3 +5,5 @@ export XDG_DATA_HOME="$HOME/.config"
 export EDITOR="nvim"
 export VISUAL="nvim"
 
+set -o vi
+
