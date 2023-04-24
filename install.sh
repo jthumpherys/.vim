@@ -14,8 +14,6 @@ for FILE in $HIDDEN_FILES; do
   fi
 done
 
-printf "\nif [ -f \$HOME/config/.profile ]; then\n  source \$HOME/config/.profile\nfi\n\n" >> $HOME/.bashrc
-
 source $CONFIG_DIR/.profile
 
 mkdir -p $XDG_DATA_HOME/nvim
