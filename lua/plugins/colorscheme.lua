@@ -4,6 +4,7 @@ return {
     name = "nightfox",
     lazy = false,
     priority = 100,
+    version = "*",
 
     opts = {
 			options = {
@@ -11,16 +12,16 @@ return {
 				dim_inactive = true,
 			},
 
-			palettes = {
-				carbonfox = {
-				},
-				duskfox = {
-					bg1 = "#0b0b0b",
-					bg0 = "#1d1d2b", -- Alt backgrounds (floats, statusline, ...)
-					bg3 = "#121820", -- 55% darkened from stock
-					sel0 = "#131b24",
-				},
-			},
+			-- palettes = {
+			-- 	carbonfox = {
+			-- 	},
+			-- 	duskfox = {
+			-- 		bg1 = "#0b0b0b",
+			-- 		bg0 = "#1d1d2b", -- Alt backgrounds (floats, statusline, ...)
+			-- 		bg3 = "#121820", -- 55% darkened from stock
+			-- 		sel0 = "#131b24",
+			-- 	},
+			-- },
 			-- specs = {
 			-- 	duskfox = {
 			-- 		inactive = "#101010",
@@ -40,6 +41,7 @@ return {
       require('nightfox').setup(opts)
       vim.cmd("colorscheme carbonfox")
     end,
+    build = ":NightfoxCompile",
     dependencies = { "treesitter", "ts-playground" },
   },
 }

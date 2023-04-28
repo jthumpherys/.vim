@@ -67,7 +67,7 @@ return {
       vim.keymap.set('n', '<c-n>', "<Plug>(YankyCycleForward)")
       vim.keymap.set('n', '<c-p>', "<Plug>(YankyCycleBackward)")
 
-      vim.keymap.set('n', 'sp', function() require("telescope").load_extension("yanky_history") end)
+      vim.keymap.set('n', 'yp', function() require("telescope").load_extension("yanky_history") end)
 
       require("yanky").setup()
     end,
@@ -84,6 +84,9 @@ return {
 	{
 		"mcauley-penney/tidy.nvim",
 		name = "tidy",
+    opts = {
+      filetype_exclude = { "markdown", "diff" },
+    },
 		config = true,
 		event = { "BufWritePre" },
 	},
