@@ -1,0 +1,20 @@
+{
+  "comment": { "branch": "main", "commit": "e9ac16ab056695cad6461173693069ec070d2b23" },
+  "cursorline": { "branch": "main", "commit": "804f0023692653b2b2368462d67d2a87056947f9" },
+  "devicons": { "branch": "master", "commit": "4ec26d67d419c12a4abaea02f1b6c57b40c08d7e" },
+  "illuminate": { "branch": "master", "commit": "a2907275a6899c570d16e95b9db5fd921c167502" },
+  "indent": { "branch": "master", "commit": "018bd04d80c9a73d399c1061fa0c3b14a7614399" },
+  "lazy.nvim": { "branch": "main", "commit": "5d3d5fb31dcf2ef6f1bda58972c5adfcbd8ff944" },
+  "modicator": { "branch": "main", "commit": "28042ea94db52e19d02eb97cfc7f792d8f61f37a" },
+  "nightfox": { "branch": "main", "commit": "68db77db88bf997f060cf591f81813ccba97c5e6" },
+  "numbertoggle": { "branch": "main", "commit": "34cd7d4c09a59f798e3420286fb94f4d8268f40d" },
+  "plenary": { "branch": "master", "commit": "9ac3e9541bbabd9d73663d757e4fe48a675bb054" },
+  "telescope": { "branch": "master", "commit": "c1a2af0af69e80e14e6b226d3957a064cd080805" },
+  "telescope-fzf": { "branch": "main", "commit": "580b6c48651cabb63455e97d7e131ed557b8c7e2" },
+  "tidy": { "branch": "main", "commit": "9b15a0eb12d6d4f0bb5c197c1f5b72bcc57f09ff" },
+  "tree": { "branch": "master", "commit": "bb375fb20327c49920c41d2b51c1ce2f4fe7deb3" },
+  "treesitter": { "branch": "master", "commit": "ee64345a3774eaecee5ddec8648390e86450eec8" },
+  "ts-playground": { "branch": "master", "commit": "2b81a018a49f8e476341dfcb228b7b808baba68b" },
+  "which-key": { "branch": "main", "commit": "4acffc92953a90a790603bfdab7c92319ab167b1" },
+  "yanky": { "branch": "main", "commit": "9fb1c211775b5a6c83b9fe806cfd99f68c65f8a0" }
+}
