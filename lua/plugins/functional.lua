@@ -48,6 +48,9 @@ return {
     "gbprod/yanky.nvim",
     name = "yanky",
     config = function()
+      require("yanky").setup()
+			require("telescope").load_extension("yank_history")
+
       vim.keymap.set({'n','x'}, 'p', "<Plug>(YankyPutAfter)")
       vim.keymap.set({'n','x'}, 'P', "<Plug>(YankyPutBefore)")
       vim.keymap.set({'n','x'}, 'gp', "<Plug>(YankyGPutAfter)")
@@ -67,9 +70,7 @@ return {
       vim.keymap.set('n', '<c-n>', "<Plug>(YankyCycleForward)")
       vim.keymap.set('n', '<c-p>', "<Plug>(YankyCycleBackward)")
 
-      vim.keymap.set('n', 'sp', function() require("telescope").load_extension("yanky_history") end)
-
-      require("yanky").setup()
+      vim.keymap.set('n', 'yp', function() require("telescope").extensions.yank_history.yank_history() end)
     end,
     version = "*",
     dependencies = { "telescope" },
