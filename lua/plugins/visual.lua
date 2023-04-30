@@ -17,7 +17,7 @@ return {
     "RRethy/vim-illuminate",
     name = "illuminate",
     opts = {
-      providers = { "treesitter" },
+      providers = { "lsp", "treesitter" },
       delay = 750,
       modes_allowlist = {'n'},
       min_count_to_highlight = 2,

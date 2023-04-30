@@ -78,7 +78,7 @@ return {
     -- keys = {
     --   'y', 'p', 'P', 'gp', 'gP',
     --   ']p', '[p', '>p', '<p', '>P', '<P', '=p', '=P',
-    --   'sp'
+    --   'yp'
     -- },
   },
 
@@ -91,4 +91,14 @@ return {
 		config = true,
 		event = { "BufWritePre" },
 	},
+
+  {
+    "sindrets/diffview.nvim",
+    name = "diffview",
+    opts = {
+      enhanced_diff_hl = true,
+    },
+    dependencies = { "plenary", "devicons" },
+    cmd = { "DiffviewFileHistory", "DiffviewOpen" },
+  },
 }
