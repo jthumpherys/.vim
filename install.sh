@@ -8,14 +8,10 @@ fi
 HIDDEN_FILES=$( find $CONFIG_DIR -maxdepth 1 -type f -name '.*' -exec basename {} \; )
 IGNORE=('.gitignore' '.rosrc')
 for FILE in $HIDDEN_FILES; do
-  if [[ ! " ${IGNORE[@]} "  =~ $FILE ]]; then
+  if [[ ! " ${IGNORE[@]} " =~ $FILE ]]; then
     echo $FILE
     ln -s $CONFIG_DIR/$FILE $HOME/$FILE
   fi
 done
 
 source $CONFIG_DIR/.bash_profile
-
-mkdir -p $XDG_DATA_HOME/nvim
-ln -s $CONFIG_DIR/init.lua $XDG_DATA_HOME/nvim/init.lua
-
