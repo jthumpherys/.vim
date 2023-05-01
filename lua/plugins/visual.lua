@@ -3,7 +3,7 @@ return {
     "folke/which-key.nvim",
     name = "which-key",
 		opts = {
-			plugins = { presets = { operators = false } }
+			plugins = { presets = { operators = false } },
 		},
     config = true,
     init = function()
@@ -83,6 +83,8 @@ return {
     version = "*",
     opts = {
       show_current_context = true,
+      -- char = '⎸',
+      -- context_char = '⎸',
     },
     event = { "BufReadPost", "BufNewFile" },
   },

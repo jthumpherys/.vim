@@ -9,9 +9,9 @@ M.filetypes = {
   vim = { package = "vint", method = "diagnostics" },
 }
 
-M.packages = {}
+local packages = {}
 for _, source in pairs(M.filetypes) do
-  table.insert(M.packages, source.package)
+  table.insert(packages, source.package)
 end
 
 function M.get_options()
@@ -25,4 +25,12 @@ function M.get_options()
   }
 end
 
+function M.setup()
+  local mason = require("mason-registry")
+  for _,server in pairs(packages) do
+    if not mason.is_installed(server) then
+      vim.cmd { cmd = "MasonInstall", args = { server } }
+    end
+  end
+end
 return M

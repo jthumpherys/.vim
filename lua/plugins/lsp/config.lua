@@ -6,7 +6,6 @@ M.servers = {
   clangd = {},
   -- dartls = {},
   -- hls = {},
-  jsonls = {},
   -- julials = {},
   -- kotlin_language_server = {},
   lua_ls = {
@@ -34,6 +33,7 @@ M.servers = {
         plugins = {
           pycodestyle = {
             ignore = {"E501"},
+            maxLineLength = 90,
           },
         },
       },
@@ -44,10 +44,16 @@ M.servers = {
   -- zk = {},
 }
 
+
 function M.setup()
-  local lspconfig = require('lspconfig')
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true,
+  }
   for server_name, server_opts in pairs(M.servers) do
-    lspconfig[server_name].setup(server_opts)
+    server_opts.capabilities = capabilities
+    require("lspconfig")[server_name].setup(server_opts)
   end
 end
 

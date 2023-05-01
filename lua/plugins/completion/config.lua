@@ -51,26 +51,30 @@ local default = {
 
   sorting = {
     comparators = {
-      -- cmp.config.compare.offset,
-      -- cmp.config.compare.exact,
-      -- cmp.config.compare.score,
+      cmp.config.compare.offset,
+      cmp.config.compare.exact,
+      cmp.config.compare.score,
       require("cmp-under-comparator").under,
-      -- cmp.config.compare.kind,
-      -- cmp.config.compare.sort_text,
-      -- cmp.config.compare.length,
-      -- cmp.config.compare.order,
+      cmp.config.compare.kind,
+      cmp.config.compare.sort_text,
+      cmp.config.compare.length,
+      cmp.config.compare.order,
     },
   },
 }
 
 local M = {}
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local servers = require("plugins.lsp.config").servers
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+capabilities.textDocument.foldingRange = {
+  dynamicRegistration = false,
+  lineFoldingOnly = true,
+}
 
 function M.setup(options)
   for server_name, _ in pairs(servers) do
-    require('lspconfig')[server_name].setup { capabilities = capabilities }
+    require("lspconfig")[server_name].setup { capabilities = capabilities }
   end
 
   cmp.setup(vim.tbl_deep_extend("force", default, options))
