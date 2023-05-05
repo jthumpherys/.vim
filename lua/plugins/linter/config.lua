@@ -1,12 +1,12 @@
 local M = {}
 
 M.filetypes = {
-  lua = { package = "stylua", method = "formatting" },
-  python = {
-    package = "pylint", method = "diagnostics",
-    config = { extra_args = {"--max-line-length=90"} },
-  },
-  vim = { package = "vint", method = "diagnostics" },
+  -- lua = { package = "stylua", method = "formatting" },
+  -- python = {
+  --   package = "pylint", method = "diagnostics",
+  --   config = { extra_args = {"--max-line-length=90"} },
+  -- },
+  -- vim = { package = "vint", method = "diagnostics" },
 }
 
 local packages = {}

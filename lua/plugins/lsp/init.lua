@@ -2,7 +2,6 @@ return {
   {
     "neovim/nvim-lspconfig",
     name = "lspconfig",
-    -- version = "*",
     config = function()
       require("lspconfig")
       require("plugins.lsp.config").setup()
