@@ -1,5 +1,8 @@
 include "/usr/share/X11/locale/en_US.UTF-8/Compose"
 
+# Check mark
+<Multi_key> <j> <j> : "✓"    U2713
+
 # Math stuff
 <Multi_key> <d> <d> : "∂"
 <Multi_key> <i> <i> : "∫"
@@ -174,4 +177,3 @@ include "/usr/share/X11/locale/en_US.UTF-8/Compose"
 <Multi_key> <g> <underscore> <p> : "ᵨ"
 <Multi_key> <g> <underscore> <f> : "ᵩ"
 <Multi_key> <g> <underscore> <x> : "ᵪ"
-
