@@ -1,1 +1,1 @@
-/home/jt/.config/nvim/lazy/nightfox/misc/feline.lua
+/home/jade/.local/share/nvim/lazy/nightfox/misc/feline.lua

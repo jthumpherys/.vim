@@ -2,6 +2,7 @@ return {
   {
     "SirVer/ultisnips",
     name = "ultisnips",
+    enabled = false,
     -- config = function()
     --   -- vim.g.UltiSnipsExpandTrigger = '<CR>'
     --   -- vim.g.UltiSnipsJumpForwardTrigger = '<tab>'

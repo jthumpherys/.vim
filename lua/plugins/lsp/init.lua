@@ -9,7 +9,7 @@ return {
     dependencies = {
       "mason",
       "mason-lspconfig",
-      "hrsh7th/cmp-nvim-lsp",
+      -- "hrsh7th/cmp-nvim-lsp",
     },
     event = { "BufReadPre", "BufNewFile" },
   },

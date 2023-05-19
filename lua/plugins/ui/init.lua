@@ -7,17 +7,16 @@ return {
     version = "*",
 
     opts = {
-			options = {
-				transparent = false,
-				dim_inactive = true,
-			},
+      options = {
+        transparent = false,
+        dim_inactive = true,
+      },
 
     },
 
     config = function(_, opts)
       require('nightfox').setup(opts)
       vim.cmd("colorscheme carbonfox")
-      -- require("plugins.ui.feline")
     end,
     build = ":NightfoxCompile",
     dependencies = { "treesitter", "ts-playground" },
@@ -26,6 +25,9 @@ return {
   {
     "freddiehaddad/feline.nvim",
     name = "feline",
+    config = function()
+      require('plugins.ui.feline')
+    end,
     dependencies = "devicons",
     event = { "BufReadPre", "BufNewFile" },
   },
