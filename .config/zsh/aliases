@@ -1,0 +1,39 @@
+#!/usr/bin/zsh
+
+# Text editors
+alias vim="/usr/local/bin/nvim"
+alias ovim="/usr/bin/vim"
+alias vimo="/usr/bin/vim"
+
+alias cls='echo -ne "\033c"'  # clear terminal screen
+alias please='sudo $(fc -ln -1)'  # rerun previous command as sudo
+alias zrc='$EDITOR $ZDOTDIR/.zshrc'
+alias zenv='$EDITOR $ZDOTDIR/.zshenv'
+alias zalias='$EDITOR $ZDOTDIR/aliases'
+alias src='source $ZDOTDIR/.zshrc $ZDOTDIR/.zshenv'
+alias sue='sudoedit'
+alias visudo='sudo visudo'
+
+# ls
+alias ls='ls -hF --color=auto --group-directories-first'
+alias ll='ls -la'
+alias lr='ls -R'
+alias la='ls -A'
+alias lla='ll -A'
+
+alias grep='grep --color=auto'
+alias df='df -h'
+alias du='du -ch'
+alias ping='ping -c 5'
+
+# Safety
+alias cp='cp -iv'
+alias mv='mv -iv'
+alias rm='rm -Iv'
+alias ln='ln -i'
+alias chown='chown --preserve-root'
+alias chmod='chmod --preserve-root'
+alias chgrp='chgrp --preserve-root'
+
+# dotfiles git management
+alias dot='/usr/bin/git --git-dir=$DOTREPO --work-tree=$HOME'

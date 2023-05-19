@@ -1,0 +1,30 @@
+autoload -Uz compinit promptinit
+compinit
+promptinit
+
+autoload -Uz vcs_info
+precmd() {
+  vcs_info
+}
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:*' max-exports 5
+zstyle ':vcs_info:*' branchformat "%b"
+zstyle ':vcs_info:git*' formats "%s:" "%r/%S" "(%b) "
+zstyle ':vcs_info:git*' actionformats "%s:" "%r/%S" "%a (%b) "
+
+setopt prompt_subst
+prompt_mytheme_setup() {
+  PS1='%B%F{green}%n%f%F{blue}@%f%F{cyan}%m%f %F{red}${vcs_info_msg_0_}%f%F{blue}${vcs_info_msg_1_}%f%18(l;;%F{blue}%-120(l:%(10~,%-3~/../%6~,%~):%6(~,%-2~/../%3~,%~))%f)%F{yellow}%(!. #.)%f >%b '
+  RPS1='%B< %F{red}${vcs_info_msg_2_}%f%F{magenta}%D{%-I:%M%p - %a, %-d %b}%b%f'
+}
+prompt_themes+=( mytheme )
+prompt mytheme
+
+zstyle ':completion:*' rehash true
+
+source $ZDOTDIR/aliases
+fpath+=$ZDOTDIR/completions  # use completions
+
+bindkey -v
+
+# start tmux upon creation of interactive shell
