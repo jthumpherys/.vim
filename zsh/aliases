@@ -1,0 +1,29 @@
+#!/usr/bin/zsh
+
+# Text editors
+alias vim="nvim"
+alias vi="vim"
+
+alias cls='echo -ne "\033c"'  # clear terminal screen
+alias please='sudo $(fc -ln -1)'  # rerun previous command as sudo
+
+# ls
+alias ls='ls -hF --color=auto'
+alias ll='ls -l'
+alias lr='ls -R'
+alias la='ls -A'
+alias lla='ll -A'
+
+alias grep='grep --color=auto'
+alias df='df -h'
+alias du='du -c -h'
+alias ping='ping -c 5'
+
+# Safety
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -I'
+alias ln='ln -i'
+alias chown='chown --preserve-root'
+alias chmod='chmod --preserve-root'
+alias chgrp='chgrp --preserve-root'
