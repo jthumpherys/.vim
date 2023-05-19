@@ -1,7 +1,1 @@
 *.swp
-# plugin repos
-/lazy/**
-# save data
-/shada/**
-# lsp installations
-/mason/**
