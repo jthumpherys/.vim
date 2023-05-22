@@ -3,22 +3,12 @@
 export XDG_CONFIG_HOME=$HOME/.config
 src_dirs=($XDG_CONFIG_HOME/shell $ZDOTDIR)
 
+setopt extendedglob
 for env_file in $XDG_CONFIG_HOME/^zsh/env; do
   source $env_file
-end
+done
 
 typeset -U path
 path=(. ~/.local/bin $path)
 
 export HOSTNAME=$HOST
-
-export XDG_CACHE_HOME=$HOME/.cache
-export XDG_DATA_HOME=$HOME/.local/share
-
-export DOTREPO=$HOME/.dotfiles
-
-export EDITOR="nvim"
-export VISUAL="nvim"
-export BROWSER="firefox"
-
-export TMUXP_CONFIGDIR=$XDG_CONFIG_HOME/tmuxp

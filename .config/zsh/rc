@@ -1,27 +1,41 @@
+#!/usr/bin/zsh
+
 # basic options
 setopt nobeep
 setopt autocd
 setopt autopushd
 setopt pushdignoredups
+setopt cdablevars
 
 DIRSTACKSIZE=30
 cdpath=(~ ~/.local ~/projects /)
 
+# history
+HISTSIZE=10000
+SAVEHIST=10000
+HISTFILE=$XDG_STATE_HOME/zsh/.history
+
+setopt appendhistory
+setopt incappendhistory
+setopt extendedhistory
+setopt histignoredups
+setopt histfindnodups
+setopt histreduceblanks
+
 # named directories
-setopt cdablevars
-hash -d cfg=$XDG_CONFIG_HOME
-hash -d uloc=~/.local
-hash -d ubin=~uloc/bin
+# hash -d cfg=$XDG_CONFIG_HOME
+# hash -d uloc=~/.local
+# hash -d ubin=~uloc/bin
 
 # completion
-autoload -Uz compinit; compinit
+autoload -Uz compinit; compinit -d $XDG_STATE_HOME/zsh/.zcompdump
 # _comp_options+=(globdots)
 typeset -U fpath
 fpath=($ZDOTDIR/funcs $ZDOTDIR/completions $fpath)
 autoload -Uz $ZDOTDIR/funcs/*(.:t)
 
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-# zstyle ':completion:*' rehash true
+zstyle ':completion:*' rehash true
 
 # prompt
 autoload -Uz promptinit vcs_info; promptinit
@@ -66,5 +80,8 @@ preexec() { echo -ne '\e[5 q' ;}
 
 bindkey -M vicmd '^p' history-search-backward
 bindkey -M vicmd '^n' history-search-forward
+
+# bindkey -M vicmd '^M-p'
+# bindkey -M vicmd '^M-n'
 
 # start tmux upon creation of interactive shell
