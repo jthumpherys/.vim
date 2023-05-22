@@ -1,0 +1,5 @@
+dir=$XDG_CONFIG_DIR
+while $#; do
+  dir=$dir/$1
+end
+cd dir

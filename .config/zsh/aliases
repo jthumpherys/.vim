@@ -12,7 +12,12 @@ alias zenv='$EDITOR $ZDOTDIR/.zshenv'
 alias zalias='$EDITOR $ZDOTDIR/aliases'
 alias src='source $ZDOTDIR/.zshrc $ZDOTDIR/.zshenv'
 alias sue='sudoedit'
+alias aur='cd /usr/local/src/aur'
+alias cfg='cd $HOME/.config'
+
+# avoid typing sudo for these commands
 alias visudo='sudo visudo'
+alias supac='sudo pacman'
 
 # ls
 alias ls='ls -hF --color=auto --group-directories-first'

@@ -1,0 +1,70 @@
+# basic options
+setopt nobeep
+setopt autocd
+setopt autopushd
+setopt pushdignoredups
+
+DIRSTACKSIZE=30
+cdpath=(~ ~/.local ~/projects /)
+
+# named directories
+setopt cdablevars
+hash -d cfg=$XDG_CONFIG_HOME
+hash -d uloc=~/.local
+hash -d ubin=~uloc/bin
+
+# completion
+autoload -Uz compinit; compinit
+# _comp_options+=(globdots)
+typeset -U fpath
+fpath=($ZDOTDIR/funcs $ZDOTDIR/completions $fpath)
+autoload -Uz $ZDOTDIR/funcs/*(.:t)
+
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# zstyle ':completion:*' rehash true
+
+# prompt
+autoload -Uz promptinit vcs_info; promptinit
+precmd() {
+  vcs_info
+}
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:*' max-exports 5
+zstyle ':vcs_info:*' branchformat "%b"
+zstyle ':vcs_info:git*' formats "%s:" "%r/%S" "(%b) "
+zstyle ':vcs_info:git*' actionformats "%s:" "%r/%S" "%a (%b) "
+
+setopt prompt_subst
+prompt_mytheme_setup() {
+  PS1='%B%F{green}%n%f%F{blue}@%f%F{cyan}%m%f %F{red}${vcs_info_msg_0_}%f%F{blue}${vcs_info_msg_1_}%f%18(l;;%F{blue}%-120(l:%(10~,%-3~/../%6~,%~):%6(~,%-2~/../%3~,%~))%f)%F{yellow}%(!. #.)%f >%b '
+  RPS1='%B< %F{red}${vcs_info_msg_2_}%f%F{magenta}%D{%-I:%M%p - %a, %-d %b}%b%f'
+}
+prompt_themes+=( mytheme )
+prompt mytheme
+
+source $ZDOTDIR/aliases
+
+# vim
+bindkey -v
+export KEYTIMEOUT=75
+bindkey -rpM viins '\e'
+bindkey -M viins 'jj' vi-cmd-mode
+
+function zle-keymap-select () {
+  case $KEYMAP in
+    vicmd) echo -ne '\e[1 q';;        # block
+    viins|main) echo -ne '\e[5 q';;  # beam
+  esac
+}
+zle -N zle-keymap-select
+zle-line-init() {
+  echo -ne '\e[5 q'
+}
+zle -N zle-line-init
+echo -ne '\e[5 q'
+preexec() { echo -ne '\e[5 q' ;}
+
+bindkey -M vicmd '^p' history-search-backward
+bindkey -M vicmd '^n' history-search-forward
+
+# start tmux upon creation of interactive shell
