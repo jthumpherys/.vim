@@ -1,1 +1,1 @@
-source $HOME/.config/zsh/env
+.config/zsh/.zshenv

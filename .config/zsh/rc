@@ -56,7 +56,7 @@ source $ZDOTDIR/prompts
 
 zmodload zsh/complist
 autoload -Uz compinit; compinit
-source $ZDOTDIR/completion
+# source $ZDOTDIR/completion
 
 source $ZDOTDIR/aliases
 
@@ -64,5 +64,5 @@ bindkey -v
 export KEYTIMEOUT=75
 source $ZDOTDIR/binds
 
-source $ZPLUGDIR/zsh-bd/bd.zsh
-source $ZPLUGDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source $ZPLUGDIR/zsh-bd/bd.zsh
+# source $ZPLUGDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

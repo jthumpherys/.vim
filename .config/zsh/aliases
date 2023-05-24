@@ -14,10 +14,10 @@ alias please='sudo $(fc -ln -1)'  # rerun previous command as sudo
 
 # ls
 alias ls='ls -hF --color=auto --group-directories-first'
-alias ll='ls -la'
+alias ll='ls -lA'
 alias lr='ls -R'
 alias la='ls -A'
-alias lla='ll -A'
+alias lla='ll -a'
 
 alias grep='grep --color=auto'
 alias df='df -h'
