@@ -1,0 +1,36 @@
+#!/hint/zsh
+
+# function to easily source user environment or shell config files
+
+typeset search_for
+search_for=(rc env)
+
+typeset dir=$SHELL:t
+if [[ $# -gt 0 && -d "${XDG_CONFIG_HOME}/$1" ]]; then
+  dir=$1
+  shift
+fi
+
+print "searching in directory ${dir}..."
+
+if [[ $# -eq 0 ]]; then
+  for filename in $search_for; do
+    typeset file="${XDG_CONFIG_HOME}/${dir}/${filename}"
+    print "Sourcing ${file}..."
+    if [[ -f $file ]]; then
+      source $file
+      return
+    fi
+  done
+  print "Unable to find files $search_for in $dir"
+else
+  for filename in $*; do
+    typeset file="${XDG_CONFIG_HOME}/${dir}/${filename}"
+    print "Sourcing ${file}..."
+    if [[ -f $file ]]; then
+      source $file
+    else
+      print "$file does not exist"
+    fi
+  done
+fi

@@ -1,6 +1,9 @@
-dir=$XDG_CONFIG_DIR
-while $#; do
-  dir=$dir/$1
+typeset dir=$XDG_CONFIG_HOME
+
+while (( $# )); do
+  dir="${dir}/$1"
   shift
-end
+done
+
+print "Going to ${dir}"
 cd $dir
