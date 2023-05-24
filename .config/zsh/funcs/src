@@ -1,11 +1,16 @@
 #!/hint/zsh
 
 # function to easily source user environment or shell config files
+# src [program] [file ...]
+# if there is a directory matching *program* in $XDG_CONFIG_HOME, all listed files in
+# the directory will be sourced
+# if there is not a directory matching, *program* defaults to $SHELL
+# if no file is listed, the program attempts to source rc, and if it fails, then env
 
 typeset search_for
 search_for=(rc env)
 
-typeset dir=$SHELL:t
+typeset dir=${SHELL:t}
 if [[ $# -gt 0 && -d "${XDG_CONFIG_HOME}/$1" ]]; then
   dir=$1
   shift

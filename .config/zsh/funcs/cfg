@@ -1,9 +1,25 @@
+#!/hint/zsh
+
 typeset dir=$XDG_CONFIG_HOME
 
 while (( $# )); do
-  dir="${dir}/$1"
+  if [[ -d "${dir}/$1" ]]; then
+    dir="${dir}/$1"
+  elif [[ -f "${dir}/$1" ]]; then
+    typeset files
+    files=()
+    for file in $*; do
+      files+=("${dir}/${file}")
+    done
+    $EDITOR -o $files
+    return
+  else
+    print "Error: $1 not found"
+    return
+  fi
+
   shift
 done
 
-print "Going to ${dir}"
+print -D $dir
 cd $dir

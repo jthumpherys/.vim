@@ -1,0 +1,13 @@
+#!/usr/bin/zsh
+
+_comp_options+=(globdots)
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/compcache"
+zstyle ':completion:*' completer _extensions _complete _approximate
+# zstyle ':completion:*' menu select=long interactive?
+zstyle ':completion:*' group-name ''
+# display aliases first when in command position
+zstyle ':completion:*:*:-command-:*:*' group-order alias builtins functions commands
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# attempt completion, then case-insensitive completion, then partial words
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'

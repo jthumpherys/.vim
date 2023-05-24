@@ -1,0 +1,7 @@
+[user]
+	name = Jade Humpherys
+	email = joshua.humpherys@protonmail.com
+[init]
+	defaultBranch = main
+[pull]
+	rebase = false

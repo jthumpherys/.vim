@@ -1,0 +1,24 @@
+#!/usr/bin/zsh
+
+bindkey -rpM viins '\e'
+bindkey -M viins 'jj' vi-cmd-mode
+
+bindkey -M viins "^[[A" up-line-or-history
+bindkey -M viins "^[[B" down-line-or-history
+bindkey -M viins "^[[C" vi-forward-char
+bindkey -M viins "^[[B" vi-backward-char
+
+# bindkey -M viins '<TAB>' complete-
+
+
+bindkey -M vicmd '^p' history-search-backward
+bindkey -M vicmd '^n' history-search-forward
+
+# bindkey -M vicmd '^M-p'
+# bindkey -M vicmd '^M-n'
+
+
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char

@@ -1,0 +1,3 @@
+#!/usr/bin/sh
+
+export LESSHISTFILE=/home/jade/.local/state/less/lesshst

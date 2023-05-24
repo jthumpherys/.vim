@@ -2,71 +2,45 @@
 
 # basic options
 setopt nobeep
+setopt noclobber
+
+# cd
 setopt autocd
+setopt cdablevars
+cdpath=(. ~ ~/.local ~/projects /)
+
+# directory stack
 setopt autopushd
 setopt pushdignoredups
-setopt cdablevars
-
+setopt pushdsilent
 DIRSTACKSIZE=30
-cdpath=(~ ~/.local ~/projects /)
+# alias d='dirs -v'
+# for index ({1..9}) alias "$index"="cd +${index}"; unset index
 
 # history
-HISTSIZE=10000
-SAVEHIST=10000
-HISTFILE=$XDG_STATE_HOME/zsh/.history
-
 setopt appendhistory
 setopt incappendhistory
 setopt extendedhistory
 setopt histignoredups
 setopt histfindnodups
 setopt histreduceblanks
+export HISTFILE=$XDG_STATE_HOME/zsh/history
 
-# named directories
-# hash -d cfg=$XDG_CONFIG_HOME
-# hash -d uloc=~/.local
-# hash -d ubin=~uloc/bin
+precmd_functions=()
 
-# completion
-autoload -Uz compinit; compinit -d $XDG_STATE_HOME/zsh/.zcompdump
-# _comp_options+=(globdots)
-typeset -U fpath
-fpath=($ZDOTDIR/funcs $ZDOTDIR/completions $fpath)
+# Ctrl+d exits on filled command line
+exit_zsh() { exit }
+zle -N exit_zsh
+bindkey '^D' exit_zsh
+
 autoload -Uz $ZDOTDIR/funcs/*(.:t)
 
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*' rehash true
-
-# prompt
-autoload -Uz promptinit vcs_info; promptinit
-precmd() {
-  vcs_info
-}
-zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:*' max-exports 5
-zstyle ':vcs_info:*' branchformat "%b"
-zstyle ':vcs_info:git*' formats "%s:" "%r/%S" "(%b) "
-zstyle ':vcs_info:git*' actionformats "%s:" "%r/%S" "%a (%b) "
-
-setopt prompt_subst
-prompt_mytheme_setup() {
-  PS1='%B%F{green}%n%f%F{blue}@%f%F{cyan}%m%f %F{red}${vcs_info_msg_0_}%f%F{blue}${vcs_info_msg_1_}%f%18(l;;%F{blue}%-120(l:%(10~,%-3~/../%6~,%~):%6(~,%-2~/../%3~,%~))%f)%F{yellow}%(!. #.)%f >%b '
-  RPS1='%B< %F{red}${vcs_info_msg_2_}%f%F{magenta}%D{%-I:%M%p - %a, %-d %b}%b%f'
-}
-prompt_themes+=( mytheme )
-prompt mytheme
-
-source $ZDOTDIR/aliases
-
 # vim
-bindkey -v
-export KEYTIMEOUT=75
-bindkey -rpM viins '\e'
-bindkey -M viins 'jj' vi-cmd-mode
 
+# cursor mode switching
 function zle-keymap-select () {
   case $KEYMAP in
-    vicmd) echo -ne '\e[1 q';;        # block
+    vicmd) echo -ne '\e[1 q';;       # block
     viins|main) echo -ne '\e[5 q';;  # beam
   esac
 }
@@ -78,10 +52,17 @@ zle -N zle-line-init
 echo -ne '\e[5 q'
 preexec() { echo -ne '\e[5 q' ;}
 
-bindkey -M vicmd '^p' history-search-backward
-bindkey -M vicmd '^n' history-search-forward
+source $ZDOTDIR/prompts
 
-# bindkey -M vicmd '^M-p'
-# bindkey -M vicmd '^M-n'
+zmodload zsh/complist
+autoload -Uz compinit; compinit
+source $ZDOTDIR/completion
 
-# start tmux upon creation of interactive shell
+source $ZDOTDIR/aliases
+
+bindkey -v
+export KEYTIMEOUT=75
+source $ZDOTDIR/binds
+
+source $ZPLUGDIR/zsh-bd/bd.zsh
+source $ZPLUGDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

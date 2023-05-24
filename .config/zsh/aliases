@@ -1,21 +1,16 @@
 #!/usr/bin/zsh
 
 # Text editors
-alias ovim="vim"
-alias vimo="vim"
-alias vim="nvim"
+alias vim="nvim"  # uses /usr/local/bin or /usr/bin
+alias ovim="/usr/bin/vim"
+alias vimo="/usr/bin/vim"
+alias vimdiff="nvim -d"
 
-alias cls='echo -ne "\033c"'  # clear terminal screen
-alias please='sudo $(fc -ln -1)'  # rerun previous command as sudo
-alias zrc='$EDITOR $ZDOTDIR/.zshrc'
-alias zenv='$EDITOR $ZDOTDIR/.zshenv'
-alias zalias='$EDITOR $ZDOTDIR/aliases'
-alias src='source $ZDOTDIR/.zshrc $ZDOTDIR/.zshenv'
-alias sue='sudoedit'
-
-# avoid typing sudo for these commands
+# sudo
 alias visudo='sudo visudo'
 alias supac='sudo pacman'
+alias sue='sudoedit'
+alias please='sudo $(fc -ln -1)'  # rerun previous command as sudo
 
 # ls
 alias ls='ls -hF --color=auto --group-directories-first'
@@ -40,3 +35,5 @@ alias chgrp='chgrp --preserve-root'
 
 # dotfiles git management
 alias dot='/usr/bin/git --git-dir=$DOTREPO --work-tree=$HOME'
+
+alias cls='echo -ne "\033c"'  # clear terminal screen
