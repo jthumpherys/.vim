@@ -1,1 +1,2 @@
-source /home/jade/.config/zsh/rc
+#!/usr/bin/zsh
+source $ZDOTDIR/rc

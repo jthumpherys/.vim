@@ -1,0 +1,11 @@
+*
+!*/**/*
+
+!README.md
+!TODO.md
+!.gitignore
+!.gitmodules
+!.zshenv
+
+!.config/
+!.local/

@@ -7,7 +7,7 @@ setopt noclobber
 # cd
 setopt autocd
 setopt cdablevars
-cdpath=(. ~ ~/.local ~/projects /)
+cdpath=( . ~ ~/.local ~/projects / )
 
 # directory stack
 setopt autopushd
@@ -52,17 +52,19 @@ zle -N zle-line-init
 echo -ne '\e[5 q'
 preexec() { echo -ne '\e[5 q' ;}
 
-source $ZDOTDIR/prompts
+[ -f $ZDOTDIR/prompts ] && source $ZDOTDIR/prompts
 
 zmodload zsh/complist
 autoload -Uz compinit; compinit
-# source $ZDOTDIR/completion
+[ -f $ZDOTDIR/completion ] && source $ZDOTDIR/completion
 
-source $ZDOTDIR/aliases
+[ -f $ZDOTDIR/aliases ] && source $ZDOTDIR/aliases
 
 bindkey -v
 export KEYTIMEOUT=75
-source $ZDOTDIR/binds
+[ -f $ZDOTDIR/binds ] && source $ZDOTDIR/binds
 
-# source $ZPLUGDIR/zsh-bd/bd.zsh
-# source $ZPLUGDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[ -f $ZPLUGDIR/zsh-bd/bd.zsh ] && source $ZPLUGDIR/zsh-bd/bd.zsh
+# if [[ -f $ZPLUGDIR/zsh-syntax-highlighting/zsh-syntax-highlighting]]; then
+#   source $ZPLUGDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# fi
