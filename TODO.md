@@ -6,10 +6,13 @@
 - [ ] Make gitignores if possible in bare repo
 - [ ] Decide on a consistent way to use and handle submodules
   - Are more aliases a bad idea?
+- [ ] Figure out AUR management flow
+  - [ ] Write script to recognize updates
 
 ### Zsh
 - [ ] Expand functions
   - [ ] Add completion
+    - tags?
 - [ ] Fix prompt
   - [ ] Find a way to not use named directories except for HOME
   - [ ] Better adapt to screen size/space
