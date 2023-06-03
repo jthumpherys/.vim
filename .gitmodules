@@ -25,3 +25,6 @@
 [submodule ".local/build/hyprland-nvidia-git"]
 	path = .local/build/hyprland-nvidia-git
 	url = https://aur.archlinux.org/hyprland-nvidia-git
+[submodule ".local/build/multimc-bin"]
+	path = .local/build/multimc-bin
+	url = https://aur.archlinux.org/multimc-bin
