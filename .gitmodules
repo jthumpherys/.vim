@@ -19,3 +19,9 @@
 [submodule ".local/build/rofi-lbonn-wayland-git"]
 	path = .local/build/rofi-lbonn-wayland-git
 	url = https://aur.archlinux.org/rofi-lbonn-wayland-git
+[submodule ".local/build/hyprshot"]
+	path = .local/build/hyprshot
+	url = https://aur.archlinux.org/hyprshot
+[submodule ".local/build/hyprland-nvidia-git"]
+	path = .local/build/hyprland-nvidia-git
+	url = https://aur.archlinux.org/hyprland-nvidia-git
