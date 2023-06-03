@@ -1,0 +1,5 @@
+#!/usr/bin/sh
+
+export PYTHONSTARTUP=$XDG_CONFIG_HOME/python/rc
+export PYTHONPYCACHEPREFIX=$XDG_CACHE_HOME/python
+export PYTHONUSERBASE=$XDG_DATA_HOME/python
