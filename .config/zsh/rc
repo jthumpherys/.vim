@@ -3,6 +3,7 @@
 # basic options
 setopt nobeep
 setopt noclobber
+setopt extendedglob
 
 # cd
 setopt autocd
@@ -24,7 +25,7 @@ setopt extendedhistory
 setopt histignoredups
 setopt histfindnodups
 setopt histreduceblanks
-export HISTFILE=$XDG_STATE_HOME/zsh/history
+setopt histignorespace
 
 precmd_functions=()
 
@@ -33,6 +34,8 @@ exit_zsh() { exit }
 zle -N exit_zsh
 bindkey '^D' exit_zsh
 
+typeset -U fpath
+fpath=( $ZDOTDIR/funcs/**/ $fpath )
 autoload -Uz $ZDOTDIR/funcs/*(.:t)
 
 # vim
@@ -55,7 +58,8 @@ preexec() { echo -ne '\e[5 q' ;}
 [ -f $ZDOTDIR/prompts ] && source $ZDOTDIR/prompts
 
 zmodload zsh/complist
-autoload -Uz compinit; compinit
+fpath=( $ZPLUGDIR/zsh-completions/src $fpath )
+autoload -Uz compinit; compinit -d $XDG_CACHE_HOME/zsh/compdump
 [ -f $ZDOTDIR/completion ] && source $ZDOTDIR/completion
 
 [ -f $ZDOTDIR/aliases ] && source $ZDOTDIR/aliases
@@ -64,7 +68,11 @@ bindkey -v
 export KEYTIMEOUT=75
 [ -f $ZDOTDIR/binds ] && source $ZDOTDIR/binds
 
+ZPLUGDIR=$XDG_DATA_HOME/zsh/plugins
 [ -f $ZPLUGDIR/zsh-bd/bd.zsh ] && source $ZPLUGDIR/zsh-bd/bd.zsh
 # if [[ -f $ZPLUGDIR/zsh-syntax-highlighting/zsh-syntax-highlighting]]; then
 #   source $ZPLUGDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # fi
+
+typeset -U path
+path=( . ~/.local/bin/**/ ~/.local/sbin/**/ $path )

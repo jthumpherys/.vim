@@ -6,7 +6,7 @@ autoload -Uz vcs_info; precmd_functions+=(vcs_info)
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' max-exports 5
 zstyle ':vcs_info:*' branchformat "%b"
-zstyle ':vcs_info:git*' formats "%s:" "%r/%S" "(%b) "
+zstyle ':vcs_info:git*' formats "%r:" "%S" "(%b) "
 zstyle ':vcs_info:git*' actionformats "%s:" "%r/%S" "%a (%b) "
 
 setopt prompt_subst

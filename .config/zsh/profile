@@ -1,0 +1,22 @@
+#!/usr/bin/zsh
+
+shell_profile=${XDG_CONFIG_HOME:-$HOME/.config}/shell/profile
+[ -f $shell_profile ] && source $shell_profile
+
+setopt localoptions
+setopt extendedglob
+for file in $XDG_CONFIG_HOME/^(zsh|shell)/env; do
+  source $file
+done
+
+# detached_session="bg"
+# /usr/bin/tmux has-session -t $detached_session 2>/dev/null
+# if [ $? != 0 ]; then
+#   if [[ -f ${TMUXP_CONFIGDIR}/${detached_session}.yaml ]]; then
+#     /usr/bin/tmuxp load -d -s $detached_session $detached_session
+#   else
+#     /usr/bin/tmux new-session -d -s $detached_session
+#   fi
+# fi
+
+export HISTFILE="${XDG_STATE_HOME}/zsh/history"

@@ -1,22 +1,6 @@
 #!/usr/bin/zsh
 
-export XDG_CONFIG_HOME=$HOME/.config
+shell_env=${XDG_CONFIG_HOME:-$HOME/.config}/shell/env
+[ -f $shell_env ] && source $shell_env
 
-[ -f $XDG_CONFIG_HOME/shell/env ] && source $XDG_CONFIG_HOME/shell/env
-
-setopt localoptions
-setopt extendedglob
-
-for env_file in $XDG_CONFIG_HOME/^(zsh|shell)/env; do
-  source $env_file
-done
-
-export ZDOTDIR=$XDG_CONFIG_HOME/zsh
-export ZPLUGDIR=$XDG_DATA_HOME/zsh/plugins
-
-typeset -U path
-path=( . ~/.local/bin/**/ ~/.local/sbin/**/ $path )
-typeset -U fpath
-export fpath=( $ZDOTDIR/funcs/**/ $ZPLUGDIR/zsh-completions/src $fpath )
-
-export HOSTNAME=$HOST
+ZDOTDIR=${XDG_CONFIG_HOME:-$HOME/.config}/zsh
