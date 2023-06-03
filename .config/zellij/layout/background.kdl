@@ -1,0 +1,7 @@
+// Layout to create on login to have background applications running and to speed up
+//   creation of subsequent sessions
+
+layout {
+    tab name="spotify" {
+        pane command="ncspot"
+    }
