@@ -5,3 +5,8 @@ layout {
     tab name="spotify" {
         pane command="ncspot"
     }
+    tab name="system" split_direction="vertical" {
+        pane command="htop"
+        pane command="kmon"
+    }
+}
