@@ -1,4 +1,0 @@
-keymap:
-  - name: tmux
-    remap:
-      KEY_CAPSLOCK: CTRL-KEY_B
