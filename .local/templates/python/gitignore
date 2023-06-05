@@ -1,0 +1,7 @@
+*.swp
+**/__init__.py
+
+env/
+__pycache__/
+
+act
