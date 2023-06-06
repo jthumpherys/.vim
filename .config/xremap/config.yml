@@ -1,7 +1,7 @@
 modmap:
   - name: Caps lock acts as control, caps lock and alt act as a prefix and as compose when pressed alone, respectively
     remap:
-      AlT_R:
+      KEY_RIGHTALT:
         held: ALT_R
         alone: Compose
         alone_timeout_millis: 500
@@ -14,13 +14,12 @@ keymap:
   - name: Caps lock as prefix key, mostly for hyprland bindings
     mode: default
     remap:
-      # CTRL_L-ALT_L: { set_mode: compose }
-      CTRL_R-KEY_J: Esc
+      # CTRL_R-KEY_J: Esc
 
       ALT-F1:
         remap:
-          ALT-F1: CTRL-ALT-Esc
-            launch: ["zsh", "$HOME/.local/sbin/toggle_caps_led"]
+          # ALT-F1: CTRL-ALT-Esc
+          #   launch: ["zsh", "$HOME/.local/sbin/toggle_caps_led"]
           KEY_B: ALT-KEY_A  # Tmux
           Apostrophe: SUPER-KEY_Q # Go to terminal
           KEY_I: ALT-KEY_I  # Go to terminal and lock
@@ -37,12 +36,27 @@ keymap:
           KEY_L: SUPER-KEY_L
 
           KEY_U: ALT-KEY_Q  # Zellij
-        timeout_millis: 250
+        timeout_millis: 500
 
-  # - name: Mode where caps lock is compose key
-  #   mode: compose
-  #   remap:
-  #     ALT-F1: Compose
-  #     CTRL_R-Enter: { set_mode: default}
+  - name:
+    application:
+      only: Firefox
+    remap:
+      # Arrow keys for scrolling
+      CTRL_R-KEY_H: Left
+      CTRL_R-KEY_J: Down
+      CTRL_R-KEY_K: Up
+      CTRL_R-KEY_L: Right
 
-# default_mode: default
+  - name:
+    application:
+      only: Discord
+    remap:
+      CTRL_R-KEY_H: CTRL-SHIFT-Tab
+      CTRL_R-KEY_J: ALT-Down
+      CTRL_R-KEY_K: ALT-Up
+      CTRL_R-KEY_L: CTRL-Tab
+      ALT_R-KEY_H: CTRL-SHIFT-Tab
+      ALT_R-KEY_J: ALT-SHIFT-Down
+      ALT_R-KEY_K: ALT-SHIFT-Up
+      ALT_R-KEY_L: CTRL-Tab
