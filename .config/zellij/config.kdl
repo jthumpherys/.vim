@@ -11,7 +11,8 @@ keybinds clear-defaults=true {
         bind "Ctrl l" { MovePane "Right"; }
     }
     locked {
-        bind "Alt q" { SwitchToMode "normal"; TogglePaneFrames; }
+        bind "Alt q" "Ctrl ;" "Alt ;" { SwitchToMode "normal"; TogglePaneFrames; }
+        bind "Ctrl a" "Ctrl b" { SwitchToMode "tmux"; TogglePaneFrames; }
     }
     pane {
         bind "h" { MovePane "Left"; }
@@ -75,7 +76,7 @@ keybinds clear-defaults=true {
     entersearch {
         bind "Ctrl i" "Alt i" { SearchToggleOption "CaseSensitivity"; }
         bind "Ctrl w" "Alt w" { SearchToggleOption "Wrap"; }
-        // bind "Ctrl ," "Ctrl ." "Alt ," "Alt ." { SearchToggleOption "WhileWord"; }
+        // bind "Ctrl ," "Ctrl ." { SearchToggleOption "WhileWord"; }
 
         bind "Enter" { SwitchToMode "search"; }
     }
@@ -96,18 +97,24 @@ keybinds clear-defaults=true {
     shared {
         bind "Alt d" { Detach; }
         bind "Alt D" { Quit; }
-        bind "Ctrl a" "Ctrl b" { SwitchToMode "tmux"; }
-        bind "Alt h" { GoToPreviousTab; }
-        bind "Alt l" { GoToNextTab; }
+        bind "Alt h" { MoveFocusOrTab "Left"; }
+        bind "Alt j" { MoveFocus "Down"; }
+        bind "Alt k" { MoveFocus "Up"; }
+        bind "Alt l" { MoveFocusOrTab "Right"; }
+        bind "Alt n" { GoToNextTab; }
+        bind "Alt p" { GoToPreviousTab; }
         bind "Alt r" { NextSwapLayout; }
         bind "Alt R" { PreviousSwapLayout; }
-        bind "Alt j" { PageScrollDown; }
-        bind "Alt k" { PageScrollUp; }
+        bind "Alt u" { PageScrollUp; }
+        bind "Alt d" { PageScrollDown; }
     }
     shared_except "locked" {
         bind "Alt q" { SwitchToMode "normal"; }
+        bind "Ctrl a" "Ctrl b" { SwitchToMode "tmux"; }
+        bind "Alt i" "Ctrl ;" { SwitchToMode "locked"; TogglePaneFrames; }
     }
     shared_except "tmux" "entersearch" "renamepane" "renametab" "locked" {
+        bind "Esc" ";" "Enter" { SwitchToMode "locked"; TogglePaneFrames; }
         bind "m" "w" { SwitchToMode "normal"; }
         bind "/" { SwitchToMode "entersearch"; }
         bind "s" { SwitchToMode "pane"; }
@@ -117,7 +124,6 @@ keybinds clear-defaults=true {
         bind "u" { SwitchToMode "scroll"; }
         bind "r" { SwitchToMode "renamepane"; }
         bind "R" { SwitchToMode "renametab"; }
-        bind ";" "Enter" { SwitchToMode "locked"; TogglePaneFrames; }
         bind "e" { EditScrollback; }
         bind "x" { CloseFocus; }
         bind "X" { CloseTab; }
@@ -139,34 +145,34 @@ keybinds clear-defaults=true {
         bind "0" { GoToTab 10; }
     }
     tmux {
-        bind "o" { FocusNextPane; SwitchToMode "locked"; }
-        bind "O" { FocusPreviousPane; SwitchToMode "locked"; }
-        bind "h" { MoveFocus "Left"; SwitchToMode "locked"; }
-        bind "j" { MoveFocus "Down"; SwitchToMode "locked"; }
-        bind "k" { MoveFocus "Up"; SwitchToMode "locked"; }
-        bind "l" { MoveFocus "Right"; SwitchToMode "locked"; }
-        bind "\"" { NewPane "Down"; SwitchToMode "locked"; }
-        bind "%" { NewPane "Right"; SwitchToMode "locked"; }
-        bind "x" { CloseFocus; SwitchToMode "locked"; }
-        bind "z" { ToggleFocusFullscreen; SwitchToMode "locked"; }
-        bind "c" { NewTab; SwitchToMode "locked"; }
-        bind "n" { GoToNextTab; SwitchToMode "locked"; }
-        bind "p" { GoToPreviousTab; SwitchToMode "locked"; }
-        bind "&" { CloseTab; SwitchToMode "locked"; }
-        bind "1" { GoToTab 1; SwitchToMode "locked"; }
-        bind "2" { GoToTab 2; SwitchToMode "locked"; }
-        bind "3" { GoToTab 3; SwitchToMode "locked"; }
-        bind "4" { GoToTab 4; SwitchToMode "locked"; }
-        bind "5" { GoToTab 5; SwitchToMode "locked"; }
-        bind "6" { GoToTab 6; SwitchToMode "locked"; }
-        bind "7" { GoToTab 7; SwitchToMode "locked"; }
-        bind "8" { GoToTab 8; SwitchToMode "locked"; }
-        bind "9" { GoToTab 9; SwitchToMode "locked"; }
-        bind "0" { GoToTab 10; SwitchToMode "locked"; }
+        bind "o" { FocusNextPane; SwitchToMode "locked"; TogglePaneFrames; }
+        bind "O" { FocusPreviousPane; SwitchToMode "locked"; TogglePaneFrames; }
+        bind "h" { MoveFocus "Left"; SwitchToMode "locked"; TogglePaneFrames; }
+        bind "j" { MoveFocus "Down"; SwitchToMode "locked"; TogglePaneFrames; }
+        bind "k" { MoveFocus "Up"; SwitchToMode "locked"; TogglePaneFrames; }
+        bind "l" { MoveFocus "Right"; SwitchToMode "locked"; TogglePaneFrames; }
+        bind "\"" { NewPane "Down"; SwitchToMode "locked"; TogglePaneFrames; }
+        bind "%" { NewPane "Right"; SwitchToMode "locked"; TogglePaneFrames; }
+        bind "x" { CloseFocus; SwitchToMode "locked"; TogglePaneFrames; }
+        bind "z" { ToggleFocusFullscreen; SwitchToMode "locked"; TogglePaneFrames; }
+        bind "c" { NewTab; SwitchToMode "locked"; TogglePaneFrames; }
+        bind "n" { GoToNextTab; SwitchToMode "locked"; TogglePaneFrames; }
+        bind "p" { GoToPreviousTab; SwitchToMode "locked"; TogglePaneFrames; }
+        bind "&" { CloseTab; SwitchToMode "locked"; TogglePaneFrames; }
+        bind "1" { GoToTab 1; SwitchToMode "locked"; TogglePaneFrames; }
+        bind "2" { GoToTab 2; SwitchToMode "locked"; TogglePaneFrames; }
+        bind "3" { GoToTab 3; SwitchToMode "locked"; TogglePaneFrames; }
+        bind "4" { GoToTab 4; SwitchToMode "locked"; TogglePaneFrames; }
+        bind "5" { GoToTab 5; SwitchToMode "locked"; TogglePaneFrames; }
+        bind "6" { GoToTab 6; SwitchToMode "locked"; TogglePaneFrames; }
+        bind "7" { GoToTab 7; SwitchToMode "locked"; TogglePaneFrames; }
+        bind "8" { GoToTab 8; SwitchToMode "locked"; TogglePaneFrames; }
+        bind "9" { GoToTab 9; SwitchToMode "locked"; TogglePaneFrames; }
+        bind "0" { GoToTab 10; SwitchToMode "locked"; TogglePaneFrames; }
         bind "," { SwitchToMode "renametab"; }
         bind "[" "]" { SwitchToMode "scroll"; }
         bind "q" { SwitchToMode "normal"; }
-        bind "Q" "Esc" { SwitchToMode "locked"; }
+        bind "Q" "Esc" { SwitchToMode "locked"; TogglePaneFrames; }
         bind "d" { Detach; }
     }
 }
