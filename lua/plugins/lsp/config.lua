@@ -62,7 +62,7 @@ M.servers = {
             enabled = false,
           },
           pycodestyle = {
-            enabled = false,
+            enabled = true,
             -- ignore = {"E501"},
             maxLineLength = 90,
           },
