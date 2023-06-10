@@ -28,3 +28,12 @@
 [submodule ".local/build/multimc-bin"]
 	path = .local/build/multimc-bin
 	url = https://aur.archlinux.org/multimc-bin
+[submodule ".local/build/gimp-git"]
+	path = .local/build/gimp-git
+	url = https://aur.archlinux.org/gimp-git.git
+[submodule ".local/build/protontricks"]
+	path = .local/build/protontricks
+	url = https://aur.archlinux.org/protontricks.git
+[submodule ".local/build/python-vdf"]
+	path = .local/build/python-vdf
+	url = https://aur.archlinux.org/python-vdf.git
