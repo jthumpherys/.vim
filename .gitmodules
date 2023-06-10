@@ -37,3 +37,6 @@
 [submodule ".local/build/python-vdf"]
 	path = .local/build/python-vdf
 	url = https://aur.archlinux.org/python-vdf.git
+[submodule ".local/build/libart-lgpl"]
+	path = .local/build/libart-lgpl
+	url = https://aur.archlinux.org/libart-lgpl.git
