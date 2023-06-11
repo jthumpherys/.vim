@@ -20,4 +20,10 @@ return {
   --   },
   --   event = { "BufReadPost", "BufNewFile" },
   -- },
+  {
+    "folke/neodev.nvim",
+    name = "neodev",
+    config = true,
+    filetype = lua,
+  },
 }

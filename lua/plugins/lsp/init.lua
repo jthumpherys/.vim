@@ -10,6 +10,7 @@ return {
       "mason",
       "mason-lspconfig",
       -- "hrsh7th/cmp-nvim-lsp",
+      "neodev",
     },
     event = { "BufReadPre", "BufNewFile" },
   },
