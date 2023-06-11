@@ -40,3 +40,9 @@
 [submodule ".local/build/libart-lgpl"]
 	path = .local/build/libart-lgpl
 	url = https://aur.archlinux.org/libart-lgpl.git
+[submodule ".local/build/discord_fonts/ttf-twemoji"]
+	path = .local/build/discord_fonts/ttf-twemoji
+	url = https://aur.archlinux.org/ttf-twemoji.git
+[submodule ".local/build/discord_fonts/font-symbola"]
+	path = .local/build/discord_fonts/font-symbola
+	url = https://aur.archlinux.org/font-symbola.git
