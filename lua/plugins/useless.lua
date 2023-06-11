@@ -2,7 +2,7 @@ return {
   {
     "andweeb/presence.nvim",
     name = "presence",
-    enabled = false,
+    -- enabled = false,
     event = "VeryLazy",
   },
 }
