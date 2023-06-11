@@ -9,4 +9,11 @@ return {
     "imsnif/kdl.vim",
     ft = "kdl",
   },
+
+  {
+    "Fymyte/rasi.vim",
+    ft = "rasi",
+    build = ":TSInstall rasi",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+  },
 }
