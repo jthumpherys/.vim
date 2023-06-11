@@ -28,16 +28,16 @@
 [submodule ".local/build/multimc-bin"]
 	path = .local/build/multimc-bin
 	url = https://aur.archlinux.org/multimc-bin
-[submodule ".local/build/gimp-git"]
-	path = .local/build/gimp-git
-	url = https://aur.archlinux.org/gimp-git.git
-[submodule ".local/build/protontricks"]
+[submodule ".local/build/steam/protontricks"]
 	path = .local/build/protontricks
 	url = https://aur.archlinux.org/protontricks.git
-[submodule ".local/build/python-vdf"]
+[submodule ".local/build/steam/python-vdf"]
 	path = .local/build/python-vdf
 	url = https://aur.archlinux.org/python-vdf.git
-[submodule ".local/build/libart-lgpl"]
+[submodule ".local/build/gimp/gimp-git"]
+	path = .local/build/gimp-git
+	url = https://aur.archlinux.org/gimp-git.git
+[submodule ".local/build/gimp/libart-lgpl"]
 	path = .local/build/libart-lgpl
 	url = https://aur.archlinux.org/libart-lgpl.git
 [submodule ".local/build/discord_fonts/ttf-twemoji"]
