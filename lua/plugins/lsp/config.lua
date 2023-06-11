@@ -85,7 +85,15 @@ M.servers = {
       },
     },
   },
-  -- rust_analyzer = {},
+  rust_analyzer = {
+    settings = {
+      ['rust-analyzer'] = {
+        diagnostics = {
+          enable = false;
+        }
+      },
+    },
+  },
   -- vimls = {},
   -- zk = {},
 }
