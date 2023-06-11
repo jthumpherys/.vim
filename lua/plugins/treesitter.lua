@@ -20,7 +20,7 @@ return {
         -- "markdown_inline",
         "python",
         "regex",
-        -- "rust",
+        "rust",
         "vim",
         "vimdoc",
       },
