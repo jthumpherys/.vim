@@ -1,0 +1,12 @@
+#!/usr/bin/sh
+
+OPTIONS="--title=primary_terminal --hold"
+COMMAND="multiplexer && $SHELL"
+
+if [[ $TERMINAL == "alacritty" ]]; then
+  $TERMINAL $OPTIONS --command=$COMMAND
+elif [[ $TERMINAL == "kitty" ]]; then
+  $TERMINAL $OPTIONS $COMMAND
+else
+  $TERMINAL $OPTIONS
+fi
