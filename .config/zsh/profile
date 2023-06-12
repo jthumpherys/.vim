@@ -23,4 +23,11 @@ done
 
 export rc_source=()
 
+typeset -U path
+path=( . ~/.local/bin/**/ ~/.local/sbin/**/ $path )
+
+typeset -U fpath
+fpath=( $ZDOTDIR/funcs/**/ $fpath )
+autoload -Uz $ZDOTDIR/funcs/*(.:t)
+
 export HISTFILE="${XDG_STATE_HOME}/zsh/history"

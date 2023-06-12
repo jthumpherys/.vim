@@ -1,24 +1,47 @@
 #!/hint/zsh
 
+while getopts as opt; do
+  case $opt in
+    (a)
+      after=true
+      ;;
+    (s)
+      src=true
+      ;;
+    (\?)
+      print $function: invalid option -- \'$opt\'
+      return 1
+      ;;
+  esac
+done
+
 typeset dir=$XDG_CONFIG_HOME
 
+typeset files
+files=()
 while (( $# )); do
-  if [[ -d "${dir}/$1" ]]; then
+  if [[ -f "${dir}/$1" ]]; then
+  elif [[ -d "${dir}/$1" && ! -f "${dir}/$1" ]]; then
     dir="${dir}/$1"
-  elif [[ -f "${dir}/$1" ]]; then
-    typeset files
-    files=()
-    for file in $*; do
-      files+=("${dir}/${file}")
-    done
+  fi
+  f=$(ls "${dir}/**/$1")
+
+  # elif [[ -f "${dir}/$1" ]]; then
+  #   files+=($1)
+  # else
+  #   files+=($(ls ${dir}/**/
+  fi
+  shift
+
+    if $src; then source $files; return; fi
     $EDITOR -o $files
+    if $after; then source $files; fi
     return
   else
     print "Error: $1 not found"
     return
   fi
 
-  shift
 done
 
 print -D $dir
