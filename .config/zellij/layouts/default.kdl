@@ -1,0 +1,6 @@
+layout {
+    pane split_direction="horizontal" {
+        pane focus=true size="85%"
+        pane size="15%"
+    }
+}

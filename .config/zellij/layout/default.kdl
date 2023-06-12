@@ -1,7 +1,0 @@
-// Default layout
-
-layout {
-    pane split_direction="vertical" {
-        pane size=85%
-        pane size=15%
-    }

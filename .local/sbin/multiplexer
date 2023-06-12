@@ -1,0 +1,9 @@
+#!/usr/bin/sh
+
+if [[ $MULTIPLEXER == "zellij" ]]; then
+  $MULTIPLEXER --layout startup options --session-name startup --attach-to-session true
+elif [[ $MULTIPLEXER == "tmux" ]]; then
+  $MULTIPLEXER
+else
+  $MULTIPLEXER
+fi
