@@ -3,20 +3,24 @@
 shell_profile=${XDG_CONFIG_HOME:-$HOME/.config}/shell/profile
 [ -f $shell_profile ] && source $shell_profile
 
-setopt localoptions
-setopt extendedglob
-for file in $XDG_CONFIG_HOME/^(zsh|shell)/env; do
-  source $file
+typeset shells=( shell sh bash zsh )
+
+for file in $XDG_CONFIG_HOME/*/env; do
+  typeset to_source=true
+  for shell in $shells; do
+    if [[ $file == $XDG_CONFIG_HOME/$shell/env ]]; then
+      to_source=false
+      break
+    fi
+  done
+  if $to_source; then
+    print $file sourced
+    source $file
+  else
+    print $file not sourced
+  fi
 done
 
-# detached_session="bg"
-# /usr/bin/tmux has-session -t $detached_session 2>/dev/null
-# if [ $? != 0 ]; then
-#   if [[ -f ${TMUXP_CONFIGDIR}/${detached_session}.yaml ]]; then
-#     /usr/bin/tmuxp load -d -s $detached_session $detached_session
-#   else
-#     /usr/bin/tmux new-session -d -s $detached_session
-#   fi
-# fi
+export rc_source=()
 
 export HISTFILE="${XDG_STATE_HOME}/zsh/history"
