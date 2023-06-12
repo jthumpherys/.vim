@@ -60,3 +60,5 @@ keymap:
       ALT_R-KEY_J: ALT-SHIFT-Down
       ALT_R-KEY_K: ALT-SHIFT-Up
       ALT_R-KEY_L: CTRL-Tab
+
+      ALT_R-KEY_B: [CTRL-KEY_K, Enter]  # previous channel
