@@ -188,3 +188,4 @@ theme "carbonfox"
 pane_frames false
 default_mode "locked"
 copy_command "wl-copy"
+layout_dir "~/.config/zellij/layouts"
