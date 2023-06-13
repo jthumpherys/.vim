@@ -14,10 +14,8 @@ for file in $XDG_CONFIG_HOME/*/env; do
     fi
   done
   if $to_source; then
-    print $file sourced
     source $file
   else
-    print $file not sourced
   fi
 done
 
