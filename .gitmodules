@@ -13,9 +13,6 @@
 [submodule ".local/build/xremap-hypr-bin"]
 	path = .local/build/xremap-hypr-bin
 	url = https://aur.archlinux.org/xremap-hypr-bin
-[submodule ".local/build/gtkcord4-bin"]
-	path = .local/build/gtkcord4-bin
-	url = https://aur.archlinux.org/gtkcord4-bin
 [submodule ".local/build/rofi-lbonn-wayland-git"]
 	path = .local/build/rofi-lbonn-wayland-git
 	url = https://aur.archlinux.org/rofi-lbonn-wayland-git
