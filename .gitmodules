@@ -37,12 +37,15 @@
 [submodule ".local/build/gimp/libart-lgpl"]
 	path = .local/build/libart-lgpl
 	url = https://aur.archlinux.org/libart-lgpl.git
-[submodule ".local/build/discord_fonts/ttf-twemoji"]
+[submodule ".local/build/discord/fonts/ttf-twemoji"]
 	path = .local/build/discord_fonts/ttf-twemoji
 	url = https://aur.archlinux.org/ttf-twemoji.git
-[submodule ".local/build/discord_fonts/font-symbola"]
+[submodule ".local/build/discord/fonts/font-symbola"]
 	path = .local/build/discord_fonts/font-symbola
 	url = https://aur.archlinux.org/font-symbola.git
-[submodule ".local/build/webcord-vencord-git"]
+[submodule ".local/build/discord/webcord-vencord-git"]
 	path = .local/build/webcord-vencord-git
 	url = https://aur.archlinux.org/webcord-vencord-git.git
+[submodule ".local/build/discord/arrpc"]
+	path = .local/build/discord/arrpc
+	url = https://aur.archlinux.org/arrpc.git
