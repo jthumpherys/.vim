@@ -1,7 +1,18 @@
 [user]
-	name = Jade Humpherys
-	email = joshua.humpherys@protonmail.com
+  name = Jade Humpherys
+  email = joshua.humpherys@protonmail.com
 [init]
-	defaultBranch = main
+  defaultBranch = main
 [pull]
-	rebase = false
+  rebase = false
+
+[difftool]
+  prompt = true
+[diff]
+  tool = nvimdiff
+[difftool]
+  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+[merge]
+  tool = nvimdiff
+[mergetool "vimdiff"]
+  path = nvim
