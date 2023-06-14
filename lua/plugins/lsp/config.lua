@@ -1,114 +1,136 @@
 local M = {}
 
-M.servers = {
-  -- arduino_language_server = {},
-  -- bashls = {},
-  -- clangd = {},
-  -- dartls = {},
-  -- hls = {},
-  -- julials = {},
-  -- kotlin_language_server = {},
-  -- lua_ls = {
+
+M.lsp_servers = {
+  lua_ls = {
+    single_file_support = true,
+    settings = {
+      Lua = {
+        runtime = {
+          version = 'LuaJIT',
+        },
+        -- diagnostics = {
+        --   globals = {'vim'},
+        -- },
+        -- workspace = {
+        --   library = vim.api.nvim_get_runtime_file("", true),
+        -- },
+      },
+    },
+  },
+  -- pylsp = {
   --   settings = {
-  --     Lua = {
-  --       runtime = {
-  --         version = "LuaJIT",
-  --       },
-  --       diagnostics = {
-  --         globals = {"vim"},
-  --       },
-  --       workspace = {
-  --         library = vim.api.nvim_get_runtime_file("", true)
-  --       },
-  --       telemetry = {
-  --         enable = false,
+  --     pylsp = {
+  --       plugins = {
+  --         -- autopep8 = {
+  --         --   enabled = false,
+  --         -- },
+  --         -- flake8 = {
+  --         --   enabled = false,
+  --         -- },
+  --         -- jedi_completion = {
+  --         --   enabled = false,
+  --         -- },
+  --         -- jedi_definition = {
+  --         --   enabled = false,
+  --         -- },
+  --         -- jedi_hover = {
+  --         --   enabled = false,
+  --         -- },
+  --         -- jedi_references = {
+  --         --   enabled = false,
+  --         -- },
+  --         -- jedi_signature_help = {
+  --         --   enabled = false,
+  --         -- },
+  --         -- jedi_symbols = {
+  --         --   enabled = false,
+  --         -- },
+  --         -- mccabe = {
+  --         --   enabled = false,
+  --         -- },
+  --         -- preload = {
+  --         --   enabled = false,
+  --         -- },
+  --         -- pycodestyle = {
+  --         --   enabled = false,
+  --         --   -- ignore = {"E501"},
+  --         --   maxLineLength = 90,
+  --         -- },
+  --         -- pyflakes = {
+  --         --   enabled = false,
+  --         -- },
+  --         pylint = {
+  --           enabled = true,
+  --           args = {"--max-line-length=90"},
+  --         },
+  --         -- rope_autoimport = {
+  --         --   enabled = false,
+  --         -- },
+  --         -- rope_completion = {
+  --         --   enabled = false,
+  --         -- },
+  --         -- yapf = {
+  --         --   enabled = false,
+  --         -- },
   --       },
   --     },
   --   },
   -- },
-  -- marksman = {},
-  pylsp = {
-    settings = {
-      pylsp = {
-        plugins = {
-          autopep8 = {
-            enabled = false,
-          },
-          flake8 = {
-            enabled = false,
-          },
-          jedi_completion = {
-            enabled = false,
-          },
-          jedi_definition = {
-            enabled = false,
-          },
-          jedi_hover = {
-            enabled = false,
-          },
-          jedi_references = {
-            enabled = false,
-          },
-          jedi_signature_help = {
-            enabled = false,
-          },
-          jedi_symbols = {
-            enabled = false,
-          },
-          mccabe = {
-            enabled = false,
-          },
-          preload = {
-            enabled = false,
-          },
-          pycodestyle = {
-            enabled = true,
-            -- ignore = {"E501"},
-            maxLineLength = 90,
-          },
-          pyflakes = {
-            enabled = false,
-          },
-          pylint = {
-            enabled = false,
-          },
-          rope_autoimport = {
-            enabled = false,
-          },
-          rope_completion = {
-            enabled = false,
-          },
-          yapf = {
-            enabled = false,
-          },
-        },
-      },
-    },
-  },
   rust_analyzer = {
     settings = {
       ['rust-analyzer'] = {
         diagnostics = {
-          enable = false;
+          enable = true;
         }
       },
     },
   },
-  -- vimls = {},
-  -- zk = {},
 }
 
 
-function M.setup()
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities.textDocument.foldingRange = {
-    dynamicRegistration = false,
-    lineFoldingOnly = true,
-  }
-  for server_name, server_opts in pairs(M.servers) do
-    server_opts.capabilities = capabilities
-    require("lspconfig")[server_name].setup(server_opts)
+M.null_packages = {
+  lua = {
+    stylua = { method = "formatting" },
+    -- selene = { method = "diagnostics" },
+  },
+  python = { ruff = { method = "formatting" }},
+  zsh = { zsh = { method = "diagnostics", mason = false }},
+}
+
+M.null_installs = {}
+for _, pkgs in pairs(M.null_packages) do
+  for name, pkg in pairs(pkgs) do
+    if pkg.mason == nil or pkg.mason then
+      table.insert(M.null_installs, name)
+    end
   end
 end
+
+M.null_filetypes = {}
+for lang, _ in pairs(M.null_packages) do
+  table.insert(M.null_filetypes, lang)
+end
+
+local null_opts = { sources = {} }
+function M.get_null_options()
+  local null = require("null-ls")
+  for _, pkgs in pairs(M.null_packages) do
+    for name, pkg in pairs(pkgs) do
+      table.insert(null_opts.sources, null.builtins[pkg.method][name])
+    end
+  end
+  return null_opts
+end
+
+
+M.defaults = {
+  capabilities = vim.lsp.protocol.make_client_capabilities()
+}
+M.defaults.capabilities.textDocument.foldingRange = {
+  dynamicRegistration = false,
+  lineFoldingOnly = true,
+}
+
 
 return M
