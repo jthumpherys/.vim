@@ -2,15 +2,15 @@ return {
   {
     "folke/which-key.nvim",
     name = "which-key",
-		opts = {
-			plugins = { presets = { operators = false } },
-		},
+    opts = {
+      plugins = { presets = { operators = false } },
+    },
     config = true,
     init = function()
       vim.o.timeout = true
       vim.o.timeoutlen = 1000
     end,
-		event = "VeryLazy",
+    event = "VeryLazy",
   },
 
   {
@@ -25,7 +25,7 @@ return {
     config = function(_, opts)
       require("illuminate").configure(opts)
     end,
-		event = "VeryLazy",
+    event = "VeryLazy",
     dependencies = { "treesitter" },
   },
 
@@ -47,11 +47,11 @@ return {
     "mawkler/modicator.nvim",
     name = "modicator",
     opts = {
-			highlights = {
-				defaults = {
-					bold = true,
-				},
-			},
+      highlights = {
+        defaults = {
+          bold = true,
+        },
+      },
     },
     config = true,
     init = function()
@@ -68,9 +68,9 @@ return {
     version = "*",
     enabled = false,
     opts = {
-			set_number = true,
-			set_cursor = true,
-			set_cursorline = false,
+      set_number = true,
+      set_cursor = true,
+      set_cursorline = false,
     },
     config = true,
     event = { "BufReadPost", "BufNewFile" },
