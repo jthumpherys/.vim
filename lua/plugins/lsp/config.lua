@@ -109,6 +109,15 @@ for _, pkgs in pairs(M.null_packages) do
       table.insert(M.null_installs, name)
     end
   end
+
+  vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+    callback = function(ev)
+      local opts = { noremap = true, silent = true, buffer = ev.buf }
+      vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+      vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    end,
+  })
 end
 
 M.null_filetypes = {}
