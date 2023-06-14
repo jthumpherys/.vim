@@ -1,22 +1,5 @@
 return {
   {
-    "nvim-telescope/telescope.nvim",
-    name = "telescope",
-    version = "*",
-    setup = function()
-      require("telescope").load_extension("fzf")
-    end,
-    events = "VeryLazy",
-    dependencies = { "treesitter", "plenary" },
-  },
-
-  {
-    "nvim-telescope/telescope-fzf-native.nvim",
-    name = "telescope-fzf",
-    build = "make",
-  },
-
-  {
     "nvim-tree/nvim-tree.lua",
     name = "tree",
     opts = {
@@ -49,7 +32,7 @@ return {
     name = "yanky",
     config = function()
       require("yanky").setup()
-			require("telescope").load_extension("yank_history")
+      require("telescope").load_extension("yank_history")
 
       vim.keymap.set({'n','x'}, 'p', "<Plug>(YankyPutAfter)")
       vim.keymap.set({'n','x'}, 'P', "<Plug>(YankyPutBefore)")
