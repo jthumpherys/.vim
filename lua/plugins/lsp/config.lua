@@ -19,65 +19,65 @@ M.lsp_servers = {
       },
     },
   },
-  -- pylsp = {
-  --   settings = {
-  --     pylsp = {
-  --       plugins = {
-  --         -- autopep8 = {
-  --         --   enabled = false,
-  --         -- },
-  --         -- flake8 = {
-  --         --   enabled = false,
-  --         -- },
-  --         -- jedi_completion = {
-  --         --   enabled = false,
-  --         -- },
-  --         -- jedi_definition = {
-  --         --   enabled = false,
-  --         -- },
-  --         -- jedi_hover = {
-  --         --   enabled = false,
-  --         -- },
-  --         -- jedi_references = {
-  --         --   enabled = false,
-  --         -- },
-  --         -- jedi_signature_help = {
-  --         --   enabled = false,
-  --         -- },
-  --         -- jedi_symbols = {
-  --         --   enabled = false,
-  --         -- },
-  --         -- mccabe = {
-  --         --   enabled = false,
-  --         -- },
-  --         -- preload = {
-  --         --   enabled = false,
-  --         -- },
-  --         -- pycodestyle = {
-  --         --   enabled = false,
-  --         --   -- ignore = {"E501"},
-  --         --   maxLineLength = 90,
-  --         -- },
-  --         -- pyflakes = {
-  --         --   enabled = false,
-  --         -- },
-  --         pylint = {
-  --           enabled = true,
-  --           args = {"--max-line-length=90"},
-  --         },
-  --         -- rope_autoimport = {
-  --         --   enabled = false,
-  --         -- },
-  --         -- rope_completion = {
-  --         --   enabled = false,
-  --         -- },
-  --         -- yapf = {
-  --         --   enabled = false,
-  --         -- },
-  --       },
-  --     },
-  --   },
-  -- },
+  pylsp = {
+    settings = {
+      pylsp = {
+        plugins = {
+          autopep8 = {
+            enabled = false,
+          },
+          flake8 = {
+            enabled = false,
+          },
+          jedi_completion = {
+            enabled = false,
+          },
+          jedi_definition = {
+            enabled = false,
+          },
+          jedi_hover = {
+            enabled = false,
+          },
+          jedi_references = {
+            enabled = false,
+          },
+          jedi_signature_help = {
+            enabled = false,
+          },
+          jedi_symbols = {
+            enabled = false,
+          },
+          mccabe = {
+            enabled = false,
+          },
+          preload = {
+            enabled = false,
+          },
+          pycodestyle = {
+            enabled = false,
+            -- ignore = {"E501"},
+            maxLineLength = 90,
+          },
+          pyflakes = {
+            enabled = false,
+          },
+          pylint = {
+            enabled = true,
+            args = {"--max-line-length=90"},
+          },
+          rope_autoimport = {
+            enabled = false,
+          },
+          rope_completion = {
+            enabled = false,
+          },
+          yapf = {
+            enabled = false,
+          },
+        },
+      },
+    },
+  },
   rust_analyzer = {
     settings = {
       ['rust-analyzer'] = {
@@ -95,7 +95,10 @@ M.null_packages = {
     stylua = { method = "formatting" },
     -- selene = { method = "diagnostics" },
   },
-  python = { ruff = { method = "formatting" }},
+  python = {
+    ruff = { method = "formatting" },
+    mypy = { method = "diagnostics" },
+  },
   zsh = { zsh = { method = "diagnostics", mason = false }},
 }
 
@@ -126,12 +129,11 @@ end
 
 
 M.defaults = {
-  capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities = vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabilities(), require("cmp_nvim_lsp").default_capabilities())
 }
 M.defaults.capabilities.textDocument.foldingRange = {
   dynamicRegistration = false,
   lineFoldingOnly = true,
 }
-
 
 return M

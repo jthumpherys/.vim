@@ -24,7 +24,7 @@ return {
     dependencies = {
       "mason",
       "mason-lspconfig",
-      -- "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-nvim-lsp",
       { "folke/neodev.nvim", config = true },
     },
     event = { "BufReadPre", "BufNewFile" },
