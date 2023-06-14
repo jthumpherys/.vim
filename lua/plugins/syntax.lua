@@ -1,7 +1,7 @@
 return {
   {
     "theRealCarneiro/hyprland-vim-syntax",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    dependencies = { "treesitter" },
     ft = "hypr",
   },
 
@@ -14,6 +14,6 @@ return {
     "Fymyte/rasi.vim",
     ft = "rasi",
     build = ":TSInstall rasi",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    dependencies = { "treesitter" },
   },
 }
