@@ -29,3 +29,5 @@ fpath=( $ZDOTDIR/funcs/**/ $fpath )
 autoload -Uz $ZDOTDIR/funcs/*(.:t)
 
 export HISTFILE="${XDG_STATE_HOME}/zsh/history"
+
+[ -f $DOTDIR/profile.local ] && source $DOTDIR/profile.local

@@ -33,7 +33,4 @@ alias chown='chown --preserve-root'
 alias chmod='chmod --preserve-root'
 alias chgrp='chgrp --preserve-root'
 
-# dotfiles git management
-alias dot='/usr/bin/git --git-dir=$DOTREPO --work-tree=$HOME'
-
 alias cls='echo -ne "\033c"'  # clear terminal screen

@@ -13,3 +13,5 @@ export RUNNER="rofi -show run"
 export BROWSER="firefox"
 
 export HOSTNAME=$HOST
+
+[ -f $XDG_CONFIG_HOME/shell/profile.local ] && source $XDG_CONFIG_HOME/shell/profile.local
