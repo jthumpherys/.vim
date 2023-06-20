@@ -3,7 +3,14 @@ return {
     "folke/which-key.nvim",
     name = "which-key",
     opts = {
-      plugins = { presets = { operators = false } },
+      plugins = {
+        presets = { operators = false }
+      },
+      key_labels = {
+        ["<space>"] = "␣",
+        ["<cr>"] = "↵ ",
+        ["<tab>"] = "⇥ ",
+      },
     },
     config = true,
     init = function()
