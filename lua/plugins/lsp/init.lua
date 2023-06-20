@@ -13,11 +13,10 @@ return {
     end,
     config = function()
       local lspconfig = require("lspconfig")
-      local config = require("plugins.lsp.config")
-      for server_name, server_opts in pairs(config.lsp_servers) do
-        if server_opts.capabilities == nil then
-          server_opts.capabilities = config.defaults.capabilities
-        end
+      local config = require("plugins.lsp.language_servers")
+      -- config.set_keymaps()
+      for server_name, server_opts in pairs(config.language_servers) do
+        -- vim.tbl_deep_extend("keep", server_opts, config.default_optionss)
         lspconfig[server_name].setup(server_opts)
       end
     end,
@@ -51,8 +50,8 @@ return {
     "jose-elias-alvarez/null-ls.nvim",
     name = "null-ls",
     config = function()
-      local config = require("plugins.lsp.config")
       local mason = require("mason-registry")
+      local config = require("plugins.lsp.null")
       for _, pkg in pairs(config.null_installs) do
         if not mason.is_installed(pkg) then
           vim.cmd { cmd = "MasonInstall", args = { pkg } }
@@ -61,6 +60,6 @@ return {
       require("null-ls").setup(config.get_null_options())
     end,
     dependencies = { "plenary", "mason" },
-    ft = require("plugins.lsp.config").null_filetypes,
+    ft = require("plugins.lsp.null").null_filetypes,
   },
 }

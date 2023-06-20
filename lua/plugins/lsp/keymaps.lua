@@ -1,12 +1,8 @@
 local M = {}
 
-local whichkey require("which-key")
 
-local keymap = vim.api.nvim_set_keymap
-local buf_keymap = vim.api.nvim_buf_set_keymap
-
-local function set_keymappings(client, bufnr)
-  local opts = { noremap = true, silent = true }
+  local keymap = vim.api.nvim_set_keymap
+  local buf_keymap = vim.api.nvim_buf_set_keymap
 
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, vim.tbl_deep_extend("force", opts, { buffer = 0 }))
   vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
@@ -39,10 +35,6 @@ local function set_keymappings(client, bufnr)
 
   whichkey.register(keymap_l, { buffr = bufnr, prefix = "<leader>" })
   whichkey.register(keymap_g, { buffr = bufnr, prefix = "g" })
-end
-
-function M.setup(client, bufnr)
-  set_keymappings(client, bufnr)
 end
 
 return M
