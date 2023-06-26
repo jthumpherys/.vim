@@ -1,0 +1,48 @@
+#!/hint/zsh
+
+typeset editors=( 'vim' 'nvim' )
+typeset editor_dirs=( '/bin' '/usr/bin' '/usr/local/bin' '$HOME/bin' '$HOME/.local/bin' )
+typeset valid_editor=false
+for editor in $editors; do
+  if [ $EDITOR == $editor ]; then
+    $valid_editor=true
+    break
+  fi
+  for dir in $editor_dirs; do
+    if [ $EDITOR == $dir/$editor ]; then
+      $valid_editor=true
+      break
+    fi
+  done
+  if [ $valid_editor ]; then
+    break;
+  fi
+done
+
+if [ ! $valid_editor ]; then
+  print Editor is not vim or neovim
+  return $EDITOR $*
+fi
+
+typeset tabs=()
+
+while (( $# )); do
+  typeset page=()
+  if [ $1 == ')' ]; then
+    print "Error: unmatched ')'"
+    return
+  elif [ $1 == '(' ]; then
+    while [ $1 != ')' ]; do
+      page+=($1)
+      shift
+      if [ $# == 0 || $1 == '(' ]; then
+        print "Error: unmatched '('"
+        return
+      fi
+    done
+    tabs+=($page)
+  else
+    page+=($1)
+    tabs+=($page)
+  fi
+done

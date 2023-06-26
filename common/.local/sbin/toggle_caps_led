@@ -1,0 +1,11 @@
+#!/bin/sh
+
+for tty in /dev/tty{1..6}; do
+    if /usr/bin/setleds < "$tty" | grep -q --line-regexp ".*leds.*CapsLock off.*"; then
+        /usr/bin/setleds -L +caps < "$tty"
+        exit
+    elif /usr/bin/setleds < "$tty" | grep -q --line-regexp ".*leds.*CapsLock on.*"; then
+        /usr/bin/setleds -L -caps < "$tty"
+        exit
+    fi
+done
