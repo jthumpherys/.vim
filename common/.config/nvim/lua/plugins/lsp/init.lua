@@ -40,7 +40,10 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     name = "mason-lspconfig",
-    opts = { automatic_installation = true },
+    opts = {
+      ensure_installed = { "rust_analyzer" },  -- Setup by rust-tools.nvim, not by lspconfig
+      automatic_installation = true,
+    },
     version = "*",
     dependencies = { "mason" },
   },
