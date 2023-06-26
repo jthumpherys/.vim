@@ -11,27 +11,28 @@ function M.setup()
       end,
     },
     mapping = cmp.mapping.preset.insert({
-      -- [''] = cmp.mapping.asdf(),
+    --   -- [''] = cmp.mapping.asdf(),
       ['<tab>'] = cmp.mapping(
         function(fallback)
           ultisnips_mappings.expand_or_jump_forwards(fallback)
         end,
         { 'i', 's' }
       ),
-      ['<s-tab>'] = cmp.mapping(
-        function(fallback)
-          ultisnips_mappings.jump_backwards(fallback)
-        end,
-        { 'i', 's' }
-      ),
-      -- ['<C-Space>'] = cmp.mapping.complete(),
-      -- ['<CR>'] = cmp.mapping.confirm({ select = true })
+    --   ['<s-tab>'] = cmp.mapping(
+    --     function(fallback)
+    --       ultisnips_mappings.jump_backwards(fallback)
+    --     end,
+    --     { 'i', 's' }
+    --   ),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<CR>'] = cmp.mapping.confirm({ select = true })
     }),
     sources = cmp.config.sources(
       {
         { name = "nvim_lsp" },
         { name = "ultisnips" },
         { name = "treesitter" },
+        { name = "crates" },
       },
       {
         { name = "buffer" },
