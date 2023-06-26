@@ -20,10 +20,11 @@ local opts = {
     lazy = true,
   },
   install = {
-    -- colorscheme = { "carbonfox" },
+    colorscheme = { "carbonfox" },
   },
   browser = "firefox",
-  -- custom_keys = {},
+  custom_keys = false,
+  diff = { cmd = "diffview.nvim" },
   checker = {
     enabled = true,
     notify = false,
