@@ -23,7 +23,7 @@ return {
       comment_empty = false,
     },
     config = true,
-		event = "VeryLazy",
+    event = "VeryLazy",
     -- keys = 'gc',
   },
 
@@ -56,8 +56,8 @@ return {
       vim.keymap.set('n', 'yp', function() require("telescope").extensions.yank_history.yank_history() end)
     end,
     version = "*",
-    dependencies = { "telescope" },
     event = "VeryLazy",
+    dependencies = { "telescope" },
     -- keys = {
     --   'y', 'p', 'P', 'gp', 'gP',
     --   ']p', '[p', '>p', '<p', '>P', '<P', '=p', '=P',

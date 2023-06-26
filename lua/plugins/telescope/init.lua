@@ -13,7 +13,7 @@ table.insert(M, {
     return options
   end,
   version = "*",
-  events = "VeryLazy",
+  event = "VeryLazy",
   dependencies = { "treesitter", "plenary", "devicons" },
 })
 
