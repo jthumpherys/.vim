@@ -11,7 +11,7 @@ keybinds clear-defaults=true {
         bind "Ctrl l" { MovePane "Right"; }
     }
     locked {
-        bind "Alt q" "Ctrl ;" "Alt ;" { SwitchToMode "normal"; TogglePaneFrames; }
+        bind "Alt q" "Alt ;" { SwitchToMode "normal"; TogglePaneFrames; }
         bind "Ctrl a" "Ctrl b" { SwitchToMode "tmux"; TogglePaneFrames; }
     }
     pane {
@@ -188,4 +188,3 @@ theme "carbonfox"
 pane_frames false
 default_mode "locked"
 copy_command "wl-copy"
-layout_dir "~/.config/zellij/layouts"
