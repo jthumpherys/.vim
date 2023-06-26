@@ -2,16 +2,22 @@ return {
   {
     "folke/trouble.nvim",
     dependencies = { "devicons" },
-    setup = function()
-      local opts = {silent = true, noremap = true}
-      vim.keymap.set('n', "<leader>xx", "<cmd>TroubleToggle<cr>", opts)
-      vim.keymap.set('n', "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", opts)
-      vim.keymap.set('n', "<leader>xd", "<cmd>TroubleToggle document_diagnostices<cr>", opts)
-      vim.keymap.set('n', "<leader>xl", "<cmd>TroubleToggle loclist<cr>", opts)
-      vim.keymap.set('n', "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", opts)
-      vim.keymap.set('n', "gR", "<cmd>TroubleToggle lsp_references<cr>", opts)
+    opts = { skip_groups = true, jump = true },
+    config = function(_, opts)
+      require("which-key").register(
+        {
+          ["<leader>x"] = {
+            name = "Trouble",
+            x = { "<cmd>TroubleToggle<cr>", "Toggle trouble" },
+            w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "" },
+            d = { "<cmd>TroubleToggle document_diagnostices<cr>", "" },
+            l = { "<cmd>TroubleToggle loclist<cr>", "" },
+            q = { "<cmd>TroubleToggle quickfix<cr>", "" },
+          },
+          ["gR"] = { "<cmd>TroubleToggle lsp_references<cr>", "" },
+        }
+      )
 
-      opts = {skip_groups = true, jump = true}
       require("trouble").next(opts)
     end,
     event = "VeryLazy",
