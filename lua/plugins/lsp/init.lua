@@ -14,9 +14,8 @@ return {
     config = function()
       local lspconfig = require("lspconfig")
       local config = require("plugins.lsp.language_servers")
-      -- config.set_keymaps()
       for server_name, server_opts in pairs(config.language_servers) do
-        -- vim.tbl_deep_extend("keep", server_opts, config.default_optionss)
+        vim.tbl_deep_extend("keep", server_opts, config.default_options)
         lspconfig[server_name].setup(server_opts)
       end
     end,
@@ -57,7 +56,7 @@ return {
           vim.cmd { cmd = "MasonInstall", args = { pkg } }
         end
       end
-      require("null-ls").setup(config.get_null_options())
+      require("null-ls").setup(config.get_options())
     end,
     dependencies = { "plenary", "mason" },
     ft = require("plugins.lsp.null").null_filetypes,

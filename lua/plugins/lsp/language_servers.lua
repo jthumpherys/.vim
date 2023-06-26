@@ -77,36 +77,33 @@ M.language_servers = {
       },
     },
   },
-  rust_analyzer = {
-    settings = {
-      ['rust-analyzer'] = {
-        diagnostics = {
-          enable = true;
-        }
-      },
-    },
+  -- rust_analyzer = {
+  --   settings = {
+  --     ['rust-analyzer'] = {
+  --       diagnostics = {
+  --         enable = true;
+  --       }
+  --     },
+  --   },
+  -- },
+}
+
+M.keymaps = {
+  ["<leader>l"] = {
+    name = "LSP",
+    r = { vim.lsp.buf.rename, "Rename" },
+    a = { vim.lsp.buf.code_action, "Code Action" },
+    d = { vim.diagnostic.open_float, "Line Diagnostics" },
+    i = { "<cmd>LspInfo<CR>", "Lsp Info" },
   },
 }
 
-default_options = {
-}
-
-local function set_keymaps(client, bufnr)
-  local whichkey require("which-key")
-
-  local opts = { noremap = true, silent = true }
-
-  whichkey.register(
-    {
-      ["<leader>l"] = {
-        name = "",
-        r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },
-        a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code Action" },
-        d = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Line Diagnostics" },
-        i = { "<cmd>LspInfo<CR>", "Lsp Info" },
-      },
-    }
-  )
+function M.set_keymaps(_, bufnr)
+  require("which-key").register(M.keymaps, { buffer = bufnr })
 end
+
+M.default_options = {
+  on_attach = M.set_keymaps
+}
 
 return M

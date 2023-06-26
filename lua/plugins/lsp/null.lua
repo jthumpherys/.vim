@@ -27,7 +27,7 @@ for lang, _ in pairs(M.null_packages) do
 end
 
 local null_opts = { sources = {} }
-function M.get_null_options()
+function M.get_options()
   local null = require("null-ls")
   for _, pkgs in pairs(M.null_packages) do
     for name, pkg in pairs(pkgs) do
