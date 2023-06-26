@@ -48,26 +48,26 @@
 
 ---
 
-## Local
+### Local Settings
 To add local settings for your own device, add another directory to the repo with local files and stow it instead of `generic`.
 
-### Currently supported local locations:
+#### Currently supported local locations:
 - Zsh
     - All shells:
         - `[device]/.config/zsh/env.local`
     - Login shells:
         - `[device]/.config/zsh/profile.local`
-        - Any files named `env` in all directories in `[device]/.config/` named anything besides `zsh` `shell` `bash` `sh`
+        - Any files named `env` in all directories in `[device]/.config/` named anything besides `zsh` `shell` `bash` `sh` (e.g. `[device]/.config/myprogram/env`)
     - Interactive shells:
         - `[device]/.config/zsh/rc.local`
         - Any functions in `[device]/.config/zsh/funcs`
 
 - Hyprland
-: Note: Hyprland will complain if these files don't exist. If you don't want to use them, just add blank files in these locations.
     - `[device]/.config/monitor.conf`
-    : Runs first in `hyprland.conf`
+        - First thing sourced by `hyprland.conf`
     - `[device]/.config/local.conf`
-    : Runs last in `hyprland.conf`
+        - Last thing sourced by `hyprland.conf`
+    - n.b. Hyprland will complain if these files don't exist. If you don't want to use them, just add blank files in these locations.
 
 - Neovim
     - Any lua file in `[device]/.config/nvim/lua/plugins/` will be checked by lazy.nvim for plugins. Check for collisions with filenames in `common`
