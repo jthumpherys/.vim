@@ -1,4 +1,4 @@
-# Jade's dotfiles
+# Jade's Dotfiles
 
 ### To use
 1. Clone the repo into your home directory, for example:
@@ -9,47 +9,51 @@
     ```Shell
     $ cd .dotfiles && stow common generic
     ```
-3. If you want to add your own local configuration, add a new directory for your device and stow that instead of generic. See [Local](#local) for more details.
+3. If you want to add a local configuration for a single device, add a new directory for your device and stow that instead of generic. See [Local](#local) for more details.
 
 ## Workflow
 
-### Startup
-#### systemd
-### Shell
+### Compositor - Hyprland
+- I am using `hyprland-nvidia-git` from the AUR because I have an nvidia GPU but the configuration here ought to work with the main branch fine.
+- Vim-ish keybinds (working on adding modal system) mostly relying on Super
+#### Display Manager - 
+#### Notifications - dunst
+- I use the default settings so no config is included here
+- To change notification daemon find `exec-once dunst` in `~/.config/hypr/hyprland.conf` and change it to your desired program
+#### Status Bar - eww
+- Haven't done this yet
 
-## Other Applications
+### Terminal Emulator - alacritty
+- Only have a colorscheme set (won't work until you run neovim to install all the plugins)
+- Most shell stuff is done in Zellij or Zsh configs
 
-## 
+### Multiplexer - Zellij
+- Basic config with vimified keybinds, colorscheme and a startup layout
+- Tmux config with vimified keybinds also included
+
+### Shell - Zsh
+- Vi mode
+- Prompt similar to Ubuntu default bash prompt but shows git repo and right side prompt has date and time
+
+### Text Editor - Neovim
+- Plugins in `~/.config/nvim/lua/plugins`
+- Adding a language server and its settings to `M.language_servers` in `lsp/language_server.lua` will automatically install it with Mason before configuring
+- Adding a tool to `M.null_packages` in `lsp/null.lua` will have Mason install it automatically
+- Currently fixing organization -- will explain here when finished
+- n.b. if using any local neovim plugins, lazy.nvim will get confused unless you run `stow` with the flag `--no-folding`
+
+### Included Scripts
+#### Scripts
+#### Zsh functions
+
+## Startup and System
 ### XCompose
 ### systemd
-### Hyprland
-
-## Terminal
-
-### Terminal Emulator
-#### kitty
-#### alacritty
-
-### Terminal Multiplexer
-#### Zellij
-
-### Shell
-#### Zsh
-#### bash
-
-### Text Editor
-#### Neovim
-#### Vim
-
-## 
-### 
-#### Zathura
-#### Firefox
 
 ---
 
 ### Local Settings
-To add local settings for your own device, add another directory to the repo with local files and stow it instead of `generic`.
+To add local settings for a single device, add another directory to the repo with local files and stow it instead of `generic`.
 
 #### Currently supported local locations:
 - Zsh
@@ -74,7 +78,6 @@ To add local settings for your own device, add another directory to the repo wit
 
 - Zellij
     - Any layouts in `[device]/.config/zellij/layouts/` will be recognized
-    - Any themes in `[device]/.config/zellij/themes/` will be recognized
 
 - Other
     - `~/.local/sbin` and `~/.local/bin` are in the path, so executables in `[device]/.local/sbin` or `[device/.local/bin` will be as well.
