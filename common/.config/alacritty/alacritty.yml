@@ -1,5 +1,5 @@
 import:
-  - ~/.config/alacritty/nightfox_alacritty.yml
+  - ~/.local/share/nvim/lazy/nightfox/extra/carbonfox/nightfox_alacritty.yml
 
 window:
   title: alacritty
