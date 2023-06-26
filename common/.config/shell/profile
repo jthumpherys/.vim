@@ -14,4 +14,4 @@ export BROWSER="firefox"
 
 export HOSTNAME=$HOST
 
-[ -f $XDG_CONFIG_HOME/shell/profile.local ] && source $XDG_CONFIG_HOME/shell/profile.local
+export PKG_CACHE_PATH=$XDG_CACHE_HOME/pkg
