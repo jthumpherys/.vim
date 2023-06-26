@@ -2,8 +2,8 @@
 
 ### General
 - [ ] Get .mozilla out of HOME somehow and start tracking configuration/profile files
-- [ ] Switch from kitty to alacritty
-- [ ] Make gitignores if possible in bare repo
+- [x] Switch from kitty to alacritty
+- [x] Make gitignores if possible in bare repo
 - [ ] Decide on a consistent way to use and handle submodules
     - Are more aliases a bad idea?
 - [ ] Figure out AUR management flow
@@ -16,7 +16,7 @@
 - [ ] Fix prompt
     - [ ] Find a way to not use named directories except for HOME
     - [ ] Better adapt to screen size/space
-    - [ ] Fix VCS to just have [repo]: in red instead of VCS program
+    - [x] Fix VCS to just have [repo]: in red instead of VCS program
 - [ ] Add prompts P2-4
 - [ ] Add scripts to assist in handling AUR and programs installed from source
 - [ ] Alias for command line scrolling program
@@ -26,7 +26,7 @@
 - [ ] Colors!
 
 ### Neovim
-- [ ] Figure out lsp
+- [x] Figure out lsp
 - [ ] Improve UI
     - [ ] Customize theme
     - [ ] Customize status bar
@@ -39,6 +39,15 @@
     - [ ] Add more detection for current filetypes
     - [ ] Add more rules for certain filetypes I use
         - [ ] Makefile tab
+- [ ] Standardize
+    - [ ] Switch all keybinds to which-key
+        - [ ] yanky
+        - [ ] telescope
+    - [ ] Figure out keys argument for lazy
+    - [ ] Get all plugin args in the same order
+    - [ ] Fix up filesystem
+        - [ ] Everything not in opts goes in config.lua file
+- [ ] Find installation startup problem with lazy
 
 ### Zellij
 - [ ] Set up my own layouts
@@ -59,10 +68,10 @@
 <!--     - [ ] Customize status bar -->
 
 ### xremap
-- [ ] Get capslock keybinding to work on laptop
+- [ ] Figure out why the hell it isn't working
 
 ### Hyprland
-- [ ] Handle different devices
+- [x] Handle different devices
     - [ ] Default fallback config
         - **Can I use logic in hyprland.conf?**
 - [ ] Expand binds
@@ -74,7 +83,7 @@
     - [ ] Figure out the two different schema
     - [ ] Customize theme
     - [ ] Add status bar
-    - [ ] Add notifications
+    - [x] Add notifications
     - [ ] Show keybind modes visually somehow
     - [ ] Add runner
     - [ ] Add window and workspace rules
