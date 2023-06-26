@@ -25,12 +25,23 @@ return {
     name = "illuminate",
     opts = {
       providers = { "lsp", "treesitter" },
-      delay = 750,
+      delay = 250,
       modes_allowlist = {'n'},
       min_count_to_highlight = 2,
     },
     config = function(_, opts)
-      require("illuminate").configure(opts)
+      -- vim.highlight.create(,, false)
+      vim.cmd[[hi def IlluminatedWordText gui=underline]]
+      local illuminate = require("illuminate")
+      illuminate.configure(opts)
+      require("which-key").register(
+        {
+          ["<leader>"] = {
+            n = { illuminate.goto_next_reference, "Go to next instance of word" },
+            p = { illuminate.goto_prev_reference, "Go to previous instance of word" },
+          }
+        }
+      )
     end,
     event = "VeryLazy",
     dependencies = { "treesitter" },
@@ -39,13 +50,14 @@ return {
   {
     "yamatsum/nvim-cursorline",
     name = "cursorline",
+    enabled = false,
     opts = {
       cursorline = {
         enable = true,
         timeout = 1000,
         number = false,
       },
-      cursorword = { enable = false }, -- illuminate already does this
+      -- cursorword = { enable = false }, -- illuminate already does this
       event = { "BufReadPost", "BufNewFile" },
     },
   },
@@ -66,16 +78,16 @@ return {
       vim.opt.cursorline = true
       vim.opt.number = true
     end,
-    event = { "BufReadPost", "BufNewFile" },
+    event = { "VeryLazy" },
   },
 
   {
     "mvllow/modes.nvim",
     name = "modes",
-    version = "*",
     enabled = false,
+    version = "*",
     opts = {
-      set_number = true,
+      set_number = false,
       set_cursor = true,
       set_cursorline = false,
     },
