@@ -36,7 +36,7 @@ bindkey '^D' exit_zsh
 
 typeset -U fpath
 fpath=( $ZDOTDIR/funcs/**/ $fpath )
-autoload -Uz $ZDOTDIR/funcs/*(.:t)
+autoload -Uz $ZDOTDIR/funcs/*  # (.:t)
 
 # vim
 
