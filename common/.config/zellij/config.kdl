@@ -95,6 +95,7 @@ keybinds clear-defaults=true {
         bind "K" { HalfPageScrollUp; }
     }
     shared {
+        bind "Alt s" { ToggleActiveSyncTab; }
         bind "Alt d" { Detach; }
         bind "Alt D" { Quit; }
         bind "Alt h" { MoveFocusOrTab "Left"; }
