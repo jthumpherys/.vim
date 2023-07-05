@@ -58,11 +58,29 @@ return {
 
   {
     "Wansmer/sibling-swap.nvim",
-    opts = {
-      keymaps = {},
-    },
     config = config.swap_config_function,
     dependencies = { "Wansmer/binary-swap.nvim", "treesitter" },
     keys = config.swap_keys,
   },
+
+  {
+    "kylechui/nvim-surround",
+    version = "*",
+    opts = {
+      keymaps = {
+        normal = "<leader>s",
+        normal_cur = "<leader>ss",
+        normal_line = "<leader>S",
+        normal_cur_line = "<leader>SS",
+        visual = "s",
+        visual_line = "S",
+        delete = "<leader>sd",
+        change = "<leader>sc",
+        change_line = "<leader>Sc",
+      },
+    },
+    config = true,
+    dependencies = { "treesitter", "ts-textobjects" },
+    keys = config.swap_keys,
+  }
 }

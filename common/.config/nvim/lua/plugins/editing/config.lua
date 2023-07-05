@@ -16,12 +16,6 @@ function M.comment_config_function(_, opts)
 end
 
 
-local yanky_special_prefix = '<leader>y'
--- M.yanky_keys = { yanky_special_prefix }
--- for key, _ in pairs(maps.yanky_map) do
---   table.insert(M.yanky_keys, key)
--- end
-
 function M.yanky_config_function(_, opts)
   print("here")
   require("yanky").setup(opts)
@@ -39,6 +33,10 @@ for prefix, _ in pairs(maps.swap_map) do
 end
 
 function M.swap_config_function(_, opts)
+  opts = opts or {}
+  if opts.keymaps == nil then
+    opts.keymaps = {}
+  end
   local keymap = {}
   local b_swap = require("binary-swap")
   for prefix, keymaps in pairs(maps.swap_map) do

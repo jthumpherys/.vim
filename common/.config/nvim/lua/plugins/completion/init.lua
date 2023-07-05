@@ -62,6 +62,7 @@ return {
     name = "pairs",
     opts = {
       check_ts = true,
+      fast_wrap = {},
     },
     config = require("plugins.completion.config").pairs_config_function,
   },

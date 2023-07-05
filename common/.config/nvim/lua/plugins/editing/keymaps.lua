@@ -186,13 +186,13 @@ end
 
 M.swap_map = {
   ['<leader>s'] = {
-    name = "Swap",
-    s = {
+    name = "Swap/Surround",
+    b = {
       plugin = "binary",
       func = "swap_operands",
       description = "Swap operands",
     },
-    S = {
+    B = {
       plugin = "binary",
       func = "swap_operands_with_operator",
       description = "Swap operands and reverse operator",

@@ -67,4 +67,10 @@ return {
       { "JoosepAlviste/nvim-ts-context-commentstring" },
     },
   },
+
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    name = "ts-textobjects",
+    dependencies = { "treesitter" },
+  }
 }
