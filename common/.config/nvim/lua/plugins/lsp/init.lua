@@ -11,14 +11,7 @@ return {
         end
       end
     end,
-    config = function()
-      local lspconfig = require("lspconfig")
-      local config = require("plugins.lsp.language_servers")
-      for server_name, server_opts in pairs(config.language_servers) do
-        vim.tbl_deep_extend("keep", server_opts, config.default_options)
-        lspconfig[server_name].setup(server_opts)
-      end
-    end,
+    config = require("plugins.lsp.config").config_function,
     dependencies = {
       "mason",
       "mason-lspconfig",
@@ -33,7 +26,12 @@ return {
     name = "mason",
     version = "*",
     lazy = false,
-    config = true,
+    config = function()
+      require("mason").setup()
+      local reg = require("mason-registry")
+      reg.refresh()
+      reg.update()
+    end,
     build = ":MasonUpdate",
   },
 
@@ -41,9 +39,9 @@ return {
     "williamboman/mason-lspconfig.nvim",
     name = "mason-lspconfig",
     opts = {
-      ensure_installed = { "rust_analyzer" },  -- Setup by rust-tools.nvim, not by lspconfig
       automatic_installation = true,
     },
+    config = true,
     version = "*",
     dependencies = { "mason" },
   },
@@ -51,17 +49,8 @@ return {
   {
     "jose-elias-alvarez/null-ls.nvim",
     name = "null-ls",
-    config = function()
-      local mason = require("mason-registry")
-      local config = require("plugins.lsp.null")
-      for _, pkg in pairs(config.null_installs) do
-        if not mason.is_installed(pkg) then
-          vim.cmd { cmd = "MasonInstall", args = { pkg } }
-        end
-      end
-      require("null-ls").setup(config.get_options())
-    end,
+    config = require("plugins.lsp.config").null_config_function,
     dependencies = { "plenary", "mason" },
-    ft = require("plugins.lsp.null").null_filetypes,
+    ft = require("plugins.lsp.null").filetypes,
   },
 }

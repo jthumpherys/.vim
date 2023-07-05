@@ -1,44 +1,56 @@
 local M = {}
 
-local cmp = require("cmp")
-local ultisnips_mappings = require("cmp_nvim_ultisnips.mappings")
+function M.cmp_config_function(opts)
+  local cmp = require("cmp")
+  opts.sources = cmp.config.sources(opts.sources)
 
-function M.setup()
-  cmp.setup({
-    snippet = {
-      expand = function(args)
-        vim.fn["UltiSnips#Anon"](args.body)
-      end,
-    },
-    mapping = cmp.mapping.preset.insert({
-    --   -- [''] = cmp.mapping.asdf(),
-      ['<tab>'] = cmp.mapping(
-        function(fallback)
-          ultisnips_mappings.expand_or_jump_forwards(fallback)
-        end,
-        { 'i', 's' }
-      ),
-    --   ['<s-tab>'] = cmp.mapping(
-    --     function(fallback)
-    --       ultisnips_mappings.jump_backwards(fallback)
-    --     end,
-    --     { 'i', 's' }
-    --   ),
-      ['<C-Space>'] = cmp.mapping.complete(),
-      ['<CR>'] = cmp.mapping.confirm({ select = true })
-    }),
-    sources = cmp.config.sources(
-      {
-        { name = "nvim_lsp" },
-        { name = "ultisnips" },
-        { name = "treesitter" },
-        { name = "crates" },
-      },
-      {
-        { name = "buffer" },
-      }
-    )
-  })
+  local mapping = {}
+  local maps = require("plugins.completion.keymaps")
+  for key, data in pairs(maps.cmp_map) do
+    mapping[key] = cmp.mapping[data.func](data.args)
+  end
+  opts.mapping = cmp.mapping.preset.insert(mapping)
+
+  cmp.setup(opts)
+
+  local pairs_comp = require("nvim-autopairs.completion.cmp")
+  cmp.event:on("confirm_done", pairs_comp.on_confirm_done())
+
+  -- cmp.setup({
+  --   snippet = {
+  --     expand = function(args)
+  --       vim.fn["UltiSnips#Anon"](args.body)
+  --     end,
+  --   },
+  --   mapping = cmp.mapping.preset.insert({
+  --   --   -- [''] = cmp.mapping.asdf(),
+  --     ['<tab>'] = cmp.mapping(
+  --       function(fallback)
+  --         ultisnips_mappings.expand_or_jump_forwards(fallback)
+  --       end,
+  --       { 'i', 's' }
+  --     ),
+  --   --   ['<s-tab>'] = cmp.mapping(
+  --   --     function(fallback)
+  --   --       ultisnips_mappings.jump_backwards(fallback)
+  --   --     end,
+  --   --     { 'i', 's' }
+  --   --   ),
+  --     ['<C-Space>'] = cmp.mapping.complete(),
+  --     ['<CR>'] = cmp.mapping.confirm({ select = true })
+  --   }),
+  --   sources = cmp.config.sources(
+  --     {
+  --       { name = "nvim_lsp" },
+  --       { name = "ultisnips" },
+  --       { name = "treesitter" },
+  --       { name = "crates" },
+  --     },
+  --     {
+  --       { name = "buffer" },
+  --     }
+  --   )
+  -- })
 
   cmp.setup.filetype(
     "gitcommit",
@@ -99,5 +111,19 @@ end
 
 --   cmp.setup(vim.tbl_deep_extend("force", default, options))
 -- end
+
+function M.pairs_config_function(opts)
+  local pairs = require("nvim-autopairs")
+  pairs.setup(opts)
+  -- local Rule = require("nvim-autopairs.rule")
+
+  -- local cond = require("nvim-autopairs.conds")
+
+  -- pairs.add_rules(
+  --   {
+  --     Rule(),
+  --   }
+  -- )
+end
 
 return M

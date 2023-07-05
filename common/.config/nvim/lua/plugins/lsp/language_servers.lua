@@ -8,12 +8,8 @@ M.language_servers = {
         runtime = {
           version = 'LuaJIT',
         },
-        -- diagnostics = {
-        --   globals = {'vim'},
-        -- },
         workspace = {
           checkThirdParty = false,
-          -- library = vim.api.nvim_get_runtime_file("", true),
         },
       },
     },
@@ -77,24 +73,15 @@ M.language_servers = {
       },
     },
   },
-}
-
-M.keymaps = {
-  ["<leader>l"] = {
-    name = "LSP",
-    r = { vim.lsp.buf.rename, "Rename" },
-    a = { vim.lsp.buf.code_action, "Code Action" },
-    d = { vim.diagnostic.open_float, "Line Diagnostics" },
-    i = { "<cmd>LspInfo<CR>", "Lsp Info" },
+  rust_analyzer = {
+    settings = {
+      ['rust-analyzer'] = {
+        diagnostics = {
+          enable = true
+        }
+      }
+    },
   },
-}
-
-function M.set_keymaps(_, bufnr)
-  require("which-key").register(M.keymaps, { buffer = bufnr })
-end
-
-M.default_options = {
-  on_attach = M.set_keymaps
 }
 
 return M

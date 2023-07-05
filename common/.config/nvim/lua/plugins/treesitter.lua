@@ -15,6 +15,7 @@ return {
         "gitattributes",
         "gitcommit",
         "gitignore",
+        "html",
         "json",
         "json5",
         -- "julia",
@@ -30,6 +31,7 @@ return {
         "python",
         "regex",
         "rust",
+        "scss",
         "toml",
         "vim",
         "vimdoc",
@@ -43,22 +45,26 @@ return {
       },
       indent = { enable = true },
 
+      context_commentstring = {
+        enable = true,
+        enable_autcmd = false,
+      },
+
       playground = {
         enable = true,
         disable = {},
         keybindings = {},
       },
     },
-    config = function(_, opts)
-      require("nvim-treesitter.configs").setup(opts)
-    end,
+    main = "nvim-treesitter.configs",
+--    config = function(_, opts)
+--      require("nvim-treesitter.configs").setup(opts)
+--    end,
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
-    dependencies = { "ts-playground" },
-  },
-
-  {
-    "nvim-treesitter/playground",
-    name = "ts-playground",
+    dependencies = {
+      { "nvim-treesitter/playground", name = "ts-playground" },
+      { "JoosepAlviste/nvim-ts-context-commentstring" },
+    },
   },
 }

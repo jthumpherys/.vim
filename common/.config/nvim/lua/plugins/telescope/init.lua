@@ -9,7 +9,7 @@ table.insert(M,
       local extensions = require("plugins.telescope.config").extensions
       options.extensions = {}
       for name, extension in pairs(extensions) do
-        options.extensions[name] = extensions.telescope_opts or {}
+        options.extensions[name] = extension.telescope_opts or {}
       end
       return options
     end,

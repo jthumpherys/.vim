@@ -1,26 +1,5 @@
 return {
   {
-    "folke/which-key.nvim",
-    name = "which-key",
-    opts = {
-      plugins = {
-        presets = { operators = false }
-      },
-      key_labels = {
-        ["<space>"] = "␣",
-        ["<cr>"] = "↵ ",
-        ["<tab>"] = "⇥ ",
-      },
-    },
-    config = true,
-    init = function()
-      vim.o.timeout = true
-      vim.o.timeoutlen = 1000
-    end,
-    event = "VeryLazy",
-  },
-
-  {
     "RRethy/vim-illuminate",
     name = "illuminate",
     opts = {

@@ -38,7 +38,7 @@ function M.get_plugins()
         plugin.config()
       end
       require("telescope").load_extension(name)
-    end,
+    end
     table.insert(plugins, lazy_entry)
   end
   return plugins

@@ -1,40 +1,41 @@
 local M = {}
 
+M.keymaps = {
+  ["<leader>l"] = {
+    name = "LSP",
+    r = { vim.lsp.buf.rename, "Rename" },
+    a = { vim.lsp.buf.code_action, "Code Action", mode = {'n', 'v'} },
+    i = { "<cmd>LspInfo<CR>", "Lsp Info" },
+  },
 
-  local keymap = vim.api.nvim_set_keymap
-  local buf_keymap = vim.api.nvim_buf_set_keymap
+  g = {
+    name = "GoTo",
+    d = { vim.lsp.buf.definition, "Definition" },
+    D = { vim.lsp.buf.declaration, "Declaration" },
+    s = { vim.lsp.buf.signature_help, "Signature Help" },
+    I = { vim.lsp.buf.implementation, "Implementation" },
+    y = { vim.lsp.buf.type_definition, "Type Definition" },
+    r = { vim.lsp.buf.references, "References" },
+  },
 
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, vim.tbl_deep_extend("force", opts, { buffer = 0 }))
-  vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-  vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-  vim.keymap.set('n', '[e', vim.diagnostic.goto_prev, vim.tbl_deep_extend("force", opts, { severity = vim.diagnostic.severity.ERROR }))
-  vim.keymap.set('n', ']e', vim.diagnostic.goto_prev, vim.tbl_deep_extend("force", opts, { severity = vim.diagnostic.severity.ERROR }))
+  ["<leader>w"] = {
+    name = "Workspace",
+    a = { vim.lsp.buf.add_workspace_folder, "Add workspace folder" },
+    d = { vim.lsp.buf.add_workspace_folder, "Remove workspace folder" },
+    l = { function() print(vim.inspect(vim.lsp.bif.list_workspace_folders())) end, "List workspace folders" },
+  },
 
-  -- Whichkey
-  local keymap_l = {
-    l = {
-      name = "Code",
-      r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },
-      a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code Action" },
-      d = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Line Diagnostics" },
-      i = { "<cmd>LspInfo<CR>", "Lsp Info" },
-    },
+  K = { vim.lsp.buf.hover, "Hover action" },
+}
+
+M.global_keymap = {
+  ["<leader>d"] = {
+    name = "Diagnostics",
+    d = { vim.diagnostic.open_float, "Line Diagnostics" },
+    n = { vim.diagnostic.goto_next, "Next error" },
+    p = { vim.diagnostic.goto_prev, "Previous error" },
+    q = { vim.diagnostic.setloclist, "Set loc list" },
   }
-  if client.resolved_capabilities.document_formatting then
-    keymapl.l.f = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "Format Document" }
-  end
-
-  local keymap_g = {
-    name = "Goto",
-    d = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Definition" },
-    D = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Declaration" },
-    s = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature Help" },
-    I = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Goto Implementation" },
-    t = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "Goto Type Definition" },,
-  }
-
-  whichkey.register(keymap_l, { buffr = bufnr, prefix = "<leader>" })
-  whichkey.register(keymap_g, { buffr = bufnr, prefix = "g" })
-end
+}
 
 return M
