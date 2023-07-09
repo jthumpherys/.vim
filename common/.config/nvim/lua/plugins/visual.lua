@@ -15,10 +15,8 @@ return {
       illuminate.configure(opts)
       require("which-key").register(
         {
-          ["<leader>"] = {
-            n = { illuminate.goto_next_reference, "Go to next instance of word" },
-            p = { illuminate.goto_prev_reference, "Go to previous instance of word" },
-          }
+          ['<c-n>'] = { illuminate.goto_next_reference, "Go to next instance of word" },
+          ['<c-p>'] = { illuminate.goto_prev_reference, "Go to previous instance of word" },
         }
       )
     end,
@@ -71,28 +69,6 @@ return {
       set_cursorline = false,
     },
     config = true,
-    event = { "BufReadPost", "BufNewFile" },
-  },
-
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    name = "indent",
-    main = "indent_blankline",
-    version = "*",
-    opts = {
-      show_current_context = true,
-      -- char = '⎸',
-      -- context_char = '⎸',
-    },
-    event = { "BufReadPost", "BufNewFile" },
-  },
-
-  {
-    "sitiom/nvim-numbertoggle",
-    name = "numbertoggle",
-    init = function()
-      vim.opt.number = true
-    end,
     event = { "BufReadPost", "BufNewFile" },
   },
 }

@@ -29,18 +29,6 @@ return {
   },
 
   {
-    "terrortylor/nvim-comment",
-    enabled = false,
-    main = "nvim_comment",
-    opts = {
-      comment_empty = false,
-    },
-    config = true,
-    event = "VeryLazy",
-    -- keys = 'gc',
-  },
-
-  {
     "gbprod/yanky.nvim",
     name = "yanky",
     opts = {

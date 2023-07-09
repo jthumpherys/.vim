@@ -16,7 +16,10 @@ M.comment_map = {
 
 
 M.yanky_map = {
-  ['<leader>y'] = { name = "Put" },
+  ['<leader>p'] = {
+    name = "Put",
+    -- t = { require("telescope").extensions.yank_history.yank_history, "View history through telescope" },
+  },
 
   Y = { "<Plug>(YankyYank)", "Yank without moving cursor", mode = { 'n', 'x' } },
 
@@ -34,14 +37,14 @@ local yanky_keys = {
   },
   rewriter = {
     [""] = nil,
-    Joined = { key = 'h', name = "JoinedPut", description = "as single line" },
+    Joined = { key = 'o', name = "JoinedPut", description = "as single line" },
   },
   modifier = {
     [""] = nil,
-    Linewise = { key = 'l', description = "linewise" },
-    ShiftRight = { key = '>', description = "with increased indent" },
-    ShiftLeft = { key = '<', description = "with decreased indent" },
-    Filter = { key = 'r', description = "reindent" },
+    Linewise = { key = 'l', name = "Linewise", description = "linewise" },
+    ShiftRight = { key = '>', name = "ShiftRight", description = "with increased indent" },
+    ShiftLeft = { key = '<', name = "ShiftLeft", description = "with decreased indent" },
+    Filter = { key = 'r', name = "Filter", description = "reindent" },
   },
   where = {
     After = { key = 'p', description = "after" },
@@ -59,7 +62,6 @@ local function recurse_keys(keymap, keys, piece_itr, yanky_options)
   print(piece)
   print(options)
   if piece then
-    print("here")
     for option, data in pairs(options) do
       yanky_options[piece] = option
       if data ~= nil then
@@ -98,13 +100,16 @@ local function recurse_keys(keymap, keys, piece_itr, yanky_options)
   end
   return keymap
 end
-function M.get_yanky_special_map()
-  local smap = {
-    name = "SpecialPut",
-  }
-  local piece_itr = vim.iter(yanky_keys)
-  return recurse_keys(smap, "", piece_itr, {})
-end
+local piece_itr = vim.iter(yanky_keys)
+-- M.yanky_map['<leader>p'] = recurse_keys({}, "", piece_itr, {})
+
+-- function M.get_yanky_special_map()
+--   local smap = {
+--     name = "SpecialPut",
+--   }
+--   local piece_itr = vim.iter(yanky_keys)
+--   return recurse_keys(smap, "", piece_itr, {})
+-- end
 
 --     local d = "Put"
 --     for _, p in pairs(function_pieces_order) do

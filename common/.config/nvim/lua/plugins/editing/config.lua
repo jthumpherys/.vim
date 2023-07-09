@@ -17,13 +17,8 @@ end
 
 
 function M.yanky_config_function(_, opts)
-  print("here")
   require("yanky").setup(opts)
-  -- require("telescope").load_extension("yank_history")
-
-  local whichkey = require("which-key")
-  -- whichkey.register(maps.yanky_map)
-  whichkey.register(maps.get_yanky_special_map(), { prefix = yanky_special_prefix })
+  require("telescope").load_extension("yank_history")
 end
 
 

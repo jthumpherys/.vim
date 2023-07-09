@@ -1,7 +1,7 @@
 local M = {}
 
 function M.whichkey_config_function(opts)
-  wk = require("which-key")
+  local wk = require("which-key")
   wk.setup(opts)
 
   local plugins_path = vim.fn.stdpath("config") .. "/lua/plugins/"

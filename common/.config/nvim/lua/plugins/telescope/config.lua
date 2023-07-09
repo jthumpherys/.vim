@@ -2,17 +2,22 @@ local M = {}
 
 M.extensions = {
   fzf = {
-    plugin = {"nvim-telescope/telescope-fzf-native.nvim", build = "make"},
-  },
-  file_browser = {
     plugin = {
-      "nvim-telescope/telescope-file-browser.nvim",
-      dependencies = { "plenary", "devicons" }
+      "nvim-telescope/telescope-fzf-native.nvim",
+      build = "make"
+    },
+  },
+  undo = {
+    plugin = {
+      "debugloop/telescope-undo.nvim",
+      dependencies = { "plenary" },
     },
     telescope_opts = {
-      theme = "ivy",
-      -- hijack_netrw = true,
-      -- cwd_to_path = true,
+      side_by_side = true,
+      layout_strategy = "vertical",
+      layout_config = {
+        preview_height = 0,8,
+      },
     },
   },
 }

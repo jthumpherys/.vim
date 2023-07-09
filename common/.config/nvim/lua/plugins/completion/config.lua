@@ -1,63 +1,52 @@
 local M = {}
 
-function M.cmp_config_function(opts)
+function M.cmp_config_function()
   local cmp = require("cmp")
-  opts.sources = cmp.config.sources(opts.sources)
 
-  local mapping = {}
-  local maps = require("plugins.completion.keymaps")
-  for key, data in pairs(maps.cmp_map) do
-    mapping[key] = cmp.mapping[data.func](data.args)
-  end
-  opts.mapping = cmp.mapping.preset.insert(mapping)
+  cmp.setup(
+    {
+      snippet = {
+        expand = function(args)
+          vim.fn["UltiSnips#anon"](args.body)
+        end,
+      },
+      mapping = cmp.mapping.preset.insert(
+        {
+          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+          ['<C-f>'] = cmp.mapping.scroll_docs(4),
+          ['<C-Space>'] = cmp.mapping.complete(),
+          ['<C-e>'] = cmp.mapping.abort(),
+          ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        }
+      ),
+      sources = cmp.config.sources(
+        {
+          { name = "treesitter" },
+          { name = "ultisnips" },
 
-  cmp.setup(opts)
+          { name = "nvim_lsp" },
+          { name = "nvim_lsp_signature_help" },
+          { name = "omni" },
 
-  local pairs_comp = require("nvim-autopairs.completion.cmp")
-  cmp.event:on("confirm_done", pairs_comp.on_confirm_done())
-
-  -- cmp.setup({
-  --   snippet = {
-  --     expand = function(args)
-  --       vim.fn["UltiSnips#Anon"](args.body)
-  --     end,
-  --   },
-  --   mapping = cmp.mapping.preset.insert({
-  --   --   -- [''] = cmp.mapping.asdf(),
-  --     ['<tab>'] = cmp.mapping(
-  --       function(fallback)
-  --         ultisnips_mappings.expand_or_jump_forwards(fallback)
-  --       end,
-  --       { 'i', 's' }
-  --     ),
-  --   --   ['<s-tab>'] = cmp.mapping(
-  --   --     function(fallback)
-  --   --       ultisnips_mappings.jump_backwards(fallback)
-  --   --     end,
-  --   --     { 'i', 's' }
-  --   --   ),
-  --     ['<C-Space>'] = cmp.mapping.complete(),
-  --     ['<CR>'] = cmp.mapping.confirm({ select = true })
-  --   }),
-  --   sources = cmp.config.sources(
-  --     {
-  --       { name = "nvim_lsp" },
-  --       { name = "ultisnips" },
-  --       { name = "treesitter" },
-  --       { name = "crates" },
-  --     },
-  --     {
-  --       { name = "buffer" },
-  --     }
-  --   )
-  -- })
+          { name = "buffer-lines" },
+        },
+        {
+          { name = "buffer" },
+        }
+      )
+    }
+  )
 
   cmp.setup.filetype(
     "gitcommit",
     {
       sources = cmp.config.sources(
-        { { name = "git" } },
-        { { name = "buffer" } }
+        {
+          { name = "git" },
+        },
+        {
+          { name = "buffer" },
+        }
       )
     }
   )
@@ -66,7 +55,9 @@ function M.cmp_config_function(opts)
     { '/', '?' },
     {
       mapping = cmp.mapping.preset.cmdline(),
-      sources = { { name = "buffer" } },
+      sources = {
+        { name = "buffer" },
+      },
     }
   )
 
@@ -75,55 +66,138 @@ function M.cmp_config_function(opts)
     {
       mapping = cmp.mapping.preset.cmdline(),
       sources = cmp.config.sources(
-        { { name = "path" } },
-        { { name = "cmdline" } }
+        {
+          { name = "path" },
+        },
+        {
+          { name = "cmdline" },
+        }
       )
     }
   )
 end
+  -- opts.sources = cmp.config.sources(opts.sources)
 
+  -- local snips_mappings = require("cmp_nvim_ultisnips.mappings")
+  -- local cmp_map = {
+  --   ['<tab>'] = cmp.mapping(
+  --     function(fallback)
+  --       snips_mappings.expand_or_jump_forwards(fallback)
+  --     end,
+  --     { 'i', 's' }
+  --   ),
 
---   sorting = {
---     comparators = {
---       cmp.config.compare.offset,
---       cmp.config.compare.exact,
---       cmp.config.compare.score,
---       require("cmp-under-comparator").under,
---       cmp.config.compare.kind,
---       cmp.config.compare.sort_text,
---       cmp.config.compare.length,
---       cmp.config.compare.order,
---     },
---   },
--- }
+  --   ['<s-tab>'] = cmp.mapping(
+  --     function(fallback)
+  --       snips_mappings.jump_backwards(fallback)
+  --     end,
+  --     { 'i', 's' }
+  --   ),
 
--- local servers = require("plugins.lsp.config").servers
--- local capabilities = require("cmp_nvim_lsp").default_capabilities()
--- capabilities.textDocument.foldingRange = {
---   dynamicRegistration = false,
---   lineFoldingOnly = true,
--- }
+    -- ['<tab>'] = {
+    --   func = { "mapping" },
+    --   args = {
+    --     function(fallback) snips_mappings.expand_or_jump_forwards(fallback) end,
+    --     { 'i', 's' },
+    --   },
+    -- },
 
--- function M.setup(options)
---   for server_name, _ in pairs(servers) do
---     require("lspconfig")[server_name].setup { capabilities = capabilities }
+    -- ['<s-tab>'] = {
+    --   func = { "mapping" },
+    --   args = {
+    --     function(fallback) snips_mappings.jump_backwards(fallback) end,
+    --     { 'i', 's' },
+    --   },
+    -- },
+
+  --   ['<c-space>'] = {
+  --     func = "complete",
+  --     args = {},
+  --   },
+
+  --   ['<CR>'] = {
+  --     func = "confirm",
+  --     args = { select = true },
+  --   },
+
+  --   ['<c-a>'] = {
+  --     func = "abort",
+  --     args = {},
+  --   },
+
+  --   ['<c-h>'] = {
+  --     func = "scroll_docs",
+  --     args = -4,
+  --   },
+
+  --   ['<c-l>'] = {
+  --     func = "scroll_docs",
+  --     args = 4,
+  --   },
+  -- }
+
+  -- local mapping = {}
+  -- for key, data in pairs(cmp_map) do
+  --   mapping[key] = cmp.mapping[data.func](data.args)
+  -- end
+--   opts.mapping = cmp.config.sources(cmp_map)  -- cmp.mapping.preset.insert(mapping)
+
+--   for _, comparator in pairs(opts.sorting.comparators) do
+--     local comp = nil
+--     if comparator.pkg == "cmp" then
+--       comp = cmp
+--     else
+--       comp = require(comparator.pkg)
+--     end
+
+--     for _, p in pairs(comparator.subpkg) do
+--       comp = comp[p]
+--     end
+
+--     opts.sorting.comparators[_] = comp
 --   end
 
---   cmp.setup(vim.tbl_deep_extend("force", default, options))
+--   cmp.setup(opts)
+
+
+--   cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
+
+
+--   for _, filetype in pairs(opts.filetypes) do
+--     cmp.setup.filetype(
+--       filetype.type,
+--       {
+--         sources = cmp.config.sources(filetype.sources),
+--       }
+--     )
+--   end
+
+--   for _, group in pairs(opts.cmdlines) do
+--     cmp.setup.cmdline(
+--       group.type,
+--       {
+--         mapping = cmp.mapping.preset.cmdline(),
+--         sources = cmp.config.sources(group.sources),
+--       }
+--     )
+--   end
 -- end
 
-function M.pairs_config_function(opts)
-  local pairs = require("nvim-autopairs")
-  pairs.setup(opts)
-  -- local Rule = require("nvim-autopairs.rule")
+-- function M.pairs_config_function(_, opts)
+--   local pairs = require("nvim-autopairs")
+--   pairs.setup(opts)
 
-  -- local cond = require("nvim-autopairs.conds")
+--   -- local Rule = require("nvim-autopairs.rule")
+--   -- local cond = require("nvim-autopairs.conds")
+--   -- pairs.add_rules(
+--   --   {
+--   --     Rule(),
+--   --   }
+--   -- )
+-- end
 
-  -- pairs.add_rules(
-  --   {
-  --     Rule(),
-  --   }
-  -- )
-end
+-- function M.close_config_function(_, opts)
+--   require("autoclose").setup(opts)
+-- end
 
 return M
