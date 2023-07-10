@@ -1,81 +1,53 @@
 local M = {}
 
-function M.cmp_config_function()
+
+function M.cmp_config_function(_, opts)
   local cmp = require("cmp")
+  local sources = require("plugins.completion.sources")
+  local ultisnips = require("cmp_nvim_ultisnips.mappings")
 
-  cmp.setup(
-    {
-      snippet = {
-        expand = function(args)
-          vim.fn["UltiSnips#anon"](args.body)
-        end,
-      },
-      mapping = cmp.mapping.preset.insert(
-        {
-          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-          ['<C-f>'] = cmp.mapping.scroll_docs(4),
-          ['<C-Space>'] = cmp.mapping.complete(),
-          ['<C-e>'] = cmp.mapping.abort(),
-          ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-        }
-      ),
-      sources = cmp.config.sources(
-        {
-          { name = "treesitter" },
-          { name = "ultisnips" },
+  if opts.preselect ~= nil then
+    opts.preselect = cmp.PreselectMode[opts.preselect]
+  end
 
-          { name = "nvim_lsp" },
-          { name = "nvim_lsp_signature_help" },
-          { name = "omni" },
+  for key, mapping in pairs(opts.mapping) do
+    if mapping.loc == "local" then
+      opts.mapping[key] = cmp.mapping[mapping.fn](mapping.args or nil)
+    elseif mapping.loc == "ultisnips" then
+      if mapping.args ~= nil then
+        opts.mapping[key] = cmp.mapping(
+          function(fallback) ultisnips[mapping.fn](mapping.args)(fallback) end, {'i', 's'}
+        )
+      else
+        opts.mapping[key] = cmp.mapping(
+          function(fallback) ultisnips[mapping.fn](fallback) end, {'i', 's'}
+        )
+      end
+    end
+  end
 
-          { name = "buffer-lines" },
-        },
-        {
-          { name = "buffer" },
-        }
-      )
-    }
-  )
+  for _, comparator in pairs(opts.sorting.comparators) do
+    if comparator.loc == "local" then
+      opts.sorting.comparators[_] = cmp.config.compare[comparator.fn]
+    else
+      opts.sorting.comparators[_] = require(comparator.loc)[comparator.fn]
+    end
+  end
 
-  cmp.setup.filetype(
-    "gitcommit",
-    {
-      sources = cmp.config.sources(
-        {
-          { name = "git" },
-        },
-        {
-          { name = "buffer" },
-        }
-      )
-    }
-  )
+  cmp.setup(opts)
 
-  cmp.setup.cmdline(
-    { '/', '?' },
-    {
-      mapping = cmp.mapping.preset.cmdline(),
-      sources = {
-        { name = "buffer" },
-      },
-    }
-  )
+  for filetype, srcs in pairs(sources.filetypes) do
+    cmp.setup.filetype(filetype, { sources = srcs })
+  end
 
-  cmp.setup.cmdline(
-    ':',
-    {
-      mapping = cmp.mapping.preset.cmdline(),
-      sources = cmp.config.sources(
-        {
-          { name = "path" },
-        },
-        {
-          { name = "cmdline" },
-        }
-      )
-    }
-  )
+  for type, srcs in pairs(sources.cmdlines) do
+    if type == '/' then
+      type = { '/', '?' }
+    end
+    cmp.setup.cmdline(type, { mapping = cmp.mapping.preset.cmdline(), sources = srcs })
+  end
 end
+
   -- opts.sources = cmp.config.sources(opts.sources)
 
   -- local snips_mappings = require("cmp_nvim_ultisnips.mappings")
@@ -160,7 +132,6 @@ end
 --   cmp.setup(opts)
 
 
---   cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
 
 
 --   for _, filetype in pairs(opts.filetypes) do
@@ -183,21 +154,19 @@ end
 --   end
 -- end
 
--- function M.pairs_config_function(_, opts)
---   local pairs = require("nvim-autopairs")
---   pairs.setup(opts)
+function M.pairs_config_function(_, opts)
+  local cmp = require("cmp")
+  local pairs = require("nvim-autopairs")
+  pairs.setup(opts)
 
---   -- local Rule = require("nvim-autopairs.rule")
---   -- local cond = require("nvim-autopairs.conds")
---   -- pairs.add_rules(
---   --   {
---   --     Rule(),
---   --   }
---   -- )
--- end
-
--- function M.close_config_function(_, opts)
---   require("autoclose").setup(opts)
--- end
+  -- local Rule = require("nvim-autopairs.rule")
+  -- local cond = require("nvim-autopairs.conds")
+  -- pairs.add_rules(
+  --   {
+  --     Rule(),
+  --   }
+  -- )
+  cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
+end
 
 return M

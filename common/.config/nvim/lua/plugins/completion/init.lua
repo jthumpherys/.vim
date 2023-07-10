@@ -1,125 +1,60 @@
 local config = require("plugins.completion.config")
+local sources = require("plugins.completion.sources")
 
 return {
   {
     "hrsh7th/nvim-cmp",
     name = "cmp",
-    -- opts = {
-    --   snippet = {
-    --     expand = function(args) vim.fn["UltiSnips#Anon"](args.body) end,
-    --   },
-    --   sources = {
-    --     {
-    --       { name = "treesitter" },
-    --       { name = "ultisnips" },
-
-    --       { name = "nvim_lsp" },
-    --       { name = "nvim_lsp_signature_help" },
-    --       { name = "omni" },
-
-    --       { name = "buffer-lines" },
-
-    --       -- { name = "crates" },
-    --     },
-    --     {
-    --       { name = "buffer" },
-    --     },
-    --   },
-    --   sorting = {
-    --     comparators = {
-    --       { pkg = "cmp", subpkg = { "config", "compare", "offset" } },
-    --       { pkg = "cmp", subpkg = { "config", "compare", "exact" } },
-    --       { pkg = "cmp", subpkg = { "config", "compare", "score" } },
-    --       { pkg = "cmp-under-comparator", subpkg = { "under" } },
-    --       { pkg = "cmp", subpkg = { "config", "compare", "kind" } },
-    --       { pkg = "cmp", subpkg = { "config", "compare", "sort_text" } },
-    --       { pkg = "cmp", subpkg = { "config", "compare", "length" } },
-    --       { pkg = "cmp", subpkg = { "config", "compare", "order" } },
-    --     },
-    --   },
-    --   filetypes = {
-    --     {
-    --       type = "gitcommit",
-    --       sources = {
-    --         {
-    --           { name = "git" },
-    --           { name = "commit" },
-    --         },
-    --         { { name = "buffer" } },
-    --       },
-    --     },
-    --     {
-    --       type = "rust",
-    --       sources = {
-    --         { { name = "buffer" } },
-    --       }
-    --     },
-    --     {
-    --       type = "lua",
-    --       sources = {
-    --         {
-    --           { name = "nvim_lua" },
-    --           { name = "plugins" },
-    --         },
-    --         { { name = "buffer" } },
-    --       },
-    --     },
-    --   },
-    --   cmdlines = {
-    --     {
-    --       type = ':',
-    --       sources = {
-    --         { { name = "path" } },
-    --         { { name = "cmdline" } },
-    --       },
-    --     },
-    --     {
-    --       type = { '/', '?' },
-    --       sources = {
-    --         { name = "buffer" },
-    --         { name = "buffer-lines" },
-    --       },
-    --     },
-    --   },
-    -- },
-    config = config.cmp_config_function,
-    dependencies = {
-      "lspconfig",
-
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-cmdline",
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-nvim-lsp-signature-help",
-      "hrsh7th/cmp-nvim-lua",
-      "hrsh7th/cmp-omni",
-      "hrsh7th/cmp-path",
-
-      -- "lukas-reineke/cmp-rg",
-
-      -- "kdheepak/cmp-latex-symbols", -- or
-      -- "amarakon/nvim-cmp-lua-latex-symbols",
-
-      -- { "KadoBOT/cmp-plugins", opts = { files = { "/home/jade/.config/nvim/lua" } } },
-
-      -- "crates",
-
-      "petertriho/cmp-git",
-      "Dosx001/cmp-commit",
-
-      "pairs",
-
-      "snips-cmp",
-
-      "lukas-reineke/cmp-under-comparator",
+    opts = {
+      preselect = "None",
+      snippet = { expand = function(args) vim.fn["UltiSnips#Anon"](args.body) end },
+      mapping = {
+        ['<tab>'] = {
+          loc = "ultisnips",
+          fn = "compose",
+          args = { "select_next_item", "jump_forwards" },
+        },
+        ['<S-tab>'] = {
+          loc = "ultisnips",
+          fn = "compose",
+          args = { "select_prev_item", "jump_backwards" },
+        },
+        ['<CR>'] = { loc = "local", fn = "confirm", args = { select = false } },
+        ['<C-b>'] = { loc = "local", fn = "scroll_docs", args = -4 },
+        ['<C-f>'] = { loc = "local", fn = "scroll_docs", args = 4 },
+        ['<C-e>'] = { loc = "local", fn = "abort" },
+      },
+      sorting = {
+        comparators = {
+          { loc = "local", fn = "offset" },
+          { loc = "local", fn = "exact" },
+          { loc = "local", fn = "score" },
+          { loc = "cmp-under-comparator", fn = "under" },
+          { loc = "local", fn = "kind" },
+          { loc = "local", fn = "sort_text" },
+          { loc = "local", fn = "length" },
+          { loc = "local", fn = "order" },
+        },
+      },
+      sources = sources.sources,
     },
+    config = config.cmp_config_function,
+    dependencies = sources.get_dependencies(
+      {
+        "lspconfig",
+        "lukas-reineke/cmp-under-comparator",
+      }
+    ),
     event = { "BufNewFile", "BufReadPost" },
   },
 
   {
-    "quangnguyen30192/cmp-nvim-ultisnips",
-    name = "snips-cmp",
-    config = true,
-    dependencies = { "ultisnips", "treesitter" },
+    "SirVer/ultisnips",
+    name = "ultisnips",
+    init = function()
+      vim.g.python3_host_prog = "/usr/bin/python3"
+    end,
+    dependencies = { "honza/vim-snippets" },
   },
 
   {
@@ -134,20 +69,19 @@ return {
     opts = {
       check_ts = true,
     },
-    -- config = config.pairs_config_function,
+    config = config.pairs_config_function,
+    dependencies = { "cmp" },
     event = "InsertEnter",
   },
 
   {
     "m4xshen/autoclose.nvim",
     name = "autoclose",
-    enabled = false,
     opts = {
       options = {
         pair_spaces = true,
       },
     },
-    -- config = config.close_config_function,
     event = "InsertEnter",
   },
 }
