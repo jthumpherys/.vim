@@ -73,15 +73,6 @@ M.language_servers = {
       },
     },
   },
-  rust_analyzer = {
-    settings = {
-      ['rust-analyzer'] = {
-        diagnostics = {
-          enable = true
-        }
-      }
-    },
-  },
 }
 
 return M
