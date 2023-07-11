@@ -1,5 +1,8 @@
 # Dotfiles
 
+## Important
+- [ ] Check `manpath` found `/usr/local/texlive/2023/texmf-dist/doc/man`, else find out how to have `manpath` recognize it
+
 ### General
 - [ ] Get .mozilla out of HOME somehow and start tracking configuration/profile files
 - [x] Switch from kitty to alacritty
