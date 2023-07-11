@@ -17,24 +17,25 @@ return {
       date_format = "%d %b %Y",
       time_format = "%H:%M %Z",
     },
-    -- follow_url_func = function(url) vim.fn.jobstart({"xdg-open", url}) end,
+    follow_url_func = function(url) vim.fn.jobstart({"xdg-open", url}) end,
   },
   config = function(_, opts)
     local obsidian = require("obsidian")
     obsidian.setup(opts)
     require("which-key").register(
       {
-        ['gf'] = {
+        ['gf'] = { --"<cmd>ObsidianFollowLink<CR>", "Follow Obsidian link" }
           function()
             if obsidian.util.cursor_on_markdown_link() then
-              return "<cmd>ObsidianFollowLink<CR>"
-            else return "gf" end end,
+              vim.cmd("ObsidianFollowLink")-- "<cmd>ObsidianFollowLink<CR>"
+            else vim.api.nvim_feedkeys('gf', 'n', true) end end,
           "Follow Obsidian link" },
       }
     )
   end,
   event = { "BufReadPre " .. vim.fn.expand "~" .. "/vault/**.md" },
   dependencies = {
+    "treesitter",
     "plenary",
     "cmp",
     "telescope",
