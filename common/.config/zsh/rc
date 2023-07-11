@@ -72,7 +72,4 @@ ZPLUGDIR=$XDG_DATA_HOME/zsh/plugins
 #   source $ZPLUGDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # fi
 
-typeset -U path
-path=( . ~/.local/bin/**/ ~/.local/sbin/**/ $path )
-
 [ -f $ZDOTDIR/rc.local ] && source $ZDOTDIR/rc.local
