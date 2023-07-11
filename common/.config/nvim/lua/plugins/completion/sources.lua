@@ -9,6 +9,7 @@ local snippet = {
 }
 local buffer = { entry = "hrsh7th/cmp-buffer", source = { name = "buffer" } }
 local buffer_lines = { entry = "amarakon/nvim-cmp-buffer-lines", source = { name = "buffer-lines" } }
+local path = { entry = "hrsh7th/cmp-path", source = { name = "path" } }
 
 local spell = {
   entry = {
@@ -29,6 +30,7 @@ local sources = {
     spell,
     buffer,
     -- buffer_lines,
+    path,
   },
 
   filetypes = {
@@ -86,7 +88,7 @@ local sources = {
 
   cmdlines = {
     [':'] = {
-      { entry = "hrsh7th/cmp-path", source = { name = "path" } },
+      path,
       { entry = "hrsh7th/cmp-cmdline", source = { name = "cmdline" } },
       { entry = "dmitmel/cmp-cmdline-history", source = { name = "cmp-cmdline-history" } },
     },
