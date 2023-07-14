@@ -9,7 +9,7 @@ local snippet = {
 }
 local buffer = { entry = "hrsh7th/cmp-buffer", source = { name = "buffer" } }
 local buffer_lines = { entry = "amarakon/nvim-cmp-buffer-lines", source = { name = "buffer-lines" } }
-local path = { entry = "hrsh7th/cmp-path", source = { name = "path" } }
+local path = { entry = "FelipeLema/cmp-async-path", source = { name = "async_path" } }
 
 local spell = {
   entry = {
@@ -29,12 +29,18 @@ local sources = {
     snippet,
     spell,
     buffer,
-    -- buffer_lines,
     path,
   },
 
   filetypes = {
+    c = {
+      filetype = { "c", "cpp" },
+      use_all = true,
+      sources = { buffer_lines },
+    },
+
     gitcommit = {
+      filetype = "gitcommit",
       use_all = true,
       sources = {
         { entry = "petertriho/cmp-git", source = { name = "git" } },
@@ -43,42 +49,41 @@ local sources = {
     },
 
     latex = {
+      filetype = { "tex", "plaintex" },
       use_all = true,
       sources = {
-        { "amarakon/nvim-cmp-lua-latex-symbols", source = { name = "latex-symbols" } },
+        { entry = "amarakon/nvim-cmp-lua-latex-symbols", source = { name = "latex-symbols" } },
       },
     },
 
     lua = {
+      filetype = "lua",
       use_all = true,
       sources = {
         { entry = "hrsh7th/cmp-nvim-lua", source = { name = "nvim_lua" } },
         {
-          entry = {
-            "KadoBOT/cmp-plugins",
-            opts = { files = { "/home/jade/.config/nvim/lua" } },
-          },
+          entry = { "KadoBOT/cmp-plugins", opts = { files = { "/home/jade/.config/nvim/lua" } } },
           source = { name = "plugins" },
         },
       },
     },
 
     markdown = {
+      filetype = "markdown",
       use_all = true,
       sources = {
         { entry = "jmbuhr/otter.nvim", source = { name = "otter.nvim" } },
-        spell,
       },
     },
 
     text = {
+      filetype = "text",
       use_all = false,
-      sources = {
-        spell,
-      },
+      sources = { spell, buffer },
     },
 
     toml = {
+      filetype = "toml",
       use_all = true,
       sources = {
         { entry = "crates", source = { name = "crates" } },
@@ -106,15 +111,15 @@ for _, source in pairs(sources.all) do
   table.insert(M.sources, source.source)
 end
 M.filetypes = {}
-for filetype, data in pairs(sources.filetypes) do
-  M.filetypes[filetype] = {}
+for _, data in pairs(sources.filetypes) do
+  M.filetypes[data.filetype] = {}
   for _, source in pairs(data.sources) do
     table.insert(dep_list, source.entry)
-    table.insert(M.filetypes[filetype], source.source)
+    table.insert(M.filetypes[data.filetype], source.source)
   end
   if data.use_all ~= false then
     for _, source in pairs(sources.all) do
-      table.insert(M.filetypes[filetype], source.source)
+      table.insert(M.filetypes[data.filetype], source.source)
     end
   end
 end
