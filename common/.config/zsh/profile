@@ -22,7 +22,7 @@ done
 export rc_source=()
 
 typeset -U path
-path=( . ~/.local/bin/**/ ~/.local/sbin/**/ $path )
+path=( . ~/.local/bin/**/ ~/.local/sbin/**/ ~/.local/share/cargo/bin $path )
 
 typeset -U fpath
 fpath=( $ZDOTDIR/funcs/**/ $fpath )
