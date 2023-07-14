@@ -21,7 +21,7 @@ return {
         -- "julia",
         "kdl",
         -- "kotlin",
-        -- "latex",
+        "latex",
         "lua",
         "luadoc",
         "make",
@@ -55,16 +55,18 @@ return {
         disable = {},
         keybindings = {},
       },
+
+      endwise = {
+        enable = true,
+      },
     },
     main = "nvim-treesitter.configs",
---    config = function(_, opts)
---      require("nvim-treesitter.configs").setup(opts)
---    end,
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
     dependencies = {
       { "nvim-treesitter/playground", name = "ts-playground" },
       { "JoosepAlviste/nvim-ts-context-commentstring" },
+      { "RRethy/nvim-treesitter-endwise" },
     },
   },
 
