@@ -48,125 +48,53 @@ function M.cmp_config_function(_, opts)
   end
 end
 
-  -- opts.sources = cmp.config.sources(opts.sources)
-
-  -- local snips_mappings = require("cmp_nvim_ultisnips.mappings")
-  -- local cmp_map = {
-  --   ['<tab>'] = cmp.mapping(
-  --     function(fallback)
-  --       snips_mappings.expand_or_jump_forwards(fallback)
-  --     end,
-  --     { 'i', 's' }
-  --   ),
-
-  --   ['<s-tab>'] = cmp.mapping(
-  --     function(fallback)
-  --       snips_mappings.jump_backwards(fallback)
-  --     end,
-  --     { 'i', 's' }
-  --   ),
-
-    -- ['<tab>'] = {
-    --   func = { "mapping" },
-    --   args = {
-    --     function(fallback) snips_mappings.expand_or_jump_forwards(fallback) end,
-    --     { 'i', 's' },
-    --   },
-    -- },
-
-    -- ['<s-tab>'] = {
-    --   func = { "mapping" },
-    --   args = {
-    --     function(fallback) snips_mappings.jump_backwards(fallback) end,
-    --     { 'i', 's' },
-    --   },
-    -- },
-
-  --   ['<c-space>'] = {
-  --     func = "complete",
-  --     args = {},
-  --   },
-
-  --   ['<CR>'] = {
-  --     func = "confirm",
-  --     args = { select = true },
-  --   },
-
-  --   ['<c-a>'] = {
-  --     func = "abort",
-  --     args = {},
-  --   },
-
-  --   ['<c-h>'] = {
-  --     func = "scroll_docs",
-  --     args = -4,
-  --   },
-
-  --   ['<c-l>'] = {
-  --     func = "scroll_docs",
-  --     args = 4,
-  --   },
-  -- }
-
-  -- local mapping = {}
-  -- for key, data in pairs(cmp_map) do
-  --   mapping[key] = cmp.mapping[data.func](data.args)
-  -- end
---   opts.mapping = cmp.config.sources(cmp_map)  -- cmp.mapping.preset.insert(mapping)
-
---   for _, comparator in pairs(opts.sorting.comparators) do
---     local comp = nil
---     if comparator.pkg == "cmp" then
---       comp = cmp
---     else
---       comp = require(comparator.pkg)
---     end
-
---     for _, p in pairs(comparator.subpkg) do
---       comp = comp[p]
---     end
-
---     opts.sorting.comparators[_] = comp
---   end
-
---   cmp.setup(opts)
-
-
-
-
---   for _, filetype in pairs(opts.filetypes) do
---     cmp.setup.filetype(
---       filetype.type,
---       {
---         sources = cmp.config.sources(filetype.sources),
---       }
---     )
---   end
-
---   for _, group in pairs(opts.cmdlines) do
---     cmp.setup.cmdline(
---       group.type,
---       {
---         mapping = cmp.mapping.preset.cmdline(),
---         sources = cmp.config.sources(group.sources),
---       }
---     )
---   end
--- end
 
 function M.pairs_config_function(_, opts)
   local cmp = require("cmp")
-  local pairs = require("nvim-autopairs")
-  pairs.setup(opts)
+  local npairs = require("nvim-autopairs")
+  npairs.setup(opts)
 
-  -- local Rule = require("nvim-autopairs.rule")
-  -- local cond = require("nvim-autopairs.conds")
-  -- pairs.add_rules(
-  --   {
-  --     Rule(),
-  --   }
-  -- )
   cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
+
+  local Rule = require("nvim-autopairs.rule")
+  local cond = require("nvim-autopairs.conds")
+
+  -- Add spaces on both sides inside braces while still allowing escaping
+  local brackets = { { '(', ')' }, { '[', ']' }, { '{', '}' } }
+  npairs.add_rule(
+    Rule(' ', ' ', { "-markdown", "-text" })
+      :with_pair(
+        function (pair_opts)
+          local pair = pair_opts.line:sub(pair_opts.col - 1, pair_opts.col)
+          return vim.tbl_contains(
+            {
+              brackets[1][1]..brackets[1][2],
+              brackets[2][1]..brackets[2][2],
+              brackets[3][1]..brackets[3][2],
+            },
+            pair
+          )
+        end
+      )
+  )
+  for _, bracket in pairs(brackets) do
+    npairs.add_rule(
+      Rule(bracket[1]..' ', ' '..bracket[2], { "-markdown", "-text" })
+        :with_pair(cond.none())
+        :with_move(
+          function(pair_opts)
+            return pair_opts.prev_char:match('.%'..bracket[2]) ~= nil
+          end
+        )
+        :use_key(bracket[2])
+    )
+  end
+
+  -- Add comma after closing bracket in lua unless within parentheses
+  -- npairs.add_rule(
+  --   Rule('{', '},', "lua")
+  --     :replace_endpair(function() return "}," end, function() cond.before_regex("{[()]*\n[()]*") end)
+  -- )
 end
 
 return M

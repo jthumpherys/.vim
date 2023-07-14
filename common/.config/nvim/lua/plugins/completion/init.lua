@@ -67,21 +67,12 @@ return {
     "windwp/nvim-autopairs",
     name = "pairs",
     opts = {
+      disable_in_visualblock = true,
+      enable_check_bracket_line = true,
       check_ts = true,
     },
     config = config.pairs_config_function,
     dependencies = { "cmp" },
-    event = "InsertEnter",
-  },
-
-  {
-    "m4xshen/autoclose.nvim",
-    name = "autoclose",
-    opts = {
-      options = {
-        pair_spaces = true,
-      },
-    },
     event = "InsertEnter",
   },
 }
