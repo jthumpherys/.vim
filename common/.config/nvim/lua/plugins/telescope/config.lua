@@ -7,6 +7,17 @@ M.extensions = {
       build = "make"
     },
   },
+  lazy = {
+    plugin = {
+      "tsakirist/telescope-lazy.nvim",
+    },
+  },
+  ultisnips = {
+    plugin = {
+      "fhill2/telescope-ultisnips.nvim",
+      dependencies = { "ultisnips" },
+    },
+  },
   undo = {
     plugin = {
       "debugloop/telescope-undo.nvim",
