@@ -3,11 +3,7 @@ local M = {}
 local maps = require("plugins.lsp.keymaps")
 
 function M.config_function()
-  local whichkey = require("which-key")
   local default_server_options = {
-    on_attach = function(_, bufnr)
-      whichkey.register(maps.keymaps, { buffer = bufnr })
-    end,
     capabilities = require("cmp_nvim_lsp").default_capabilities(),
   }
   default_server_options.capabilities.textDocument.foldingRange = {

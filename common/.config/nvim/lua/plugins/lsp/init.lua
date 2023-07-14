@@ -51,6 +51,7 @@ return {
     name = "null-ls",
     config = require("plugins.lsp.config").null_config_function,
     dependencies = { "plenary", "mason" },
-    ft = require("plugins.lsp.null").filetypes,
+    event = "VeryLazy",
+    -- ft = require("plugins.lsp.null").filetypes,
   },
 }

@@ -1,6 +1,6 @@
 local M = {}
 
-M.keymaps = {
+M.global_keymap = {
   ["<leader>l"] = {
     name = "LSP",
     r = { vim.lsp.buf.rename, "Rename" },
@@ -26,9 +26,7 @@ M.keymaps = {
   },
 
   K = { vim.lsp.buf.hover, "Hover action" },
-}
 
-M.global_keymap = {
   ["<leader>d"] = {
     name = "Diagnostics",
     d = { vim.diagnostic.open_float, "Line Diagnostics" },

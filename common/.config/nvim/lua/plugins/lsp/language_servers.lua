@@ -1,6 +1,7 @@
 local M = {}
 
 M.language_servers = {
+  bashls = {},
   lua_ls = {
     single_file_support = true,
     settings = {
@@ -14,6 +15,7 @@ M.language_servers = {
       },
     },
   },
+  -- ltex = {},
   pylsp = {
     settings = {
       pylsp = {
