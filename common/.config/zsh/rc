@@ -72,4 +72,6 @@ ZPLUGDIR=$XDG_DATA_HOME/zsh/plugins
 #   source $ZPLUGDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # fi
 
+eval "$(zoxide init zsh)"
+
 [ -f $ZDOTDIR/rc.local ] && source $ZDOTDIR/rc.local
