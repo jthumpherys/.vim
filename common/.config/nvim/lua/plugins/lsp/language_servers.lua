@@ -17,64 +17,39 @@ M.language_servers = {
   },
   -- ltex = {},
   pylsp = {
+    on_attach = function(_, bufnr)
+      vim.api.nvim_buf_set_keymap(
+        bufnr,
+        'v',
+        '<leader>la',
+        "<cmd>lua vim.lsp.buf.range_code_action()<CR>",  -- for rope
+        { noremap = true, silent = true }
+      )
+    end,
     settings = {
       pylsp = {
         plugins = {
-          autopep8 = {
-            enabled = false,
-          },
-          flake8 = {
-            enabled = false,
-          },
+          autopep8 = { enabled = false },  -- ruff
           jedi_completion = {
-            enabled = false,
+            include_class_objects = true,
+            include_function_objects = true,
+            fuzzy = true,
+            eager = true,
           },
-          jedi_definition = {
-            enabled = false,
-          },
-          jedi_hover = {
-            enabled = false,
-          },
-          jedi_references = {
-            enabled = false,
-          },
-          jedi_signature_help = {
-            enabled = false,
-          },
-          jedi_symbols = {
-            enabled = false,
-          },
-          mccabe = {
-            enabled = false,
-          },
-          preload = {
-            enabled = false,
-          },
-          pycodestyle = {
-            enabled = false,
-            -- ignore = {"E501"},
-            maxLineLength = 90,
-          },
-          pyflakes = {
-            enabled = false,
-          },
-          pylint = {
-            enabled = true,
-            args = {"--max-line-length=90"},
-          },
-          rope_autoimport = {
-            enabled = false,
-          },
+          pycodestyle = { enabled = false },  -- ruff
+          pydocstyle = { enabled = false },  -- ruff
+          pyflakes = { enabled = false },  -- ruff
+          pylint = { enabled = false },  -- mypy
           rope_completion = {
-            enabled = false,
+            enabled = true,
+            eager = true,
           },
-          yapf = {
-            enabled = false,
-          },
+          yapf = { enabled = false },
         },
       },
     },
   },
+  -- pylyzer = {},
 }
 
 return M

@@ -4,8 +4,9 @@ M.global_keymap = {
   ["<leader>l"] = {
     name = "LSP",
     r = { vim.lsp.buf.rename, "Rename" },
-    a = { vim.lsp.buf.code_action, "Code Action", mode = {'n', 'v'} },
+    a = { vim.lsp.buf.code_action, "Code Action" },
     i = { "<cmd>LspInfo<CR>", "Lsp Info" },
+    f = { vim.lsp.buf.format, "Format" },
   },
 
   g = {
