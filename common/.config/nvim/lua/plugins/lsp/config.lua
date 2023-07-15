@@ -1,7 +1,5 @@
 local M = {}
 
-local maps = require("plugins.lsp.keymaps")
-
 function M.config_function()
   local default_server_options = {
     capabilities = require("cmp_nvim_lsp").default_capabilities(),
@@ -19,8 +17,7 @@ function M.config_function()
   end
 end
 
-function M.null_config_function()
-  require("which-key").register(maps.keymaps)
+function M.null_config_function(_, opts)
   local mason = require("mason-registry")
   local packages = require("plugins.lsp.null")
   for _, pkg in pairs(packages.package_installation_list) do
@@ -28,7 +25,9 @@ function M.null_config_function()
       vim.cmd { cmd = "MasonInstall", args = { pkg } }
     end
   end
-  require("null-ls").setup(packages.get_plugin_options())
+
+  opts.sources = packages.get_sources()
+  require("null-ls").setup(opts)
 end
 
 return M

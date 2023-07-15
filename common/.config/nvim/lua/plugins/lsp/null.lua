@@ -15,11 +15,11 @@ M.packages = {
     -- mdl = { method = "diagnostics" },
   },
   python = {
-    ruff = { method = "formatting" },
-    mypy = { method = "diagnostics" },
+    ruff = { method = { "diagnostics", "formatting" } },
+    mypy = { method = "diagnostics", opts = { prefer_local = "env/bin" } },
   },
   rust = {
-    rustfmt = { method = "formatting" },
+    rustfmt = { method = "formatting", mason = false },
   },
   tex = {
     chktex = { method = "diagnostics", mason = false },
@@ -46,19 +46,21 @@ for lang, _ in pairs(M.packages) do
   table.insert(M.filetypes, lang)
 end
 
-function M.get_plugin_options()
-  local null_opts = { sources = {} }
+function M.get_sources()
+  local sources = {}
   local null = require("null-ls")
   for _, pkgs in pairs(M.packages) do
     for name, pkg in pairs(pkgs) do
-      if pkg.opts ~= nil then
-        table.insert(null_opts.sources, null.builtins[pkg.method][name].with(pkg.opts))
+      if type(pkg.method) == "table" then
+        for _, method in pairs(pkg.method) do
+          table.insert(sources, null.builtins[method][name].with(pkg.opts or {}))
+        end
       else
-        table.insert(null_opts.sources, null.builtins[pkg.method][name])
+        table.insert(sources, null.builtins[pkg.method][name].with(pkg.opts or {}))
       end
     end
   end
-  return null_opts
+  return sources
 end
 
 return M
