@@ -49,6 +49,9 @@ return {
   {
     "jose-elias-alvarez/null-ls.nvim",
     name = "null-ls",
+    opts = {
+      diagnostics_format = "[#{s}] #{m} (#{c})",
+    },
     config = require("plugins.lsp.config").null_config_function,
     dependencies = { "plenary", "mason" },
     event = "VeryLazy",
