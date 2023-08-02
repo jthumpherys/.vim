@@ -1,18 +1,64 @@
 local M = {}
 
-function M.config_function()
-  local default_server_options = {
+function M.get_default_server_options()
+  local options = {
     capabilities = require("cmp_nvim_lsp").default_capabilities(),
+    on_attach = function (_, bufnr)
+      require("which-key").register(
+        {
+          ["<leader>l"] = {
+            name = "LSP",
+            r = { vim.lsp.buf.rename, "Rename" },
+            a = { vim.lsp.buf.code_action, "Code Action" },
+            i = { "<cmd>LspInfo<CR>", "Lsp Info" },
+            f = { vim.lsp.buf.format, "Format" },
+          },
+
+          g = {
+            name = "GoTo",
+            d = { vim.lsp.buf.definition, "Definition" },
+            D = { vim.lsp.buf.declaration, "Declaration" },
+            s = { vim.lsp.buf.signature_help, "Signature Help" },
+            I = { vim.lsp.buf.implementation, "Implementation" },
+            y = { vim.lsp.buf.type_definition, "Type Definition" },
+            r = { vim.lsp.buf.references, "References" },
+          },
+
+          ["<leader>w"] = {
+            name = "Workspace",
+            a = { vim.lsp.buf.add_workspace_folder, "Add workspace folder" },
+            d = { vim.lsp.buf.add_workspace_folder, "Remove workspace folder" },
+            l = { function() print(vim.inspect(vim.lsp.bif.list_workspace_folders())) end, "List workspace folders" },
+          },
+
+          K = { vim.lsp.buf.hover, "Hover action" },
+
+          ["<leader>d"] = {
+            name = "Diagnostics",
+            d = { vim.diagnostic.open_float, "Line Diagnostics" },
+            n = { vim.diagnostic.goto_next, "Next error" },
+            p = { vim.diagnostic.goto_prev, "Previous error" },
+            q = { vim.diagnostic.setloclist, "Set loc list" },
+          }
+        },
+        { buffer = bufnr }
+      )
+    end
   }
-  default_server_options.capabilities.textDocument.foldingRange = {
+  options.capabilities.textDocument.foldingRange = {
     dynamicRegistration = false,
     lineFoldingOnly = true,
   }
 
+  return options
+end
+
+function M.config_function()
+
   local lspconfig = require("lspconfig")
   local servers = require("plugins.lsp.language_servers")
   for server_name, server_opts in pairs(servers.language_servers) do
-    server_opts = vim.tbl_deep_extend("keep", server_opts, default_server_options)
+    server_opts = vim.tbl_deep_extend("keep", server_opts, M.get_default_server_options())
     lspconfig[server_name].setup(server_opts)
   end
 end
@@ -26,7 +72,7 @@ function M.null_config_function(_, opts)
     end
   end
 
-  opts.sources = packages.get_sources()
+  opts.sources = packages.get_sources(M.default_server_options)
   require("null-ls").setup(opts)
 end
 

@@ -26,7 +26,7 @@ M.global_keymap = {
     l = { function() print(vim.inspect(vim.lsp.bif.list_workspace_folders())) end, "List workspace folders" },
   },
 
-  K = { vim.lsp.buf.hover, "Hover action" },
+  -- K = { vim.lsp.buf.hover, "Hover action" },
 
   ["<leader>d"] = {
     name = "Diagnostics",

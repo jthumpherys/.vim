@@ -8,28 +8,52 @@ local snippet = {
   source = { name = "ultisnips" },
 }
 local buffer = { entry = "hrsh7th/cmp-buffer", source = { name = "buffer" } }
+local fuzzy_buffer = {
+  entry = {
+    "tzachar/cmp-fuzzy-buffer",
+    dependencies = { "tzachar/fuzzy.nvim", dependencies = "telescope-fzf" },
+  },
+  source = { name = "fuzzy_buffer" },
+}
 local buffer_lines = { entry = "amarakon/nvim-cmp-buffer-lines", source = { name = "buffer-lines" } }
 local path = { entry = "FelipeLema/cmp-async-path", source = { name = "async_path" } }
+local fuzzy_path = {
+  entry = {
+    "tzachar/cmp-fuzzy-path",
+    dependencies = { "tzachar/fuzzy.nvim", dependencies = "telescope-fzf" },
+  },
+  source = { name = "fuzzy_path" },
+}
+local ripgrep = { entry = "lukas-reineke/cmp-rg", source = { name = "rg" } }
 
 local spell = {
   entry = {
     "f3fora/cmp-spell",
-    config = function()
-      vim.opt.spell = true
-      vim.opt.spelllang = { 'en_us' }
-    end,
+    -- config = function()
+    --   vim.opt.spell = true
+    --   vim.opt.spelllang = { 'en_us' }
+    -- end,
   },
   source = { name = "spell" },
 }
 
 local sources = {
   all = {
-    { entry = "hrsh7th/cmp-nvim-lsp", source = { name = "nvim_lsp" } },
-    { entry = "hrsh7th/cmp-nvim-lsp-signature-help", source = { name = "nvim_lsp_signature_help" } },
-    snippet,
-    spell,
-    buffer,
-    path,
+    -- {
+      { entry = "hrsh7th/cmp-nvim-lsp-signature-help", source = { name = "nvim_lsp_signature_help" } },
+    -- },
+    -- {
+      { entry = "hrsh7th/cmp-nvim-lsp", source = { name = "nvim_lsp" } },
+      snippet,
+      -- buffer,
+      fuzzy_buffer,
+      ripgrep,
+      -- path,
+      fuzzy_path,
+    -- },
+    -- {
+      spell
+    -- },
   },
 
   filetypes = {
@@ -62,7 +86,7 @@ local sources = {
       sources = {
         { entry = "hrsh7th/cmp-nvim-lua", source = { name = "nvim_lua" } },
         {
-          entry = { "KadoBOT/cmp-plugins", opts = { files = { "/home/jade/.config/nvim/lua" } } },
+          entry = { "KadoBOT/cmp-plugins", opts = { files = { "/home/jade/.config/nvim/lua", "/home/jade/.dotfiles/common/.config/nvim/lua" } } },
           source = { name = "plugins" },
         },
       },
@@ -79,7 +103,7 @@ local sources = {
     text = {
       filetype = "text",
       use_all = false,
-      sources = { spell, buffer },
+      sources = { fuzzy_buffer, spell },
     },
 
     toml = {
@@ -89,18 +113,33 @@ local sources = {
         { entry = "crates", source = { name = "crates" } },
       },
     },
+
+    zsh = {
+      filetype = "zsh",
+      use_all = true,
+      sources = {
+        { entry = "tamago324/cmp-zsh", source = { name = "zsh" } },
+      },
+    }
   },
 
   cmdlines = {
     [':'] = {
-      path,
+      -- path,
+      fuzzy_path,
       { entry = "hrsh7th/cmp-cmdline", source = { name = "cmdline" } },
       { entry = "dmitmel/cmp-cmdline-history", source = { name = "cmp-cmdline-history" } },
+      -- buffer,
+      fuzzy_buffer,
+      -- buffer_lines,
+      ripgrep,
     },
     ['/'] = {
-      buffer,
+      -- buffer,
+      fuzzy_buffer,
       -- buffer_lines,
-    }
+      ripgrep,
+    },
   },
 }
 

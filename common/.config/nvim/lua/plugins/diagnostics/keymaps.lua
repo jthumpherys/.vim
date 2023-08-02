@@ -1,7 +1,7 @@
 local M = {}
 
 M.global_keymap = {
-  ["<leader>x"] = {
+  ['<leader>x'] = {
     name = "Trouble",
     x = { "<cmd>TroubleToggle<cr>", "Toggle trouble" },
     r = { "<cmd>TroubleRefresh<cr>", "Refresh" },

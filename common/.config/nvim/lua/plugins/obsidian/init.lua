@@ -19,21 +19,7 @@ return {
     },
     follow_url_func = function(url) vim.fn.jobstart({"xdg-open", url}) end,
   },
-  config = function(_, opts)
-    local obsidian = require("obsidian")
-    obsidian.setup(opts)
-    require("which-key").register(
-      {
-        ['gf'] = { --"<cmd>ObsidianFollowLink<CR>", "Follow Obsidian link" }
-          function()
-            if obsidian.util.cursor_on_markdown_link() then
-              vim.cmd("ObsidianFollowLink")-- "<cmd>ObsidianFollowLink<CR>"
-            else vim.api.nvim_feedkeys('gf', 'n', true) end end,
-          "Follow Obsidian link" },
-      }
-    )
-  end,
-  event = { "BufReadPre " .. vim.fn.expand "~" .. "/vault/**.md" },
+  config = require("plugins.obsidian.config").config_function,
   dependencies = {
     "treesitter",
     "plenary",
@@ -41,4 +27,5 @@ return {
     "telescope",
     "which-key",
   },
+  event = { "BufReadPre " .. vim.fn.expand "~" .. "/vault/**.md" },
 }

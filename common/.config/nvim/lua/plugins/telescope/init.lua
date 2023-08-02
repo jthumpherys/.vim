@@ -1,4 +1,4 @@
-local M = { require("plugins.telescope.config").get_plugins() }
+local M = require("plugins.telescope.config").get_plugins()
 
 table.insert(M,
   {
@@ -20,8 +20,8 @@ table.insert(M,
       return options
     end,
     version = "*",
-    event = "VeryLazy",
     dependencies = { "treesitter", "plenary", "devicons" },
+    -- event = "VeryLazy",
   }
 )
 

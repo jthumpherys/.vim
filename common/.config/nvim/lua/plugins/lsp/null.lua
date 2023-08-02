@@ -2,7 +2,7 @@ local M = {}
 
 M.packages = {
   all = {
-    codespell = { method = "diagnostics" },
+    codespell = { method = "diagnostics", opts = { disabled_filetypes = { "rust" } } },
   },
   lua = {
     stylua = { method = "formatting" },
@@ -11,7 +11,7 @@ M.packages = {
   markdown = {
     -- dictionary = { method = "hover", mason = false, opts = { extra_filetypes = { "tex" } } },
     ltrs = { method = "code_actions", mason = false, opts = { extra_filetypes = { "tex" } } },
-    markdownlint = { method = "diagnostics", opts = { extra_args = { "--disable", "MD007", "MD013" } } },
+    -- markdownlint = { method = "diagnostics", opts = { extra_args = { "--disable", "MD007", "MD013" } } },
     -- mdl = { method = "diagnostics" },
   },
   python = {
@@ -27,7 +27,7 @@ M.packages = {
   },
   zsh = {
     shellharden = { method = "formatting", opts = { extra_filetypes = { "zsh" } } },
-    shellcheck = { method = "diagnostics", opts = { extra_filetypes = { "zsh" } } },
+    shellcheck = { method = "diagnostics" },
     zsh = { method = "diagnostics", mason = false },
   },
 }
@@ -46,17 +46,18 @@ for lang, _ in pairs(M.packages) do
   table.insert(M.filetypes, lang)
 end
 
-function M.get_sources()
+function M.get_sources(options)
   local sources = {}
   local null = require("null-ls")
   for _, pkgs in pairs(M.packages) do
     for name, pkg in pairs(pkgs) do
+      local opts = vim.tbl_deep_extend("keep", pkg.opts or {}, options or {})
       if type(pkg.method) == "table" then
         for _, method in pairs(pkg.method) do
-          table.insert(sources, null.builtins[method][name].with(pkg.opts or {}))
+          table.insert(sources, null.builtins[method][name].with(opts))
         end
       else
-        table.insert(sources, null.builtins[pkg.method][name].with(pkg.opts or {}))
+        table.insert(sources, null.builtins[pkg.method][name].with(opts))
       end
     end
   end

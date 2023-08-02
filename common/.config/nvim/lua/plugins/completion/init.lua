@@ -38,14 +38,16 @@ return {
       },
       sources = sources.sources,
     },
-    config = config.cmp_config_function,
+    config = config.config_function,
     dependencies = sources.get_dependencies(
       {
         "lspconfig",
+        "quangnguyen30192/cmp-nvim-ultisnips",
         "lukas-reineke/cmp-under-comparator",
+        "pairs",
       }
     ),
-    event = { "BufNewFile", "BufReadPost" },
+    event = { "CmdlineEnter", "InsertEnter" },
   },
 
   {
@@ -72,7 +74,6 @@ return {
       check_ts = true,
     },
     config = config.pairs_config_function,
-    dependencies = { "cmp" },
     event = "InsertEnter",
   },
 }
