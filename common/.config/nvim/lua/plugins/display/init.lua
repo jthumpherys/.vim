@@ -10,23 +10,8 @@ return {
       vim.o.foldlevelstart = 99
       vim.o.foldenable = true
     end,
-    event = { "BufReadPost", "BufNewFile" },
-    keys = 'z',
-    -- keys = {
-    --   { 'n', 'zR', require("ufo").openAllFolds },
-    --   { 'n', 'zM', require("ufo").closeAllFolds },
-    -- },
+    event = "VeryLazy",
     dependencies = { "kevinhwang91/promise-async" },
-  },
-
-  {
-    "mcauley-penney/tidy.nvim",
-    name = "tidy",
-    opts = {
-      filetype_exclude = { "markdown", "diff" },
-    },
-    config = true,
-    event = { "BufWritePre" },
   },
 
   {
