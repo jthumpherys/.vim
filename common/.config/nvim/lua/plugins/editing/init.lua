@@ -41,7 +41,6 @@ return {
     config = config.yanky_config_function,
     dependencies = { "telescope" },
     event = "VeryLazy",
-    -- keys = config.yanky_keys,
   },
 
   {
@@ -70,5 +69,10 @@ return {
     config = true,
     dependencies = { "treesitter", "ts-textobjects" },
     keys = config.swap_keys,
-  }
+  },
+
+  {
+    "s1n7ax/nvim-search-and-replace",
+    config = true,
+  },
 }
