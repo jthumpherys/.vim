@@ -23,6 +23,12 @@ table.insert(M,
     event = "VeryLazy",
     dependencies = { "treesitter", "plenary", "devicons" },
   }
+
+  -- {
+  --   "prochri/telescope-all-recent.nvim",
+  --   config = true,
+  --   dependencies = { "telescope" },
+  -- }
 )
 
 return M
