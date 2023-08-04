@@ -1,7 +1,7 @@
 local M = {}
 
 M.language_servers = {
-  bashls = {},
+  -- bashls = {},
   lua_ls = {
     single_file_support = true,
     settings = {

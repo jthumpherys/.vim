@@ -44,6 +44,16 @@ return {
   },
 
   {
+    "gbprod/substitute.nvim",
+    opts = function()
+      return {
+        on_substitute = require("yanky.integration").substitute(),
+      }
+    end,
+    dependencies = { "yanky" },
+  },
+
+  {
     "Wansmer/sibling-swap.nvim",
     config = config.swap_config_function,
     dependencies = { "Wansmer/binary-swap.nvim", "treesitter" },

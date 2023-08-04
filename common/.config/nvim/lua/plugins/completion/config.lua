@@ -1,7 +1,7 @@
 local M = {}
 
 
-function M.cmp_config_function(_, opts)
+function M.config_function(_, opts)
   local cmp = require("cmp")
   local sources = require("plugins.completion.sources")
   local ultisnips = require("cmp_nvim_ultisnips.mappings")
@@ -46,15 +46,14 @@ function M.cmp_config_function(_, opts)
     end
     cmp.setup.cmdline(type, { mapping = cmp.mapping.preset.cmdline(), sources = srcs })
   end
+
+  cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
 end
 
 
 function M.pairs_config_function(_, opts)
-  local cmp = require("cmp")
   local npairs = require("nvim-autopairs")
   npairs.setup(opts)
-
-  cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
 
   local Rule = require("nvim-autopairs.rule")
   local cond = require("nvim-autopairs.conds")
@@ -91,10 +90,12 @@ function M.pairs_config_function(_, opts)
   end
 
   -- Add comma after closing bracket in lua unless within parentheses
-  -- npairs.add_rule(
-  --   Rule('{', '},', "lua")
-  --     :replace_endpair(function() return "}," end, function() cond.before_regex("{[()]*\n[()]*") end)
-  -- )
+  npairs.add_rule(
+    Rule('{', '},', "lua")
+      :with_pair(require("nvim-autopairs.ts-conds").is_ts_node({"table_constructor"}))
+      -- :with_pair(npairs.is_not_ts_node({""}))
+      -- :replace_endpair(function() return "}," end, function() cond.before_regex("{^}*") end)
+  )
 end
 
 return M

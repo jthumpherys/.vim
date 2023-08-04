@@ -60,7 +60,7 @@ local function recurse_keys(keymap, keys, piece_itr, yanky_options)
   local yopts = vim.deepcopy(yanky_options)
   local piece, options = itr:next()
   print(piece)
-  print(options)
+  print(vim.inspect(options))
   if piece then
     for option, data in pairs(options) do
       yanky_options[piece] = option
@@ -101,7 +101,7 @@ local function recurse_keys(keymap, keys, piece_itr, yanky_options)
   return keymap
 end
 local piece_itr = vim.iter(yanky_keys)
--- M.yanky_map['<leader>p'] = recurse_keys({}, "", piece_itr, {})
+-- M.yanky_map['<leader>p'] = recurse_keys(M.yanky_map, "", piece_itr, {})
 
 -- function M.get_yanky_special_map()
 --   local smap = {

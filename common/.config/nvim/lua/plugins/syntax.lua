@@ -12,8 +12,8 @@ return {
 
   {
     "Fymyte/rasi.vim",
-    ft = "rasi",
     build = ":TSInstall rasi",
     dependencies = { "treesitter" },
+    ft = "rasi",
   },
 }

@@ -4,7 +4,8 @@ M.extensions = {
   fzf = {
     plugin = {
       "nvim-telescope/telescope-fzf-native.nvim",
-      build = "make"
+      name = "telescope-fzf",
+      build = "make",
     },
   },
   lazy = {

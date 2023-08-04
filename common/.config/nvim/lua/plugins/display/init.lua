@@ -10,8 +10,8 @@ return {
       vim.o.foldlevelstart = 99
       vim.o.foldenable = true
     end,
-    event = "VeryLazy",
     dependencies = { "kevinhwang91/promise-async" },
+    event = "VeryLazy",
   },
 
   {

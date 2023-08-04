@@ -46,7 +46,6 @@ return {
         }
       )
     end,
-    event = { "BufReadPre " .. vim.fn.expand "~" .. "/vault/**.md" },
     dependencies = {
       "treesitter",
       "plenary",
@@ -54,5 +53,6 @@ return {
       "telescope",
       "which-key",
     },
+    event = { "BufReadPre " .. vim.fn.expand "~" .. "/vault/**.md" },
   },
 }

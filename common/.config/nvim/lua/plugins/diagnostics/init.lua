@@ -3,6 +3,7 @@ return {
     "folke/trouble.nvim",
     config = true,
     dependencies = { "devicons" },
-    event = "VeryLazy",
+    keys = '<leader>x',
+    -- event = "VeryLazy",
   },
 }
