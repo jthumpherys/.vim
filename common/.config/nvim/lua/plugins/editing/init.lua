@@ -44,6 +44,11 @@ return {
   },
 
   {
+    "s1n7ax/nvim-search-and-replace",
+    config = true,
+  },
+
+  {
     "gbprod/substitute.nvim",
     opts = function()
       return {
@@ -51,6 +56,13 @@ return {
       }
     end,
     dependencies = { "yanky" },
+  },
+
+  {
+    "willothy/moveline.nvim",
+    config = config.moveline_config_function,
+    build = "make",
+    event = "VeryLazy",
   },
 
   {
@@ -79,10 +91,5 @@ return {
     config = true,
     dependencies = { "treesitter", "ts-textobjects" },
     keys = config.swap_keys,
-  },
-
-  {
-    "s1n7ax/nvim-search-and-replace",
-    config = true,
   },
 }

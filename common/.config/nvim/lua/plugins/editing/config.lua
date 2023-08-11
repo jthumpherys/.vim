@@ -22,6 +22,18 @@ function M.yanky_config_function(_, opts)
 end
 
 
+function M.moveline_config_function()
+  local moveline = require("moveline")
+  require("which-key").register(
+    {
+      ['<c-k>'] = { moveline.up, "Move line up" },
+      ['<c-j>'] = { moveline.down, "Move line down" },
+    },
+    { { mode = { 'n', 'v' } } }
+  )
+end
+
+
 M.swap_keys = {}
 for prefix, _ in pairs(maps.swap_map) do
   table.insert(M.swap_keys, prefix)
@@ -48,8 +60,7 @@ function M.swap_config_function(_, opts)
 
   require("sibling-swap").setup(opts)
 
-  local whichkey = require("which-key")
-  whichkey.register(keymap)
+  require("which-key").register(keymap)
 end
 
 return M
