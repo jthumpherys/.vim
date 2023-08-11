@@ -30,6 +30,12 @@ return {
   },
 
   {
+    "stevearc/dressing.nvim",
+    config = true,
+    event = "VeryLazy",
+  },
+
+  {
     "sitiom/nvim-numbertoggle",
     name = "numbertoggle",
     init = function()
