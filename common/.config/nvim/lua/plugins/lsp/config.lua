@@ -1,6 +1,7 @@
 local M = {}
 
 function M.get_default_server_options()
+  local preview = require("goto-preview")
   local options = {
     capabilities = require("cmp_nvim_lsp").default_capabilities(),
     on_attach = function (_, bufnr)
@@ -16,13 +17,18 @@ function M.get_default_server_options()
 
           g = {
             name = "GoTo",
-            d = { vim.lsp.buf.definition, "Definition" },
+            -- d = { vim.lsp.buf.definition, "Definition" },
+            d = { preview.goto_preview_definition, "Definition" },
             D = { vim.lsp.buf.declaration, "Declaration" },
             s = { vim.lsp.buf.signature_help, "Signature Help" },
-            I = { vim.lsp.buf.implementation, "Implementation" },
-            y = { vim.lsp.buf.type_definition, "Type Definition" },
-            r = { vim.lsp.buf.references, "References" },
+            -- I = { vim.lsp.buf.implementation, "Implementation" },
+            I = { preview.goto_preview_implementation, "Implementation" },
+            -- y = { vim.lsp.buf.type_definition, "Type Definition" },
+            y = { preview.goto_preview_type_definition, "Type Definition" },
+            -- r = { vim.lsp.buf.references, "References" },
+            r = { preview.goto_preview_references, "References" },
           },
+          ['<c-c>'] = { preview.close_all_win, "Close preview windows" },
 
           ["<leader>w"] = {
             name = "Workspace",

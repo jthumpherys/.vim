@@ -17,6 +17,7 @@ return {
       "mason-lspconfig",
       "hrsh7th/cmp-nvim-lsp",
       { "folke/neodev.nvim", config = true },
+      { "rmagatti/goto-preview", config = true },
     },
     event = { "BufReadPre", "BufNewFile" },
   },
