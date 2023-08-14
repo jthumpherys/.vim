@@ -25,6 +25,8 @@ M.language_servers = {
         "<cmd>lua vim.lsp.buf.range_code_action()<CR>",  -- for rope
         { noremap = true, silent = true }
       )
+      local config = require("plugins.lsp.config").get_default_server_options()
+      config.on_attach(_, bufnr)
     end,
     settings = {
       pylsp = {
