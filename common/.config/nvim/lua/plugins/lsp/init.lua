@@ -17,9 +17,19 @@ return {
       "mason-lspconfig",
       "hrsh7th/cmp-nvim-lsp",
       { "folke/neodev.nvim", config = true },
-      { "rmagatti/goto-preview", config = true },
+      "goto-preview",
     },
     event = { "BufReadPre", "BufNewFile" },
+  },
+
+  {
+    "rmagatti/goto-preview",
+    name = "goto-preview",
+    opts = function()
+      local ok, module = pcall(require, "plugins.lsp.local")
+      if ok then return module.goto_preview_opts else return {} end
+    end,
+    config = true,
   },
 
   {
