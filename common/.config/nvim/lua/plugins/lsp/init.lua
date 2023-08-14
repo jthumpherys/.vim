@@ -64,8 +64,8 @@ return {
       diagnostics_format = "[#{s}] #{m} (#{c})",
     },
     config = require("plugins.lsp.config").null_config_function,
-    dependencies = { "plenary", "mason" },
-    event = "VeryLazy",
-    -- ft = require("plugins.lsp.null").filetypes,
+    dependencies = { "plenary", "mason", "lspconfig" },
+    -- event = { "BufReadPre", "BufNewFile" },
+    ft = require("plugins.lsp.null").filetypes,
   },
 }

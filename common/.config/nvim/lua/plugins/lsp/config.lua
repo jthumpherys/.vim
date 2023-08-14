@@ -78,7 +78,8 @@ function M.null_config_function(_, opts)
     end
   end
 
-  opts.sources = packages.get_sources(M.default_server_options)
+  opts.sources = packages.get_sources()
+  opts.on_attach = M.get_default_server_options().on_attach
   require("null-ls").setup(opts)
 end
 
