@@ -37,23 +37,25 @@ local spell = {
   source = { name = "spell" },
 }
 
-local sources = {
+local source_data = {
   all = {
-    -- {
+    {
       { entry = "hrsh7th/cmp-nvim-lsp-signature-help", source = { name = "nvim_lsp_signature_help" } },
-    -- },
-    -- {
+    },
+    {
       { entry = "hrsh7th/cmp-nvim-lsp", source = { name = "nvim_lsp" } },
       snippet,
+    },
+    {
       -- buffer,
       fuzzy_buffer,
       ripgrep,
       -- path,
       fuzzy_path,
-    -- },
-    -- {
+    },
+    {
       spell
-    -- },
+    },
   },
 
   filetypes = {
@@ -67,8 +69,10 @@ local sources = {
       filetype = "gitcommit",
       use_all = true,
       sources = {
-        { entry = "petertriho/cmp-git", source = { name = "git" } },
-        { entry = "Dosx001/cmp-commit", source = { name = "commit" } },
+        {
+          { entry = "petertriho/cmp-git", source = { name = "git" } },
+          { entry = "Dosx001/cmp-commit", source = { name = "commit" } },
+        },
       },
     },
 
@@ -76,7 +80,9 @@ local sources = {
       filetype = { "tex", "plaintex" },
       use_all = true,
       sources = {
-        { entry = "amarakon/nvim-cmp-lua-latex-symbols", source = { name = "latex-symbols" } },
+        {
+          { entry = "amarakon/nvim-cmp-lua-latex-symbols", source = { name = "latex-symbols" } },
+        },
       },
     },
 
@@ -84,10 +90,16 @@ local sources = {
       filetype = "lua",
       use_all = true,
       sources = {
-        { entry = "hrsh7th/cmp-nvim-lua", source = { name = "nvim_lua" } },
         {
-          entry = { "KadoBOT/cmp-plugins", opts = { files = { "/home/jade/.config/nvim/lua", "/home/jade/.dotfiles/common/.config/nvim/lua" } } },
-          source = { name = "plugins" },
+          { entry = "hrsh7th/cmp-nvim-lua", source = { name = "nvim_lua" } },
+          {
+            entry = { "KadoBOT/cmp-plugins",
+              opts = {
+                files = { "/home/jade/.config/nvim/lua", "/home/jade/.dotfiles/common/.config/nvim/lua" },
+              },
+            },
+            source = { name = "plugins" },
+          },
         },
       },
     },
@@ -96,21 +108,25 @@ local sources = {
       filetype = "markdown",
       use_all = true,
       sources = {
-        { entry = "jmbuhr/otter.nvim", source = { name = "otter.nvim" } },
+        {
+          { entry = "jmbuhr/otter.nvim", source = { name = "otter.nvim" } },
+        },
       },
     },
 
     text = {
       filetype = "text",
       use_all = false,
-      sources = { fuzzy_buffer, spell },
+      sources = { { fuzzy_buffer, spell } },
     },
 
     toml = {
       filetype = "toml",
       use_all = true,
       sources = {
-        { entry = "crates", source = { name = "crates" } },
+        {
+          { entry = "crates", source = { name = "crates" } },
+        },
       },
     },
 
@@ -118,56 +134,76 @@ local sources = {
       filetype = "zsh",
       use_all = true,
       sources = {
-        { entry = "tamago324/cmp-zsh", source = { name = "zsh" } },
+        { { entry = "tamago324/cmp-zsh", source = { name = "zsh" } } },
       },
     }
   },
 
   cmdlines = {
     [':'] = {
-      -- path,
-      fuzzy_path,
-      { entry = "hrsh7th/cmp-cmdline", source = { name = "cmdline" } },
-      { entry = "dmitmel/cmp-cmdline-history", source = { name = "cmp-cmdline-history" } },
-      -- buffer,
-      fuzzy_buffer,
-      -- buffer_lines,
-      ripgrep,
+      {
+        -- path,
+        fuzzy_path,
+        { entry = "hrsh7th/cmp-cmdline", source = { name = "cmdline" } },
+        { entry = "dmitmel/cmp-cmdline-history", source = { name = "cmp-cmdline-history" } },
+      },
+      {
+        -- buffer,
+        fuzzy_buffer,
+        -- buffer_lines,
+        ripgrep,
+      },
     },
     ['/'] = {
-      -- buffer,
-      fuzzy_buffer,
-      -- buffer_lines,
-      ripgrep,
+      {
+        -- buffer,
+        fuzzy_buffer,
+        -- buffer_lines,
+        ripgrep,
+      },
     },
   },
 }
 
 local dep_list = {}
 M.sources = {}
-for _, source in pairs(sources.all) do
-  table.insert(dep_list, source.entry)
-  table.insert(M.sources, source.source)
+for index, source_list in pairs(source_data.all) do
+  M.sources[index] = {}
+  for _, source in pairs(source_list) do
+    table.insert(M.sources[index], source.source)
+    table.insert(dep_list, source.entry)
+  end
 end
 M.filetypes = {}
-for _, data in pairs(sources.filetypes) do
+for _, data in pairs(source_data.filetypes) do
   M.filetypes[data.filetype] = {}
-  for _, source in pairs(data.sources) do
-    table.insert(dep_list, source.entry)
-    table.insert(M.filetypes[data.filetype], source.source)
+  for index, source_list in pairs(data.sources) do
+    M.filetypes[data.filetype][index] = {}
+    for _, source in pairs(source_list) do
+      table.insert(dep_list, source.entry)
+      table.insert(M.filetypes[data.filetype][index], source.source)
+    end
   end
   if data.use_all ~= false then
-    for _, source in pairs(sources.all) do
-      table.insert(M.filetypes[data.filetype], source.source)
+    for index, source_list in pairs(source_data.all) do
+      if M.filetypes[data.filetype][index] == nil then
+        M.filetypes[data.filetype][index] = {}
+      end
+      for _, source in pairs(source_list) do
+        table.insert(M.filetypes[data.filetype][index], source.source)
+      end
     end
   end
 end
 M.cmdlines = {}
-for type, srcs in pairs(sources.cmdlines) do
+for type, srcs in pairs(source_data.cmdlines) do
   M.cmdlines[type] = {}
-  for _, source in pairs(srcs) do
-    table.insert(dep_list, source.entry)
-    table.insert(M.cmdlines[type], source.source)
+  for index, source_list in pairs(srcs) do
+    M.cmdlines[type][index] = {}
+    for _, source in pairs(source_list) do
+      table.insert(dep_list, source.entry)
+      table.insert(M.cmdlines[type][index], source.source)
+    end
   end
 end
 

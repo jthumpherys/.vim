@@ -34,17 +34,19 @@ function M.config_function(_, opts)
     end
   end
 
+  opts.sources = cmp.config.sources(unpack(sources.sources))
+
   cmp.setup(opts)
 
   for filetype, srcs in pairs(sources.filetypes) do
-    cmp.setup.filetype(filetype, { sources = srcs })
+    cmp.setup.filetype(filetype, { sources = cmp.config.sources(unpack(srcs)) })
   end
 
   for type, srcs in pairs(sources.cmdlines) do
     if type == '/' then
       type = { '/', '?' }
     end
-    cmp.setup.cmdline(type, { mapping = cmp.mapping.preset.cmdline(), sources = srcs })
+    cmp.setup.cmdline(type, { mapping = cmp.mapping.preset.cmdline(), sources = cmp.config.sources(unpack(srcs)) })
   end
 
   cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
@@ -97,5 +99,6 @@ function M.pairs_config_function(_, opts)
       -- :replace_endpair(function() return "}," end, function() cond.before_regex("{^}*") end)
   )
 end
+
 
 return M

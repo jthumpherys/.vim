@@ -36,7 +36,6 @@ return {
           { loc = "local", fn = "order" },
         },
       },
-      sources = sources.sources,
     },
     config = config.config_function,
     dependencies = sources.get_dependencies(
@@ -47,7 +46,8 @@ return {
         "pairs",
       }
     ),
-    event = { "CmdlineEnter", "InsertEnter" },
+    lazy = false,
+    -- event = { "CmdlineEnter", "InsertEnter" },
   },
 
   {
