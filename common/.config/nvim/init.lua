@@ -29,7 +29,7 @@ local opts = {
   checker = {
     enabled = true,
     notify = false,
-    concurrency = 1,
+    -- concurrency = 1,
   },
   performance = {
     rtp = {
