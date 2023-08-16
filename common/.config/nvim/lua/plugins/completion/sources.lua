@@ -6,25 +6,48 @@ local snippet = {
     dependencies = { "ultisnips", "treesitter" },
   },
   source = { name = "ultisnips" },
+  display = "Ulti",
 }
-local buffer = { entry = "hrsh7th/cmp-buffer", source = { name = "buffer" } }
+local buffer = {
+  entry = "hrsh7th/cmp-buffer",
+  source = { name = "buffer" },
+  display = "Buffer",
+}
 local fuzzy_buffer = {
   entry = {
     "tzachar/cmp-fuzzy-buffer",
     dependencies = { "tzachar/fuzzy.nvim", dependencies = "telescope-fzf" },
   },
   source = { name = "fuzzy_buffer" },
+  display = "Buffer",
 }
-local buffer_lines = { entry = "amarakon/nvim-cmp-buffer-lines", source = { name = "buffer-lines" } }
-local path = { entry = "FelipeLema/cmp-async-path", source = { name = "async_path" } }
+local buffer_lines = {
+  entry = "amarakon/nvim-cmp-buffer-lines",
+  source = { name = "buffer-lines" },
+  display = "Buf Lines"
+}
+local path = { entry = "FelipeLema/cmp-async-path", source = { name = "async_path" }, display = "Path" }
 local fuzzy_path = {
   entry = {
     "tzachar/cmp-fuzzy-path",
     dependencies = { "tzachar/fuzzy.nvim", dependencies = "telescope-fzf" },
   },
-  source = { name = "fuzzy_path" },
+  source = {
+    name = "fuzzy_path",
+    option = {
+      fd_cmd = {
+        'fd', '--max-depth', '20', '--full-path', -- default
+        '--type', 'd', '--type', 'f', -- suggest directories
+        '--follow', -- follow symbolic links for suggestions
+        '--no-ignore-vcs', -- suggest files in .gitignore
+        '--hidden',
+        -- '--glob',
+      },
+    },
+  },
+  display = "Path",
 }
-local ripgrep = { entry = "lukas-reineke/cmp-rg", source = { name = "rg" } }
+local ripgrep = { entry = "lukas-reineke/cmp-rg", source = { name = "rg" }, display = "RipGrep" }
 
 local spell = {
   entry = {
@@ -35,16 +58,27 @@ local spell = {
     -- end,
   },
   source = { name = "spell" },
+  display = "Spell",
+}
+local lsp_signature = {
+  entry = "hrsh7th/cmp-nvim-lsp-signature-help",
+  source = { name = "nvim_lsp_signature_help" },
+  display = "LSP Sig",
+}
+local lsp = {
+  entry = "hrsh7th/cmp-nvim-lsp",
+  source = { name = "nvim_lsp" },
+  display = "LSP",
 }
 
 local source_data = {
   all = {
     {
-      { entry = "hrsh7th/cmp-nvim-lsp-signature-help", source = { name = "nvim_lsp_signature_help" } },
+      lsp_signature,
     },
     {
-      { entry = "hrsh7th/cmp-nvim-lsp", source = { name = "nvim_lsp" } },
       snippet,
+      lsp,
     },
     {
       -- buffer,
@@ -54,7 +88,7 @@ local source_data = {
       fuzzy_path,
     },
     {
-      spell
+      spell,
     },
   },
 
@@ -62,7 +96,7 @@ local source_data = {
     c = {
       filetype = { "c", "cpp" },
       use_all = true,
-      sources = { buffer_lines },
+      sources = { { buffer_lines } },
     },
 
     gitcommit = {
@@ -70,8 +104,8 @@ local source_data = {
       use_all = true,
       sources = {
         {
-          { entry = "petertriho/cmp-git", source = { name = "git" } },
-          { entry = "Dosx001/cmp-commit", source = { name = "commit" } },
+          { entry = "petertriho/cmp-git", source = { name = "git" }, display = "git" },
+          { entry = "Dosx001/cmp-commit", source = { name = "commit" }, display = "commit" },
         },
       },
     },
@@ -81,7 +115,7 @@ local source_data = {
       use_all = true,
       sources = {
         {
-          { entry = "amarakon/nvim-cmp-lua-latex-symbols", source = { name = "latex-symbols" } },
+          { entry = "amarakon/nvim-cmp-lua-latex-symbols", source = { name = "latex-symbols" }, display = "Latex"},
         },
       },
     },
@@ -91,7 +125,7 @@ local source_data = {
       use_all = true,
       sources = {
         {
-          { entry = "hrsh7th/cmp-nvim-lua", source = { name = "nvim_lua" } },
+          { entry = "hrsh7th/cmp-nvim-lua", source = { name = "nvim_lua" }, display = "Lua" },
           {
             entry = { "KadoBOT/cmp-plugins",
               opts = {
@@ -99,6 +133,7 @@ local source_data = {
               },
             },
             source = { name = "plugins" },
+            display = "Plugins",
           },
         },
       },
@@ -109,7 +144,7 @@ local source_data = {
       use_all = true,
       sources = {
         {
-          { entry = "jmbuhr/otter.nvim", source = { name = "otter.nvim" } },
+          { entry = "jmbuhr/otter.nvim", source = { name = "otter.nvim" }, display = "Otter" },
         },
       },
     },
@@ -125,7 +160,7 @@ local source_data = {
       use_all = true,
       sources = {
         {
-          { entry = "crates", source = { name = "crates" } },
+          { entry = "crates", source = { name = "crates" }, display = "Crates" },
         },
       },
     },
@@ -134,7 +169,9 @@ local source_data = {
       filetype = "zsh",
       use_all = true,
       sources = {
-        { { entry = "tamago324/cmp-zsh", source = { name = "zsh" } } },
+        {
+          { entry = "tamago324/cmp-zsh", source = { name = "zsh" }, display = "Zsh" },
+        },
       },
     }
   },
@@ -142,10 +179,12 @@ local source_data = {
   cmdlines = {
     [':'] = {
       {
-        -- path,
+        path,
         fuzzy_path,
-        { entry = "hrsh7th/cmp-cmdline", source = { name = "cmdline" } },
-        { entry = "dmitmel/cmp-cmdline-history", source = { name = "cmp-cmdline-history" } },
+      },
+      {
+        { entry = "hrsh7th/cmp-cmdline", source = { name = "cmdline" }, display = "CmdLine" },
+        { entry = "dmitmel/cmp-cmdline-history", source = { name = "cmp-cmdline-history" }, display = "CmdHist"},
       },
       {
         -- buffer,
@@ -165,44 +204,56 @@ local source_data = {
   },
 }
 
-local dep_list = {}
 M.sources = {}
+local dep_list = {}
+M.menu = {}
 for index, source_list in pairs(source_data.all) do
-  M.sources[index] = {}
   for _, source in pairs(source_list) do
-    table.insert(M.sources[index], source.source)
     table.insert(dep_list, source.entry)
+
+    local src = vim.deepcopy(source.source)
+    src.group_index = index
+    table.insert(M.sources, src)
+
+    M.menu[source.source.name] = source.display
   end
 end
 M.filetypes = {}
 for _, data in pairs(source_data.filetypes) do
-  M.filetypes[data.filetype] = {}
+  local srcs = {}
   for index, source_list in pairs(data.sources) do
-    M.filetypes[data.filetype][index] = {}
     for _, source in pairs(source_list) do
       table.insert(dep_list, source.entry)
-      table.insert(M.filetypes[data.filetype][index], source.source)
+
+      local src = vim.deepcopy(source.source)
+      src.group_index = index
+      table.insert(srcs, src)
+
+      M.menu[source.source.name] = source.display
     end
   end
   if data.use_all ~= false then
     for index, source_list in pairs(source_data.all) do
-      if M.filetypes[data.filetype][index] == nil then
-        M.filetypes[data.filetype][index] = {}
-      end
       for _, source in pairs(source_list) do
-        table.insert(M.filetypes[data.filetype][index], source.source)
+        source.source.group_index = index
+        table.insert(srcs, source.source)
       end
     end
   end
+  table.insert(M.filetypes, { sources=srcs, filetype=data.filetype })
 end
 M.cmdlines = {}
 for type, srcs in pairs(source_data.cmdlines) do
   M.cmdlines[type] = {}
   for index, source_list in pairs(srcs) do
-    M.cmdlines[type][index] = {}
     for _, source in pairs(source_list) do
       table.insert(dep_list, source.entry)
-      table.insert(M.cmdlines[type][index], source.source)
+
+      local src = vim.deepcopy(source.source)
+      src.group_index = index
+      table.insert(M.cmdlines[type], src)
+
+      M.menu[source.source.name] = source.display
     end
   end
 end

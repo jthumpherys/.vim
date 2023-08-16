@@ -34,19 +34,31 @@ function M.config_function(_, opts)
     end
   end
 
-  opts.sources = cmp.config.sources(unpack(sources.sources))
+  opts.sources = sources.sources
+
+  opts.formatting = {
+    format = require("lspkind").cmp_format(
+      {
+        mode = "symbol",
+        menu = sources.menu,
+        maxwidth = 50,
+        ellipsis_char = '...',
+        -- before = function(entry, vim_item) return vim_item end,
+      }
+    )
+  }
 
   cmp.setup(opts)
 
-  for filetype, srcs in pairs(sources.filetypes) do
-    cmp.setup.filetype(filetype, { sources = cmp.config.sources(unpack(srcs)) })
+  for _, srcs in pairs(sources.filetypes) do
+    cmp.setup.filetype(srcs.filetype, { sources = srcs.sources })
   end
 
   for type, srcs in pairs(sources.cmdlines) do
     if type == '/' then
       type = { '/', '?' }
     end
-    cmp.setup.cmdline(type, { mapping = cmp.mapping.preset.cmdline(), sources = cmp.config.sources(unpack(srcs)) })
+    cmp.setup.cmdline(type, { mapping = cmp.mapping.preset.cmdline(), sources = srcs })
   end
 
   cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())

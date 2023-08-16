@@ -26,6 +26,7 @@ return {
       },
       sorting = {
         comparators = {
+          { loc = "cmp_fuzzy_path", fn = "compare" },
           { loc = "local", fn = "offset" },
           { loc = "local", fn = "exact" },
           { loc = "local", fn = "score" },
@@ -44,10 +45,10 @@ return {
         "quangnguyen30192/cmp-nvim-ultisnips",
         "lukas-reineke/cmp-under-comparator",
         "pairs",
+        "onsails/lspkind.nvim",
       }
     ),
-    lazy = false,
-    -- event = { "CmdlineEnter", "InsertEnter" },
+    event = { "CmdlineEnter", "InsertEnter" },
   },
 
   {
