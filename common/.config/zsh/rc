@@ -2,13 +2,7 @@
 
 # basic options
 setopt nobeep
-setopt noclobber
 setopt extendedglob
-
-# cd
-setopt autocd
-setopt cdablevars
-# cdpath=( . ~ ~/.local ~/projects / )
 
 # directory stack
 setopt autopushd
