@@ -10,9 +10,16 @@ M.packages = {
   },
   markdown = {
     -- dictionary = { method = "hover", mason = false, opts = { extra_filetypes = { "tex" } } },
-    ltrs = { method = "code_actions", mason = false, opts = { extra_filetypes = { "tex" } } },
-    -- markdownlint = { method = "diagnostics", opts = { extra_args = { "--disable", "MD007", "MD013" } } },
-    -- mdl = { method = "diagnostics" },
+    ltrs = {
+      -- method = { "code_actions", "diagnostics" },
+      method = "code_actions",
+      mason = false,
+      opts = { extra_filetypes = { "tex" } },
+    },
+    markdownlint = {
+      method = { "diagnostics", "formatting" },
+      -- opts = { extra_args = { "--disable", "MD007", }}--"MD013" } },
+    },
   },
   python = {
     ruff = { method = { "diagnostics", "formatting" } },
