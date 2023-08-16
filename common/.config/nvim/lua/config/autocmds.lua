@@ -13,16 +13,6 @@ function M.setup()
       end,
     }
   )
-  -- Wrap files that have text blocks
-  vim.api.nvim_create_autocmd(
-    "FileType",
-    {
-      pattern = "markdown",
-      callback = function()
-        vim.opt.wrap = true
-      end,
-    }
-  )
 
   vim.api.nvim_create_user_command(
     "Tcd",
