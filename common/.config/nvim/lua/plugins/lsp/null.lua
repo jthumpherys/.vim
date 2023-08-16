@@ -16,7 +16,13 @@ M.packages = {
   },
   python = {
     ruff = { method = { "diagnostics", "formatting" } },
-    mypy = { method = "diagnostics", opts = { prefer_local = "env/bin", args = { "--install-types" } } },
+    mypy = {
+      method = "diagnostics",
+      opts = {
+        prefer_local = "env/bin",
+        -- extra_args = { "--install-types", "--non-interactive" },
+      },
+    },
   },
   rust = {
     rustfmt = { method = "formatting", mason = false },
