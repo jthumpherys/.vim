@@ -16,7 +16,13 @@ M.packages = {
   },
   python = {
     ruff = { method = { "diagnostics", "formatting" } },
-    mypy = { method = "diagnostics", opts = { prefer_local = "env/bin", args = { "--install-types" } } },
+    mypy = {
+      method = "diagnostics",
+      opts = {
+        prefer_local = "env/bin",
+        -- extra_args = { "--install-types", "--non-interactive" },
+      },
+    },
   },
   rust = {
     rustfmt = { method = "formatting", mason = false },
@@ -46,18 +52,17 @@ for lang, _ in pairs(M.packages) do
   table.insert(M.filetypes, lang)
 end
 
-function M.get_sources(options)
+function M.get_sources()
   local sources = {}
   local null = require("null-ls")
   for _, pkgs in pairs(M.packages) do
     for name, pkg in pairs(pkgs) do
-      local opts = vim.tbl_deep_extend("keep", pkg.opts or {}, options or {})
       if type(pkg.method) == "table" then
-        for _, method in pairs(pkg.method) do
-          table.insert(sources, null.builtins[method][name].with(opts))
+        for _, method in ipairs(pkg.method) do
+          table.insert(sources, null.builtins[method][name].with(pkg.opts or {}))
         end
       else
-        table.insert(sources, null.builtins[pkg.method][name].with(opts))
+        table.insert(sources, null.builtins[pkg.method][name].with(pkg.opts or {}))
       end
     end
   end
