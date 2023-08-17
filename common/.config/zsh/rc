@@ -4,6 +4,8 @@
 setopt nobeep
 setopt extendedglob
 
+setopt autocd
+
 # directory stack
 setopt autopushd
 setopt pushdignoredups
