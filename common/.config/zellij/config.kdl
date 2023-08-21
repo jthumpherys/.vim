@@ -1,9 +1,9 @@
 keybinds clear-defaults=true {
     normal {
-        bind "h" "Left" { MoveFocusOrTab "Left"; }
+        bind "h" "Left" { MoveFocus "Left"; }
         bind "j" "Down" { MoveFocus "Down"; }
         bind "k" "Up" { MoveFocus "Up"; }
-        bind "l" "Right" { MoveFocusOrTab "Right"; }
+        bind "l" "Right" { MoveFocus "Right"; }
 
         bind "Ctrl h" { MovePane "Left"; }
         bind "Ctrl j" { MovePane "Down"; }
