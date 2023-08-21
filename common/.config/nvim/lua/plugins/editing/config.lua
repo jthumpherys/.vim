@@ -28,8 +28,14 @@ function M.moveline_config_function()
     {
       ['<c-k>'] = { moveline.up, "Move line up" },
       ['<c-j>'] = { moveline.down, "Move line down" },
+    }
+  )
+  require("which-key").register(
+    {
+      ['<c-k>'] = { moveline.block_up, "Move line up" },
+      ['<c-j>'] = { moveline.block_down, "Move line down" },
     },
-    { { mode = { 'n', 'v' } } }
+    { mode = { 'v' } }
   )
 end
 
