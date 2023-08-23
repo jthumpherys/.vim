@@ -265,11 +265,10 @@ for type, srcs in pairs(source_data.cmdlines) do
 end
 
 function M.get_dependencies(dependencies)
-  local list = vim.deepcopy(dep_list)
-  for _, dependency in pairs(dependencies) do
-    table.insert(list, dependency)
+  for _, dependency in pairs(dep_list) do
+    table.insert(dependencies, dependency)
   end
-  return list
+  return dependencies
 end
 
 return M

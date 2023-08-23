@@ -1,8 +1,22 @@
 return {
+  -- {
+  --   "theRealCarneiro/hyprland-vim-syntax",
+  --   dependencies = { "treesitter" },
+  --   ft = "hypr",
+  -- },
+
   {
-    "theRealCarneiro/hyprland-vim-syntax",
-    dependencies = { "treesitter" },
+    "luckasRanarison/tree-sitter-hypr",
     ft = "hypr",
+    init = function()
+      vim.filetype.add(
+        {
+          pattern = {
+            [".*/hypr/.*%.conf"] = "hypr",
+          },
+        }
+      )
+    end
   },
 
   {

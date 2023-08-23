@@ -8,4 +8,9 @@ return {
     "nvim-tree/nvim-web-devicons",
     name = "devicons",
   },
+
+  {
+    "kkharji/sqlite.lua",
+    name = "sqlite",
+  },
 }

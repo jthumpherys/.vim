@@ -1,34 +1,28 @@
-local M = require("plugins.telescope.config").get_plugins()
+local config = require("plugins.telescope.config")
 
-table.insert(M,
+return {
   {
     "nvim-telescope/telescope.nvim",
     name = "telescope",
-    opts = function()
-      local options = {
-        defaults = {
-          mapping = {
-            n = { ['<leader>t'] = require("trouble.providers.telescope").open_with_trouble },
-          },
+    opts = {
+      defaults = {
+        mapping = {
+          n = { ['<leader>t'] = require("trouble.providers.telescope").open_with_trouble },
         },
-      }
-      local extensions = require("plugins.telescope.config").extensions
-      options.extensions = {}
-      for name, extension in pairs(extensions) do
-        options.extensions[name] = extension.telescope_opts or {}
-      end
-      return options
-    end,
+      },
+    },
+    config = config.telescope,
     version = "*",
-    dependencies = { "treesitter", "plenary", "devicons" },
+    -- dependencies = { "treesitter", "plenary", "devicons" },
+    dependencies = { "plenary" },
     -- event = "VeryLazy",
-  }
+  },
+
+  unpack(require("plugins.telescope.extensions").plugins),
 
   -- {
   --   "prochri/telescope-all-recent.nvim",
   --   config = true,
   --   dependencies = { "telescope" },
   -- }
-)
-
-return M
+}

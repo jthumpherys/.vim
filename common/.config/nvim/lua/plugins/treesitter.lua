@@ -16,6 +16,7 @@ return {
         "gitcommit",
         "gitignore",
         "html",
+        "hypr",
         "json",
         "json5",
         -- "julia",
@@ -60,6 +61,19 @@ return {
         enable = true,
       },
     },
+    config = function(_, opts)
+      local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+      parser_config.hypr = {
+        install_info = {
+          url = "https://github.com/luckasRanarison/tree-sitter-hypr",
+          files = { "src/parser.c" },
+          branch = "master",
+        },
+        filetype = "hypr",
+      }
+
+      require("nvim-treesitter.configs").setup(opts)
+    end,
     main = "nvim-treesitter.configs",
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
