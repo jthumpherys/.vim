@@ -26,10 +26,11 @@ return {
       },
       sorting = {
         comparators = {
-          { loc = "cmp_fuzzy_path", fn = "compare" },
+          -- { loc = "cmp_fuzzy_path", fn = "compare" },
           { loc = "local", fn = "offset" },
           { loc = "local", fn = "exact" },
           { loc = "local", fn = "score" },
+          { loc = "local", fn = "recently_used" },
           { loc = "cmp-under-comparator", fn = "under" },
           { loc = "local", fn = "kind" },
           { loc = "local", fn = "sort_text" },

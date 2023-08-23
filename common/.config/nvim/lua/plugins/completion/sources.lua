@@ -26,7 +26,11 @@ local buffer_lines = {
   source = { name = "buffer-lines" },
   display = "Buf Lines"
 }
-local path = { entry = "FelipeLema/cmp-async-path", source = { name = "async_path" }, display = "Path" }
+local path = {
+  entry = "FelipeLema/cmp-async-path",
+  source = { name = "async_path" },
+  display = "Path",
+}
 local fuzzy_path = {
   entry = {
     "tzachar/cmp-fuzzy-path",
@@ -39,9 +43,11 @@ local fuzzy_path = {
         'fd', '--max-depth', '20', '--full-path', -- default
         '--type', 'd', '--type', 'f', -- suggest directories
         '--follow', -- follow symbolic links for suggestions
-        '--no-ignore-vcs', -- suggest files in .gitignore
-        '--hidden',
+        -- '--no-ignore-vcs', -- suggest files in .gitignore
+        -- '--hidden',
         -- '--glob',
+        '--exclude', "'*.pyc'",
+        '--exclude', "'__*__'",
       },
     },
   },
@@ -52,10 +58,10 @@ local ripgrep = { entry = "lukas-reineke/cmp-rg", source = { name = "rg" }, disp
 local spell = {
   entry = {
     "f3fora/cmp-spell",
-    -- config = function()
-    --   vim.opt.spell = true
-    --   vim.opt.spelllang = { 'en_us' }
-    -- end,
+    config = function()
+      vim.opt.spell = true
+      vim.opt.spelllang = { 'en_us' }
+    end,
   },
   source = { name = "spell" },
   display = "Spell",
@@ -179,7 +185,7 @@ local source_data = {
   cmdlines = {
     [':'] = {
       {
-        path,
+        -- path,
         fuzzy_path,
       },
       {
