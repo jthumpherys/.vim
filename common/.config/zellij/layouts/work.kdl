@@ -6,24 +6,27 @@ layout {
     tab name="nvim-plugins" cwd=".dotfiles/common/.config/nvim/lua/plugins" {
         pane
     }
-    tab name="update" split_direction="horizontal" {
-        pane size="25%" command="sudo" {
-            args "pacman" "-Syu"
-            start_suspended true
-        }
-        pane size="25%" cwd=".local/build"
-        pane size="50%" {
-            pane cwd="/usr/local/src/neovim" command="git" {
-                args "switch" "-"
-                args "pull"
-                args "checkout" "nightly"
-            }
-            pane cwd="/usr/local/src/neovim" {
-                command "make"
-                command "sudo make"
-                args "install"
-                start_suspended true
-            }
-        }
+    tab name="notes" cwd="vault/notes" {
+        pane
     }
+    // tab name="update" split_direction="horizontal" {
+    //     pane size="25%" command="sudo" {
+    //         args "pacman" "-Syu"
+    //         start_suspended true
+    //     }
+    //     pane size="25%" cwd=".local/build"
+    //     pane size="50%" {
+    //         pane cwd="/usr/local/src/neovim" command="git" {
+    //             args "switch" "-"
+    //             args "pull"
+    //             args "checkout" "nightly"
+    //         }
+    //         pane cwd="/usr/local/src/neovim" {
+    //             command "make"
+    //             command "sudo make"
+    //             args "install"
+    //             start_suspended true
+    //         }
+    //     }
+    // }
 }
