@@ -1,6 +1,6 @@
 local M = {}
 
-function M.whichkey_config_function(opts)
+function M.whichkey(_, opts)
   local wk = require("which-key")
   wk.setup(opts)
 

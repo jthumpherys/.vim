@@ -9,17 +9,16 @@ return {
         presets = { operators = false },
       },
       key_labels = {
-        ['<space>'] = "␣",
-        ['<cr>'] = "↵ ",
-        ['<tab>'] = "⇥ ",
+        ['<space>'] = '␣',
+        ['<cr>'] = '↵ ',
+        ['<tab>'] = '⇥ ',
       },
     },
-    config = require("plugins.whichkey.config").whichkey_config_function,
+    -- config = require("plugins.whichkey.config").whichkey_config_function,
     init = function()
       vim.o.timeout = true
-      vim.o.timeoutlen = 1000
+      vim.o.timeoutlen = 500
     end,
-    dependencies = { "telescope" },  -- until I fix yanky keybinds
-    event = "VeryLazy",
+    -- dependencies = { "telescope" },  -- until I fix yanky keybinds
   },
 }

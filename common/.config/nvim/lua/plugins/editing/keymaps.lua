@@ -1,21 +1,46 @@
-local M = {}
+local M = { operators = {} }
 
-M.comment_map = {
-  ['<leader>c'] = {
-    name = "Comment",
-    c = { "Comment this line" },
-    ['0'] = { "Add comment above current line" },
-    o = { "Add comment below current line" },
-    A = { "Add comment at the end of the current line" },
+M.comment_keys = {
+  line_prefix = '<leader>c',
+  block_prefix = '<leader>b',
+
+  toggler = 'c',
+
+  above = '0',
+  below = 'o',
+  eol = 'A',
+}
+
+M.comment = {
+  {
+    {
+      [M.comment_keys.line_prefix] = {
+        name = "Comment",
+        -- operator = true,
+        [M.comment_keys.toggler] = { "Comment line" },
+        [M.comment_keys.above] = { "Add comment above current line" },
+        [M.comment_keys.below] = { "Add comment below current line" },
+        [M.comment_keys.eol] = { "Add comment at the end of the current line" },
+      },
+      [M.comment_keys.block_prefix] = {
+        name = "BlockComment",
+        -- operator = true,
+        [M.comment_keys.toggler] = { "Comment line blockwise" },
+      },
+    },
   },
-  ['<leader>b'] = {
-    name = "BlockComment",
-    c = { "Comment this line" },
-  }
+
+  {
+    {
+      ['<leader>c'] = { "Comment selection" },
+      ['<leader>b'] = { "Comment selection blockwise" },
+    },
+    { mode = "x" },
+  },
 }
 
 
-M.yanky_map = {
+M.yanky = {
   ['<leader>p'] = {
     name = "Put",
     -- t = { require("telescope").extensions.yank_history.yank_history, "View history through telescope" },
@@ -226,15 +251,15 @@ M.swap_map = {
 }
 
 
-M.global_keymap = {}
-for prefix, map in pairs(M.comment_map) do
-  M.global_keymap[prefix] = map.name
-end
-for key, map in pairs(M.yanky_map) do
-  M.global_keymap[key] = map
-end
-for prefix, keymaps in pairs(M.swap_map) do
-  M.global_keymap[prefix] = { name = keymaps.name }
-end
+-- M.global_keymap = {}
+-- for prefix, map in pairs(M.comment_map) do
+--   M.global_keymap[prefix] = map.name
+-- end
+-- for key, map in pairs(M.yanky_map) do
+--   M.global_keymap[key] = map
+-- end
+-- for prefix, keymaps in pairs(M.swap_map) do
+--   M.global_keymap[prefix] = { name = keymaps.name }
+-- end
 
 return M
