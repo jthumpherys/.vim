@@ -3,8 +3,6 @@ return {
     "folke/which-key.nvim",
     name = "which-key",
     opts = {
-      -- operators = { ['<leader>c'] = "Comments", ['<leader>b'] = "BlockComments" },
-
       plugins = {
         presets = { operators = false },
       },
@@ -14,11 +12,10 @@ return {
         ['<tab>'] = '⇥ ',
       },
     },
-    -- config = require("plugins.whichkey.config").whichkey_config_function,
+    config = require("plugins.whichkey.config").whichkey,
     init = function()
       vim.o.timeout = true
       vim.o.timeoutlen = 500
     end,
-    -- dependencies = { "telescope" },  -- until I fix yanky keybinds
   },
 }

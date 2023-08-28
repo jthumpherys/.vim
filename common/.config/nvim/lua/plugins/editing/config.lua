@@ -1,6 +1,11 @@
-local M = {}
+local M = { operators = {} }
 
 local keymaps = require("plugins.editing.keymaps")
+
+
+local comment_ops, comment_map
+M.comment_keys, comment_ops, comment_map = require("utils.keymaps").process(keymaps.comment)
+table.insert(M.operators, comment_ops)
 
 function M.comment(_, opts)
   for _, opt in pairs({"opleader", "toggler", "extra"}) do
@@ -18,15 +23,10 @@ function M.comment(_, opts)
   end
   require("Comment").setup(opts)
 
-  for _, map in pairs(keymaps.comment) do
-    print(vim.inspect(map))
-    -- local m = unpack(map)
-    -- print(vim.inspect(m))
+  for _, map in pairs(comment_map) do
     require("which-key").register(unpack(map))
   end
 end
-
-M.comment_keys = require("utils.keymaps").get_keys(keymaps.comment)
 
 
 function M.yanky(_, opts)

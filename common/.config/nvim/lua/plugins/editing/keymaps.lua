@@ -16,7 +16,7 @@ M.comment = {
     {
       [M.comment_keys.line_prefix] = {
         name = "Comment",
-        -- operator = true,
+        operator = true,
         [M.comment_keys.toggler] = { "Comment line" },
         [M.comment_keys.above] = { "Add comment above current line" },
         [M.comment_keys.below] = { "Add comment below current line" },
@@ -24,7 +24,7 @@ M.comment = {
       },
       [M.comment_keys.block_prefix] = {
         name = "BlockComment",
-        -- operator = true,
+        operator = true,
         [M.comment_keys.toggler] = { "Comment line blockwise" },
       },
     },

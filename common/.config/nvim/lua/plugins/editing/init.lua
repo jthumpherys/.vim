@@ -11,7 +11,7 @@ return {
     config = config.comment,
     version = "*",
     lazy = false,
-    -- keys = config.comment_keys,
+    keys = config.comment_keys,
     -- event = "VeryLazy",
     -- dependencies = { "treesitter" },
   },
