@@ -1,4 +1,0 @@
-#!/usr/bin/sh
-
-# /usr/bin/node $HOME/.local/build/discord/arrpc/src/arrpc/src &
-USER_FLAG="$(cat $XDG_HOME_CONFIG/electron-flags.conf)" /usr/bin/webcord
