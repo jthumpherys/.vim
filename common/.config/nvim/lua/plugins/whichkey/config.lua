@@ -18,9 +18,9 @@ function M.whichkey(_, opts)
           local file = require("plugins." .. item .. ".config")
           if file ~= true then
             if file.operators ~= nil then
-              print(vim.inspect(file.operators))
-              table.insert(opts.operators, unpack(file.operators))
-              print(vim.inspect(opts.operators))
+              for op, name in pairs(file.operators) do
+                opts.operators[op] = name
+              end
             end
           end
         end

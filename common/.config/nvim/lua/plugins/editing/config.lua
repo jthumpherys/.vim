@@ -1,11 +1,14 @@
 local M = { operators = {} }
 
+local km = require("utils.keymaps")
 local keymaps = require("plugins.editing.keymaps")
 
 
 local comment_ops, comment_map
-M.comment_keys, comment_ops, comment_map = require("utils.keymaps").process(keymaps.comment)
-table.insert(M.operators, comment_ops)
+M.comment_keys, comment_ops, comment_map = km.process(keymaps.comment)
+for operator, description in pairs(comment_ops) do
+  M.operators[operator] = description
+end
 
 function M.comment(_, opts)
   for _, opt in pairs({"opleader", "toggler", "extra"}) do
@@ -29,9 +32,16 @@ function M.comment(_, opts)
 end
 
 
+local yanky_map
+M.yanky_keys, _, yanky_map = km.process(keymaps.yanky)
+
 function M.yanky(_, opts)
   require("yanky").setup(opts)
   require("telescope").load_extension("yank_history")
+
+  for _, map in pairs(yanky_map) do
+    require("which-key").register(unpack(map))
+  end
 end
 
 

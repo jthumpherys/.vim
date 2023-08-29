@@ -12,25 +12,18 @@ return {
     version = "*",
     lazy = false,
     keys = config.comment_keys,
-    -- event = "VeryLazy",
-    -- dependencies = { "treesitter" },
   },
 
   {
     "gbprod/yanky.nvim",
     name = "yanky",
     opts = {
-      -- picker = {
-      --   telescope = {
-      --     use_default_mappings = false,
-      --   },
-      -- },
+      ring = {
+        storage = "sqlite",
+      },
     },
     config = config.yanky,
     keys = config.yanky_keys,
-    -- dependencies = { "telescope" },
-    dependencies = { "sqlite" },
-    -- event = "VeryLazy",
   },
 
 --   {

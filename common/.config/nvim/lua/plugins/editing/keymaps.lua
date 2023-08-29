@@ -41,92 +41,112 @@ M.comment = {
 
 
 M.yanky = {
-  ['<leader>p'] = {
-    name = "Put",
-    -- t = { require("telescope").extensions.yank_history.yank_history, "View history through telescope" },
+  {
+    {
+      ['<leader>p'] = {
+        name = "Put",
+        t = { function() require("telescope").extensions.yank_history.yank_history() end, "Put from telescope" },
+      },
+
+
+      p = { "<Plug>(YankyPutAfter)", "Put after" },
+      P = { "<Plug>(YankyPutBefore)", "Put before" },
+
+      ['<c-n>'] = { "<Plug>(YankyCycleForward)" },
+      ['<c-p>'] = { "<Plug>(YankyCycleBackward)" },
+    },
   },
 
-  Y = { "<Plug>(YankyYank)", "Yank without moving cursor", mode = { 'n', 'x' } },
-
-  p = { "<Plug>(YankyPutAfter)", "Put after" },
-  P = { "<Plug>(YankyPutBefore)", "Put before" },
-
-  ['<c-n>'] = { "<Plug>(YankyCycleForward)" },
-  ['<c-p>'] = { "<Plug>(YankyCycleBackward)" },
+  {
+    {
+      Y = { "<Plug>(YankyYank)", "Yank without moving cursor" },
+    },
+    { mode = { 'n', 'x' }, },
+  },
 }
 
 local yanky_keys = {
   put_type = {
-    Put = nil,
-    GPut = { key = 'g', name = "GotoEnd", description = "and move cursor to end" },
+    Put = {},
+    GPut = { key = 'g', name = "GotoEnd", description = "move cursor to end" },
   },
   rewriter = {
-    [""] = nil,
+    [""] = {},
     Joined = { key = 'o', name = "JoinedPut", description = "as single line" },
   },
   modifier = {
-    [""] = nil,
+    [""] = {},
     Linewise = { key = 'l', name = "Linewise", description = "linewise" },
-    ShiftRight = { key = '>', name = "ShiftRight", description = "with increased indent" },
-    ShiftLeft = { key = '<', name = "ShiftLeft", description = "with decreased indent" },
-    Filter = { key = 'r', name = "Filter", description = "reindent" },
+    Charwise = { key = 'c', name = "Charwise", description = "charwise" },
+    Blockwise = { key = 'b', name = "Blockwise", description = "blockwise" },
+    ShiftRight = { key = '>', name = "ShiftRight", description = "increase indent" },
+    ShiftLeft = { key = '<', name = "ShiftLeft", description = "decrease indent" },
+    Filter = { key = 'r', name = "Reindent", description = "reindent" },
   },
   where = {
     After = { key = 'p', description = "after" },
     Before = { key = 'P', description = "before" },
-    IndentAfter = { key = 'j', description = "after while matching current line indent" },
-    IndentBefore = { key = 'k', description = "before while matching current line indent" },
+    IndentAfter = { key = 'j', description = "after match indent" },
+    IndentBefore = { key = 'k', description = "before match indent" },
   },
 }
-local function_pieces_order = { "put_type", "where", "modifier", "rewriter" }
+local function_section_order = { "put_type", "where", "modifier", "rewriter" }
+local description_section_order = { "where", "rewriter", "modifier", "put_type" }
+local keybind_section_order = { "put_type", "rewriter", "modifier", "where" }
 
-local function recurse_keys(keymap, keys, piece_itr, yanky_options)
-  local itr = vim.deepcopy(piece_itr)
-  local yopts = vim.deepcopy(yanky_options)
-  local piece, options = itr:next()
-  print(piece)
-  print(vim.inspect(options))
-  if piece then
-    for option, data in pairs(options) do
-      yanky_options[piece] = option
-      if data ~= nil then
-        local key = keys .. data.key
-        if data.name ~= nil then
-          -- create new group
-          keymap[key] = recurse_keys({ name = data.name }, "", itr, yopts)
+local function recurse_keys(keymap, keys, command_sections, evaluated_sections)
+  -- print(vim.inspect(keymap))
+  local map = vim.deepcopy(keymap)
+  local command = vim.deepcopy(command_sections)
+  local already_done = vim.deepcopy(evaluated_sections)
+  for _, section in pairs(keybind_section_order) do
+    if not vim.tbl_contains(already_done, section) then
+      table.insert(already_done, section)
+      for put_type, keybind in pairs(yanky_keys[section]) do
+        command[section] = put_type
+        if keybind.key ~= nil then
+          local key = keys .. keybind.key
+          if keybind.name ~= nil then
+            -- create new group
+            map[key] = recurse_keys({ name = keybind.name }, "", command, already_done)
+          else
+            -- append key and continue
+            map = recurse_keys(map, key, command, already_done)
+          end
         else
-          -- append key and continue
-          keymap = recurse_keys(keymap, key, itr, yopts)
+          -- empty option
+          map = recurse_keys(map, keys, command, already_done)
         end
-      else
-        -- empty option
-        keymap = recurse_keys(keymap, keys, itr, yopts)
       end
     end
-  else
-    if keys ~= "" then
-      local f = "<Plug>(Yanky"
-      local d = "Put"
-      for _, p in pairs(function_pieces_order) do
-        local option = yanky_options[p]
-        if option then
-          f = f .. option
-        else
-          print(vim.inspect(yanky_options))
-        end
-        local opt = yanky_keys[p][option]
-        if opt ~= nil and opt.description ~= nil then
-          d = d .. opt.description
-        end
-      end
-      keymap[keys] = { f, d }
-    end
-    return keymap
   end
-  return keymap
+  if keys ~= "" then
+    local func = "<Plug>(Yanky"
+    local description = "Put"
+    for _, section_name in pairs(function_section_order) do
+      local function_section = command[section_name]
+      if function_section then
+        func = func .. function_section
+      end
+    end
+    for _, section_name in pairs(description_section_order) do
+      local function_section = command[section_name]
+      local opt = yanky_keys[section_name][function_section]
+      if opt ~= nil and opt.description ~= nil then
+        description = description .. ' ' .. opt.description
+      end
+    end
+    func = func .. ')'
+    map[keys] = { func, description }
+  end
+  return map
 end
+
 local piece_itr = vim.iter(yanky_keys)
--- M.yanky_map['<leader>p'] = recurse_keys(M.yanky_map, "", piece_itr, {})
+local map = recurse_keys({}, "", piece_itr, {})
+for key, m in pairs(map) do
+  M.yanky[1][1]['<leader>p'][key] = m
+end
 
 -- function M.get_yanky_special_map()
 --   local smap = {
