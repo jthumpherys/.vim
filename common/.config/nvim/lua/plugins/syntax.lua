@@ -8,6 +8,7 @@ return {
   {
     "luckasRanarison/tree-sitter-hypr",
     ft = "hypr",
+    config = function() require("Comment.ft").set("hypr", '#%s') end,
     init = function()
       vim.filetype.add(
         {
