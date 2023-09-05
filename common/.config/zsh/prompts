@@ -1,4 +1,4 @@
-#!/usr/bin/zsh
+#!/usr/bin/env zsh
 
 autoload -Uz promptinit; promptinit
 autoload -Uz vcs_info; precmd_functions+=(vcs_info)

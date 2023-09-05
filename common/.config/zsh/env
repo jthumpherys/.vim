@@ -1,4 +1,4 @@
-#!/usr/bin/zsh
+#!/usr/bin/env sh
 
 shell_env=${XDG_CONFIG_HOME:-$HOME/.config}/shell/env
 [ -f $shell_env ] && source $shell_env

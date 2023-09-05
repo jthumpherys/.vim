@@ -1,4 +1,4 @@
-#!/usr/bin/zsh
+#!/usr/bin/env zsh
 
 _comp_options+=(globdots)
 zstyle ':completion:*' use-cache on

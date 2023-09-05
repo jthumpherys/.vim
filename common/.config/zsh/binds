@@ -1,4 +1,4 @@
-#!/usr/bin/zsh
+#!/usr/bin/env zsh
 
 bindkey -rpM viins '\e'
 bindkey -M viins 'jj' vi-cmd-mode
