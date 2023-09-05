@@ -1,0 +1,11 @@
+#!/hint/zsh
+
+# comment
+
+typeset BRIGHTNESS_DIR="/sys/class/backlight/intel_backlight"
+
+typeset -i max_brightness="$(cat ${BRIGHTNESS_DIR}/max_brightness)"
+
+(( brightness = $max_brightness / 100 * $1 ))
+
+"$(echo $brightness > ${BRIGHTNESS_DIR}/brightness)"
