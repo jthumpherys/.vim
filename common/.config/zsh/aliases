@@ -1,4 +1,4 @@
-#!/usr/bin/zsh
+#!/usr/bin/env sh
 
 # Text editors
 alias vim="nvim"  # uses /usr/local/bin or /usr/bin
@@ -19,7 +19,7 @@ alias please='sudo $(fc -ln -1)'  # rerun previous command as sudo
 # alias la='ls -A'
 # alias lla='ll -a'
 ignore='--ignore-glob=__*__|__init__.py|*.pyc'
-alias ls='exa --across --icons --group-directories-first'
+alias ls='exa --icons --group-directories-first'
 alias lr='ls --recurse $ignore'
 alias lt='ls --tree $ignore'
 alias la='ls --all'
