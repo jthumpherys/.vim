@@ -1,6 +1,6 @@
 layout {
     tab name="scada" cwd="projects/iiottti-scada" focus=true split_direction="horizontal" {
-        pane focus=true size="90%"
+        pane cwd="scada" focus=true size="90%"
         pane size="10%"
     }
     tab name="nvim-plugins" cwd=".dotfiles/common/.config/nvim/lua/plugins" {
