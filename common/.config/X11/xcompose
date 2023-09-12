@@ -7,6 +7,8 @@ include "/usr/share/X11/locale/en_US.UTF-8/Compose"
 <Multi_key> <asciitilde> <asciitilde> : "≈"
 <Multi_key> <equal> <asciitilde> : "≅"
 <Multi_key> <asciitilde> <equal> : "≅"
+<Multi_key> <asciitilde> <slash> : "∝"
+<Multi_key> <slash> <asciitilde> : "∝"
 
 <Multi_key> <bar> <bar> : "‖"
 
