@@ -34,7 +34,7 @@ function M.get_default_server_options()
             name = "Workspace",
             a = { vim.lsp.buf.add_workspace_folder, "Add workspace folder" },
             d = { vim.lsp.buf.add_workspace_folder, "Remove workspace folder" },
-            l = { function() print(vim.inspect(vim.lsp.bif.list_workspace_folders())) end, "List workspace folders" },
+            l = { vim.lsp.buf.list_workspace_folders, "List workspace folders" },
           },
 
           K = { vim.lsp.buf.hover, "Hover action" },
