@@ -53,6 +53,7 @@ M.language_servers = {
     },
   },
   -- pylyzer = {},
+  texlab = {},
 }
 
 return M
