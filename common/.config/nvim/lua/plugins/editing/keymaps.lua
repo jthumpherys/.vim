@@ -148,6 +148,7 @@ for key, m in pairs(map) do
   M.yanky[1][1]['<leader>p'][key] = m
 end
 
+
 -- function M.get_yanky_special_map()
 --   local smap = {
 --     name = "SpecialPut",

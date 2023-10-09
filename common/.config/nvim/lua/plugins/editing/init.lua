@@ -10,7 +10,7 @@ return {
     } end,
     config = config.comment,
     version = "*",
-    lazy = false,
+    -- lazy = false,
     keys = config.comment_keys,
   },
 
@@ -41,19 +41,33 @@ return {
 --     dependencies = { "yanky" },
 --   },
 
---   {
---     "willothy/moveline.nvim",
---     config = config.moveline_config_function,
---     build = "make",
---     event = "VeryLazy",
---   },
+  {
+    "willothy/moveline.nvim",
+    build = "make",
+    keys = {
+      { '<C-j>', function() require("moveline").down() end, desc = "Move line down" },
+      { '<C-k>', function() require("moveline").up() end, desc = "Move line up" },
 
---   {
---     "Wansmer/sibling-swap.nvim",
---     config = config.swap_config_function,
---     dependencies = { "Wansmer/binary-swap.nvim", "treesitter" },
---     keys = config.swap_keys,
---   },
+      { '<C-j>', function() require("moveline").block_down() end, mode = 'v', desc = "Move block down" },
+      { '<C-k>', function() require("moveline").block_up() end, mode = 'v', desc = "Move block up" },
+    },
+  },
+
+  -- {
+  --   "Wansmer/sibling-swap.nvim",
+  --   opts = {
+  --     use_default_keymaps = false,
+  --   },
+  --   config = config.sibling_swap,
+  --   dependencies = { "treesitter" },
+  --   keys = config.sibling_swap_keys,
+  -- },
+
+  -- {
+  --   "Wansmer/binary-swap.nvim",
+  --   config = config.binary_swap,
+  --   keys = config.binary_swap_keys,
+  -- },
 
 --   {
 --     "kylechui/nvim-surround",
