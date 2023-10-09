@@ -1,9 +1,9 @@
 return {
-  -- {
-  --   "theRealCarneiro/hyprland-vim-syntax",
-  --   dependencies = { "treesitter" },
-  --   ft = "hypr",
-  -- },
+  {
+    "theRealCarneiro/hyprland-vim-syntax",
+    dependencies = { "treesitter" },
+    ft = "hypr",
+  },
 
   {
     "luckasRanarison/tree-sitter-hypr",

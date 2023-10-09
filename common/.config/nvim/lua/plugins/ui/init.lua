@@ -47,13 +47,47 @@ return {
   {
     "lukas-reineke/indent-blankline.nvim",
     name = "indent",
-    main = "indent_blankline",
+    main = "ibl",
     version = "*",
     opts = {
-      show_current_context = true,
-      -- char = '⎸',
-      -- context_char = '⎸',
+      indent = {
+        char = '▏',
+      },
+      scope = {
+        char = '▎',
+        show_start = false,
+        show_end = false,
+        highlight = "Label",
+      },
     },
-    event = { "BufReadPost", "BufNewFile" },
+    config = true,
+    event = "VeryLazy",
+  },
+
+  -- this don't work
+  {
+    "HiPhish/rainbow-delimiters.nvim",
+    config = function ()
+      local delim = require("rainbow-delimiters")
+      vim.g.rainbow_delimiters = {
+        strategy = {
+          [''] = delim.strategy["global"],
+          latex = delim.strategy["local"],
+        },
+        query = {
+          [''] = "rainbow-delimiters",
+          lua = "rainbow-blocks",
+          latex = "rainbow-blocks",
+        },
+        highlight = {
+          "RainbowDelimiterViolet",
+          "RainbowDelimiterCyan",
+          "RainbowDelimiterBlue",
+          "RainbowDelimiterGreen",
+        },
+      }
+    end,
+    event = "VeryLazy",
+    dependencies = { "treesitter" },
   },
 }

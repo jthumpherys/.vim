@@ -1,20 +1,5 @@
 return {
   {
-    "yamatsum/nvim-cursorline",
-    name = "cursorline",
-    enabled = false,
-    opts = {
-      cursorline = {
-        enable = true,
-        timeout = 1000,
-        number = false,
-      },
-      -- cursorword = { enable = false }, -- illuminate already does this
-      event = { "BufReadPost", "BufNewFile" },
-    },
-  },
-
-  {
     "mawkler/modicator.nvim",
     name = "modicator",
     opts = {
