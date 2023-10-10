@@ -19,7 +19,7 @@ return {
         "hypr",
         "json",
         "json5",
-        -- "julia",
+        "julia",
         "kdl",
         -- "kotlin",
         "latex",
@@ -28,6 +28,7 @@ return {
         "make",
         "markdown",
         "markdown_inline",
+        "matlab",
         "passwd",
         "python",
         "regex",
@@ -74,6 +75,8 @@ return {
       }
 
       require("nvim-treesitter.configs").setup(opts)
+
+      vim.treesitter.language.register("matlab", "octave")
     end,
     main = "nvim-treesitter.configs",
     build = ":TSUpdate",

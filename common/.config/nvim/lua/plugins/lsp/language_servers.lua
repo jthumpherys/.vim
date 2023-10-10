@@ -16,7 +16,12 @@ M.language_servers = {
       },
     },
   },
+  jsonls = {},
+  julials = {},
   -- ltex = {},
+  matlab_ls = {
+    filetypes = { "matlab", "octave" },
+  },
   pylsp = {
     on_attach = function(_, bufnr)
       vim.api.nvim_buf_set_keymap(
@@ -53,7 +58,7 @@ M.language_servers = {
     },
   },
   -- pylyzer = {},
-  texlab = {},
+  -- texlab = {},
 }
 
 return M
