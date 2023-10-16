@@ -22,6 +22,11 @@ return {
   {
     "saecki/crates.nvim",
     name = "crates",
+    opts = {
+      null_ls = {
+        enabled = true,
+      },
+    },
     config = true,
     dependencies = { "plenary" },
     event = { "BufRead Cargo.toml" },
