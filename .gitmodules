@@ -1,4 +1,4 @@
-[submodule "alacritty-theme"]
+[submodule "alacritty-themes"]
 	path = common/.config/alacritty/themes
 	url = git@github.com:alacritty/alacritty-theme.git
 [submodule "zsh-completions"]
