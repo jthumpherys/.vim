@@ -1,4 +1,3 @@
 #!/usr/bin/env sh
 
-export WGETRC=$XDG_CONFIG_HOME/wget/rc
-alias wget="wget --hsts-file=\"$XDG_CACHE_HOME/wget-hsts\""
+export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
