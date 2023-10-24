@@ -1,9 +1,12 @@
-[submodule "common/.local/share/zsh/plugins/zsh-completions"]
-	path = .local/share/zsh/plugins/zsh-completions
+[submodule "alacritty-theme"]
+	path = common/.config/alacritty/alacritty-theme
+	url = git@github.com:alacritty/alacritty-theme.git
+[submodule "zsh-completions"]
+	path = common/.local/share/zsh/plugins/completions
 	url = git@github.com:zsh-users/zsh-completions.git
-[submodule "common/.local/share/zsh/plugins/zsh-syntax-highlighting"]
-	path = .local/share/zsh/plugins/zsh-syntax-highlighting
+[submodule "zsh-syntax-highlighting"]
+	path = common/.local/share/zsh/plugins/syntax-highlighting
 	url = git@github.com:zsh-users/zsh-syntax-highlighting.git
-[submodule "common/.local/share/zsh/plugins/zsh-bd"]
-	path = .local/share/zsh/plugins/zsh-bd
+[submodule "zsh-bd"]
+	path = common/.local/share/zsh/plugins/bd
 	url = git@github.com:Tarrasch/zsh-bd.git

@@ -185,7 +185,7 @@ plugins {
     compact-bar { path "compact-bar"; }
 }
 
-theme "carbonfox"
+theme "tokyo-night"
 pane_frames false
 default_mode "locked"
 copy_command "wl-copy"

@@ -1,18 +1,28 @@
 return {
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {
+      style = "night",
+      styles = {
+	keywords = { italic = false },
+      },
+      lualine_bold = true,
+    },
+    config = function(_, opts)
+      require("tokyonight").setup(opts)
+      vim.cmd[[colorscheme tokyonight]]
+    end
+  },
 	{
 		"Shatur/neovim-ayu",
 		name = "ayu",
-		lazy = false,
-    config = function (_, opts)
-      require("ayu").setup(opts)
-      require("ayu").colorscheme()
-    end,
-		priority = 100,
 	},
 
 	{
 		"nvim-lualine/lualine.nvim",
-		opts = { theme = "ayu" },
+		opts = { theme = "tokyonight" },
     lazy = false,
     config = true,
 	},
@@ -110,4 +120,16 @@ return {
 		event = "VeryLazy",
 		dependencies = { "treesitter" },
 	},
+  {
+    "NvChad/nvim-colorizer.lua",
+    main = "colorizer",
+    config = true,
+    opts = {
+      user_default_options = {
+	RRGGBBAA = true,
+	AARRGGBB = true,
+	always_update = true,
+      },
+    },
+  },
 }
