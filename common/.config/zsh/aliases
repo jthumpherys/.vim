@@ -27,6 +27,10 @@ alias lA='la --all'
 alias ll='la --long --header --git'
 alias lla='ll --all'
 
+alias wget="wget --hsts-file=\"\$XDG_CACHE_HOME/wget-hsts\""
+alias ba="bat"
+alias brg="batgrep"
+
 # fd
 alias fd='fd --hidden'
 alias fa='fd --no-ignore'
