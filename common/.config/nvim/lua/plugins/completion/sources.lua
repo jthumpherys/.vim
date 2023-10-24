@@ -121,6 +121,7 @@ local source_data = {
       use_all = true,
       sources = {
         {
+          { entry = "hrsh7th/cmp-omni", source = { name = "omni" }, display = "vimtex" },
           { entry = "amarakon/nvim-cmp-lua-latex-symbols", source = { name = "latex-symbols" }, display = "Latex"},
         },
       },

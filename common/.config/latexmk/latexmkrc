@@ -1,0 +1,3 @@
+$emulate_aux = 1;
+# $aux_dir = 'tex';
+$out_dir = 'tex';

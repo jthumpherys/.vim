@@ -14,6 +14,17 @@ function M.setup()
     }
   )
 
+  -- Set wrap for latex and markdown
+  vim.api.nvim_create_autocmd(
+    "FileType",
+    {
+      pattern = {"markdown", "tex"},
+      callback = function()
+        vim.wo.wrap = true
+      end,
+    }
+  )
+
   vim.api.nvim_create_user_command(
     "Tcd",
     function(opts)

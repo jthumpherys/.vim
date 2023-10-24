@@ -2,26 +2,52 @@
 
 # basic options
 setopt nobeep
-setopt extendedglob
 
-setopt autocd
-
-# directory stack
-setopt autopushd
-setopt pushdignoredups
-setopt pushdsilent
+# cd
+setopt auto_cd
+setopt chase_dots
+setopt auto_pushd
+setopt pushd_ignore_dups
+setopt pushd_silent
 DIRSTACKSIZE=30
+
 # alias d='dirs -v'
 # for index ({1..9}) alias "$index"="cd +${index}"; unset index
 
+# completion
+setopt auto_list
+setopt auto_menu
+setopt auto_param_keys
+setopt auto_param_slash
+setopt auto_remove_slash
+setopt glob_complete
+setopt no_list_ambiguous
+
+# globbing
+setopt extendedglob
+setopt mark_dirs
+
 # history
-setopt appendhistory
-setopt incappendhistory
-setopt extendedhistory
-setopt histignoredups
-setopt histfindnodups
-setopt histreduceblanks
-setopt histignorespace
+setopt append_history
+setopt extended_history
+setopt hist_fcntl_lock
+setopt hist_find_no_dups
+setopt hist_ignore_dups
+setopt hist_ignore_space
+setopt hist_lex_words
+setopt hist_reduce_blanks
+setopt inc_append_history_time
+
+# io
+setopt no_clobber
+setopt clobber_empty
+setopt hash_cmds
+setopt hash_dirs
+setopt path_dirs
+
+setopt check_jobs
+
+export LISTMAX=0
 
 precmd_functions=()
 
