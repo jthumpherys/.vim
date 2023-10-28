@@ -1,6 +1,6 @@
 [user]
 	name = Jade Humpherys
-	email = joshua.humpherys@protonmail.com
+	email = jade.topaz@proton.me
 [init]
 	defaultBranch = main
 [pull]
@@ -11,7 +11,10 @@
 [interactive]
   diffFilter = delta --color-only --features=interactive
 [delta]
-  features = decorations
+  navigate = true
+  ; features = decorations
+  side-by-side = true
+  line-numbers = true
 [delta "interactive"]
   keep-plus-minus-markers = false
 [delta "decorations"]
@@ -20,12 +23,16 @@
   file-style = omit
   hunk-header-decoration-style = blue box
   hunk-header-file-style = red
-  hunk-header-line-number-style = "#067a00"
+  hunk-header-line-number-style = "#6e6a86"
   hunk-header-style = file line-number syntax
+
+[merge]
+  conflictstyle = diff3
 
 [difftool]
   prompt = true
 [diff]
+  colorMoved = default
   tool = nvimdiff
 [difftool]
   cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
