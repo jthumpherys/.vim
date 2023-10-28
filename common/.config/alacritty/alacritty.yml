@@ -1,6 +1,5 @@
 import:
-  - ~/.config/alacritty/themes/themes/tokyo-night.yaml
-  # - ~/.local/share/nvim/lazy/nightfox/extra/carbonfox/nightfox_alacritty.yml
+  - ~/.config/alacritty/duskfox.yml
 
 window:
   title: alacritty
