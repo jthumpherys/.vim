@@ -18,7 +18,7 @@ alias please='sudo $(fc -ln -1)'  # rerun previous command as sudo
 # alias lr='ls -R'
 # alias la='ls -A'
 # alias lla='ll -a'
-ignore='--ignore-glob=__*__|__init__.py|*.pyc'
+ignore='--ignore-glob=__*__|__init__.py|*.pyc --git-ignore'
 alias ls='eza --icons --group-directories-first'
 alias lr='ls --recurse $ignore'
 alias lt='ls --tree $ignore'
@@ -28,11 +28,13 @@ alias ll='la --long --header --git'
 alias lla='ll --all'
 
 alias wget="wget --hsts-file=\"\$XDG_CACHE_HOME/wget-hsts\""
-alias ba="bat"
-alias brg="batgrep"
+
+# bat
+alias cat='bat'
+alias rg='batgrep'
 
 # fd
-alias fd='fd --hidden'
+alias fd='fd --hidden -X bat'
 alias fa='fd --no-ignore'
 
 alias grep='grep --color=auto'
