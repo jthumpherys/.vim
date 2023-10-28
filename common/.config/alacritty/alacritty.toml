@@ -1,0 +1,66 @@
+live_config_reload = true
+
+# Theme
+import = ["~/.config/alacritty/duskfox.toml"]
+
+
+[window]
+decorations = "None"
+title = "Alacritty"
+dynamic_title = true
+# option_as_alt = "OnlyRight"
+
+[window.class]
+instance = "alacritty"
+general = "alacritty"
+
+[scrolling]
+history = 50000
+
+
+[font]
+size = 11.0
+
+[font.normal]
+family = "CaskaydiaCove Nerd Font Mono"
+style = "SemiLight"
+
+[font.italic]
+style = "SemiLight Italic"
+
+[font.bold]
+style = "Bold"
+
+[font.bold_italic]
+style = "Bold Italic"
+
+
+[cursor]
+unfocused_hollow = true
+
+# Typing cursor
+[cursor.style]
+shape = "Beam"
+
+[color.cursor]
+text = "CellForeground"
+cursor = "CellForeground"
+
+# Motion cursor
+[cursor.vi_mode_style]
+shape = "Block"
+
+[color.vi_mode_cursor]
+text = "CellBackground"
+cursor = "CellForeground"
+
+
+[[keyboard.bindings]]
+chars = "\u001B[13;2u"
+key = "Return"
+mods = "Shift"
+
+[[keyboard.bindings]]
+chars = "\u001B[13;5u"
+key = "Return"
+mods = "Control"
