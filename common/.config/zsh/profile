@@ -22,16 +22,16 @@ done
 export rc_source=()
 
 typeset -U path
-path=( ~/.local/bin/**/ ~/.local/sbin/**/ ~/.local/share/cargo/bin "$path" )
+path=( ~/.local/bin ~/.local/sbin ~/.local/share/cargo/bin $path )
 
 typeset -U fpath
-fpath=( "$ZDOTDIR"/funcs/**/ "$fpath" )
+fpath=( "$ZDOTDIR"/funcs/**/ $fpath )
 
 typeset -U manpath
-manpath=( "$XDG_DATA_HOME"/man "$manpath" )
+manpath=( "$XDG_DATA_HOME"/man $manpath )
 
 typeset -U infopath
-infopath=( "$XDG_DATA_HOME"/info "$infopath" )
+infopath=( "$XDG_DATA_HOME"/info $infopath )
 
 export HISTFILE=$XDG_STATE_HOME/zsh/history
 export HISTSIZE=10000
