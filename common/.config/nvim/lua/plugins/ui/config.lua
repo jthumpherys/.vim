@@ -28,6 +28,8 @@ function M.nightfox(_, options)
         -- builtin0 = "magenta.bright",
         -- keyword = "purple",
         variable = "purple",
+        builtin1 = "purple.dim",
+        ident = "purple.bright",
         -- field = "green",
         -- field = "magenta.bright",
         -- func = "pink",
