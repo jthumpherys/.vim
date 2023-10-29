@@ -1,0 +1,11 @@
+set show-all-if-ambiguous on
+
+set editing-mode vi
+
+set show-mode-in-prompt on
+set vi-ins-mode-string \1\e[6 q\2
+set vi-cmd-mode-string \1\e[4 q\2
+
+# set keymap vi
+set keymap vi-insert
+"jj": "\e"
