@@ -22,7 +22,7 @@ def write_history(path):
 
 history = os.path.join(
         os.path.join(
-                os.environ.get('XDG_CONFIG_HOME') or os.path.expanduser('~/.cache'),
+                os.environ.get('XDG_CACHE_HOME') or os.path.expanduser('~/.cache'),
                 'python'
             ),
         # if the variable is set it will be an absolute path and override previous
@@ -39,3 +39,19 @@ except FileNotFoundError:
 # Prevents creation of default history if custom history is empty
 if readline.get_current_history_length() == 0:
     readline.add_history(f'# History created at {time.asctime()}')
+
+
+# Jedi completion
+try:
+    from jedi.utils import setup_readline
+except ImportError:
+    # Fallback to stdlib readline completer
+    print("Jedi is not installed, falling back to readline")
+    try:
+        import readline
+        import rlcompleter
+        readline.parse_and_bind("tab: complete")
+    except ImportError:
+        print("Readline is not installed either. No tab completion is enabled.")
+else:
+    setup_readline()
