@@ -1,1 +1,3 @@
-export ZELLIJ_CONFIG_DIR=$XDG_CONFIG_HOME/zellij
+#!/usr/bin/env sh
+
+export ZELLIJ_CONFIG_DIR="$XDG_CONFIG_HOME"/zellij

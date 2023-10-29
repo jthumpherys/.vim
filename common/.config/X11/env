@@ -1,4 +1,4 @@
-#!/usr/bin/sh
+#!/usr/bin/env sh
 
-export XCOMPOSEFILE=$XDG_CONFIG_HOME/X11/xcompose
-export XCOMPOSECACHE=$XDG_CACHE_HOME/X11/xcompose
+export XCOMPOSEFILE="$XDG_CONFIG_HOME"/X11/xcompose
+export XCOMPOSECACHE="$XDG_CACHE_HOME"/X11/xcompose

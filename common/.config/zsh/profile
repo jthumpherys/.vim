@@ -1,20 +1,20 @@
 #!/usr/bin/env zsh
 
 shell_profile=${XDG_CONFIG_HOME:-$HOME/.config}/shell/profile
-[ -f $shell_profile ] && source $shell_profile
+[ -f "$shell_profile" ] && source "$shell_profile"
 
 typeset shells=( shell sh bash zsh )
 
-for file in $XDG_CONFIG_HOME/*/env; do
+for file in "$XDG_CONFIG_HOME"/*/env; do
   typeset to_source=true
-  for shell in $shells; do
+  for shell in "${shells[@]}"; do
     if [[ $file == $XDG_CONFIG_HOME/$shell/env ]]; then
       to_source=false
       break
     fi
   done
-  if $to_source; then
-    source $file
+  if "$to_source"; then
+    source "$file"
   else
   fi
 done
@@ -22,19 +22,19 @@ done
 export rc_source=()
 
 typeset -U path
-path=( ~/.local/bin/**/ ~/.local/sbin/**/ ~/.local/share/cargo/bin $path )
+path=( ~/.local/bin/**/ ~/.local/sbin/**/ ~/.local/share/cargo/bin "$path" )
 
 typeset -U fpath
-fpath=( $ZDOTDIR/funcs/**/ $fpath )
+fpath=( "$ZDOTDIR"/funcs/**/ "$fpath" )
 
 typeset -U manpath
-manpath=( $XDG_DATA_HOME/man $manpath )
+manpath=( "$XDG_DATA_HOME"/man "$manpath" )
 
 typeset -U infopath
-infopath=( $XDG_DATA_HOME/info $infopath )
+infopath=( "$XDG_DATA_HOME"/info "$infopath" )
 
-export HISTFILE="${XDG_STATE_HOME}/zsh/history"
-export HISTSIZE=1000
-export SAVEHIST=1000
+export HISTFILE=$XDG_STATE_HOME/zsh/history
+export HISTSIZE=10000
+export SAVEHIST=10000
 
-[ -f $DOTDIR/profile.local ] && source $DOTDIR/profile.local
+[ -f "$DOTDIR"/profile.local ] && source "$DOTDIR"/profile.local

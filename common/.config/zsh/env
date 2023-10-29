@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
 
 shell_env=${XDG_CONFIG_HOME:-$HOME/.config}/shell/env
-[ -f $shell_env ] && source $shell_env
+[ -f "$shell_env" ] && . "$shell_env"
 
 ZDOTDIR=${XDG_CONFIG_HOME:-$HOME/.config}/zsh
 
-[ -f $ZDOTDIR/env.local ] && source $ZDOTDIR/env.local
+[ -f "$ZDOTDIR"/env.local ] && . "$ZDOTDIR"/env.local
