@@ -185,7 +185,22 @@ plugins {
     compact-bar { path "compact-bar"; }
 }
 
-theme "tokyo-night"
+themes {
+  duskfox {
+    bg "#1b1029"
+    fg "#b1acde"
+    red "#eb6f92"
+    green "#a3be8c"
+    blue "#567fba"
+    yellow "#f6c177"
+    magenta "#e777ee"
+    orange "#ea9a97"
+    cyan "#7bb8c1"
+    black "#373354"
+    white "#c9afe5"
+  }
+}
+theme "duskfox"
 pane_frames false
 default_mode "locked"
 copy_command "wl-copy"

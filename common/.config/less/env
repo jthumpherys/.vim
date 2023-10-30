@@ -1,4 +1,4 @@
-#!/usr/bin/sh
+#!/usr/bin/env sh
 
-export LESSKEY=$XDG_CONFIG_HOME/less/keybinds
-export LESSHISTFILE=$XDG_STATE_HOME/less/history
+export LESSKEY="$XDG_CONFIG_HOME"/less/keybinds
+export LESSHISTFILE="$XDG_STATE_HOME"/less/history

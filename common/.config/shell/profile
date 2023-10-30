@@ -1,9 +1,9 @@
-#!/usr/bin/sh
+#!/usr/bin/env sh
 
-export XDG_CONFIG_HOME=$HOME/.config
-export XDG_CACHE_HOME=$HOME/.local/cache
-export XDG_STATE_HOME=$HOME/.local/state
-export XDG_DATA_HOME=$HOME/.local/share
+export XDG_CONFIG_HOME="$HOME"/.config
+export XDG_CACHE_HOME="$HOME"/.local/cache
+export XDG_STATE_HOME="$HOME"/.local/state
+export XDG_DATA_HOME="$HOME"/.local/share
 
 export TERMINAL="alacritty"
 export MULTIPLEXER="zellij"
@@ -12,6 +12,6 @@ export VISUAL="nvim"
 export RUNNER="rofi -show run"
 export BROWSER="firefox"
 
-export HOSTNAME=$HOST
+export HOSTNAME="$HOST"
 
-export PKG_CACHE_PATH=$XDG_CACHE_HOME/pkg
+export PKG_CACHE_PATH="$XDG_CACHE_HOME"/pkg

@@ -18,6 +18,7 @@ function M.nightfox(_, options)
       purple = Shade.new("#b08ddf", "#c9afe5", "#9570c2"),
       magenta = Shade.new("#cc58d5", "#e777ee", "#b437c0"),
       blue = Shade.new("#567fba", "#8aa5dd", "#445a8c"),
+      cyan = C.blue,
     },
   }
   opts.palettes.duskfox.white = opts.palettes.duskfox.purple
@@ -27,6 +28,8 @@ function M.nightfox(_, options)
         -- builtin0 = "magenta.bright",
         -- keyword = "purple",
         variable = "purple",
+        builtin1 = "purple.dim",
+        ident = "purple.bright",
         -- field = "green",
         -- field = "magenta.bright",
         -- func = "pink",
