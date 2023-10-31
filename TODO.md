@@ -8,12 +8,17 @@
 ### General
 
 - [ ] Get .mozilla out of HOME somehow and start tracking configuration/profile files
+  - [ ] Maybe I can leave it in HOME but handle with stow organization
 - [x] Switch from kitty to alacritty
 - [x] Make gitignores if possible in bare repo
-- [ ] Decide on a consistent way to use and handle submodules
+- [x] Decide on a consistent way to use and handle submodules
   - Are more aliases a bad idea?
-- [ ] Figure out AUR management flow
+- [ ] Organization
+  - [ ] Distribute aliases possibly
+  - [ ] Check out a couple dot management programs as alternatives to stow possibly
+- [x] Figure out AUR management flow
   - [ ] Write script to recognize updates
+    - One already exists, check if paru handles it
 
 ### Zsh
 
@@ -25,8 +30,6 @@
   - [ ] Better adapt to screen size/space
   - [x] Fix VCS to just have [repo]: in red instead of VCS program
 - [ ] Add prompts P2-4
-- [ ] Add scripts to assist in handling AUR and programs installed from source
-- [ ] Alias for command line scrolling program
 - [ ] Keybindings
   - [ ] Customize menu and completion binds
   - [ ] Vi-ify even more
@@ -39,7 +42,7 @@
   - [ ] Customize theme
   - [ ] Customize status bar
   - [ ] Add live displays
-    - [ ] latex
+    - [x] latex
     - [ ] Markdown
 - [ ] Improve filetype detection
   - [ ] Add dynamic detection in files without filetype
@@ -49,7 +52,7 @@
     - [ ] Makefile tab
 - [ ] Standardize
   - [ ] Switch all keybinds to which-key
-    - [ ] yanky
+    - [x] yanky
     - [ ] telescope
   - [x] Figure out keys argument for lazy
   - [ ] Get all plugin args in the same order
@@ -64,7 +67,7 @@
   - [ ] display/
   - [ ] editing/
     - [x] Comment
-    - [ ] yanky
+    - [x] yanky
   - [ ] latex/
   - [ ] lsp/
   - [ ] markdown/
@@ -107,20 +110,25 @@
 ### Hyprland
 
 - [x] Handle different devices
-  - [ ] Default fallback config
+  - [x] Default fallback config
     - **Can I use logic in hyprland.conf?**
 - [ ] Expand binds
   - [ ] Set modal or prefix binds
     - **Can you set a single bind that triggers with any keypress?**
+    - [ ] hyprland.rs
+    - [ ] xremap
   - [ ] Set binds for mouse button use
   - [ ] Improve binds for mouse&keyboard use
 - [ ] Improve UI
+  - [ ] GAY BORDERS
   - [ ] Figure out the two different schema
   - [ ] Customize theme
   - [ ] Add status bar
   - [x] Add notifications
   - [ ] Show keybind modes visually somehow
-  - [ ] Add runner
+    - borders
+  - [ ] Play with runners
   - [ ] Add window and workspace rules
 - [ ] Figure out clipboard
+  - [ ] Keyboard shortcut for keyboard history
 - [ ] Add login manager
