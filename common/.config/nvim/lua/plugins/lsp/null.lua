@@ -39,8 +39,8 @@ M.packages = {
     latexindent = { method = "formatting", mason = false },
   },
   zsh = {
-    shellharden = { method = "formatting", opts = { extra_filetypes = { "zsh" } } },
-    shellcheck = { method = "diagnostics" },
+    shellharden = { method = "formatting", opts = { extra_filetypes = { "sh" } } },
+    shellcheck = { method = "diagnostics", opts = { extra_filetypes = { "zsh", "sh" } } },
     zsh = { method = "diagnostics", mason = false },
   },
 }
