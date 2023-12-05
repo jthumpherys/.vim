@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+export OPAMROOT="$XDG_DATA_HOME"/opam
+
+MYSHELL=$(ps -h -o comm -p $$)
+if [ "$MYSHELL" = "zsh" ]; then
+  [ -f "$XDG_DATA_HOME"/opam/opam-init/init.zsh ] && . "$XDG_DATA_HOME"/opam/opam-init/init.zsh
+else
+  [ -f "$XDG_DATA_HOME"/opam/opam-init/init.sh ] && . "$XDG_DATA_HOME"/opam/opam-init/init.sh
+fi
