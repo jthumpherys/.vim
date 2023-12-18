@@ -12,6 +12,8 @@ function M.setup()
   vim.opt.softtabstop=-1
 
   vim.opt.incsearch = true
+  vim.opt.ignorecase = true
+  vim.opt.smartcase = true
   vim.opt.termguicolors = true
   vim.opt.wrap = false
 end
