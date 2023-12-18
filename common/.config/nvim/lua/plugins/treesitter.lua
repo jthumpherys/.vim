@@ -48,11 +48,6 @@ return {
       },
       indent = { enable = true },
 
-      context_commentstring = {
-        enable = true,
-        enable_autcmd = false,
-      },
-
       playground = {
         enable = true,
         disable = {},
@@ -78,13 +73,23 @@ return {
 
       vim.treesitter.language.register("matlab", "octave")
     end,
-    main = "nvim-treesitter.configs",
+    -- main = "nvim-treesitter.configs",
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
     dependencies = {
       { "nvim-treesitter/playground", name = "ts-playground" },
-      { "JoosepAlviste/nvim-ts-context-commentstring" },
+      -- "context_commentstring",
       { "RRethy/nvim-treesitter-endwise" },
+    },
+  },
+
+  {
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    name = "context_commentstring",
+    main = "ts_context_commentstring",
+    -- setup = function() vim.g.ts_skip_ = false end,
+    opts = {
+      enable_autocmd = false,
     },
   },
 
