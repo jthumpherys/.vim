@@ -124,5 +124,15 @@ return {
       },
       mode = "background",
     },
+    event = "VeryLazy",
+  },
+
+  {
+    "lewis6991/gitsigns.nvim",
+    opts = {
+      numhl = true,
+    },
+    config = true,
+    event = "VeryLazy",
   },
 }
