@@ -1,5 +1,11 @@
 #!/usr/bin/env zsh
 
+
+# Most my personal zsh setup is here or sourced from here :3
+# within my system, this file is sourced when starting any new terminal (it's just symbolic linked to `.zshrc`) so it should be easier to adjust on the fly
+# sources a bunch of other files to keep things somewhat organized, for the most part in this file options are just set
+
+
 # basic options
 setopt nobeep
 
@@ -58,25 +64,30 @@ bindkey '^D' exit_zsh
 
 autoload -Uz $ZDOTDIR/funcs/*  # (.:t)
 
+# my prompt
 [ -f $ZDOTDIR/prompts ] && source $ZDOTDIR/prompts
 
+# completion functions
 zmodload zsh/complist
 fpath=( $ZPLUGDIR/zsh-completions/src $fpath )
 autoload -Uz compinit; compinit -d $XDG_CACHE_HOME/zsh/compdump
 [ -f $ZDOTDIR/completion ] && source $ZDOTDIR/completion
 
+# my aliases
 [ -f $ZDOTDIR/aliases ] && source $ZDOTDIR/aliases
 
-bindkey -v
-export KEYTIMEOUT=75
+# my keybinds
 [ -f $ZDOTDIR/binds ] && source $ZDOTDIR/binds
 
+# plugins
 ZPLUGDIR=$XDG_DATA_HOME/zsh/plugins
 [ -f $ZPLUGDIR/zsh-bd/bd.zsh ] && source $ZPLUGDIR/zsh-bd/bd.zsh
 # if [[ -f $ZPLUGDIR/zsh-syntax-highlighting/zsh-syntax-highlighting]]; then
 #   source $ZPLUGDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # fi
 
+# for zoxide completions to work
 eval "$(zoxide init zsh)"
 
+# source other local stuff I might have
 [ -f $ZDOTDIR/rc.local ] && source $ZDOTDIR/rc.local
