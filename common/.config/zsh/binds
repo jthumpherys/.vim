@@ -29,6 +29,10 @@ preexec() { echo -ne '\e[5 q' ;}
 bindkey -rpM viins '\e'
 bindkey -M viins 'jj' vi-cmd-mode
 
+# vim backspace instead of vi-style
+bindkey "^?" backward-delete-char
+
+# arrow keys in insert mode, so if you don't enter command mode it acts like a normal terminal
 bindkey -M viins "^[[A" up-line-or-history
 bindkey -M viins "^[[B" down-line-or-history
 bindkey -M viins "^[[C" vi-forward-char
