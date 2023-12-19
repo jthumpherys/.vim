@@ -6,7 +6,7 @@ bindkey -M viins 'jj' vi-cmd-mode
 bindkey -M viins "^[[A" up-line-or-history
 bindkey -M viins "^[[B" down-line-or-history
 bindkey -M viins "^[[C" vi-forward-char
-bindkey -M viins "^[[B" vi-backward-char
+bindkey -M viins "^[[D" vi-backward-char
 
 # bindkey -M viins '<TAB>' complete-
 
