@@ -10,8 +10,17 @@ return {
     } end,
     config = config.comment,
     version = "*",
-    -- lazy = false,
     keys = config.comment_keys,
+  },
+
+  {
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    opts = {
+      enable_autocmd = false,
+    },
+    init = function()
+      vim.g.skip_ts_context_commentstring_module = true
+    end,
   },
 
   {
