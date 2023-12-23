@@ -32,6 +32,10 @@ return {
       },
     },
     config = config.yanky,
+    init = function()
+      table.insert(require("plugins.telescope.utils").extensions, "yank_history")
+    end,
+    dependencies = { "sqlite" },
     keys = config.yanky_keys,
   },
 
