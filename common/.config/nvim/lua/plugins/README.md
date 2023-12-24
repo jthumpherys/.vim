@@ -45,6 +45,21 @@ Lazy entry keys are listed in the following order:
 }
 ```
 
+### Subdirectory Structure
+
+```terminal
+ grouping
+├── config.lua
+├── init.lua
+├── keymaps.lua
+└── utils.lua
+```
+
+- `init.lua` contains the primary lazy plugin entries
+- `config.lua` separates out configuration functions for plugins that may have a more intensive configuration process
+- `utils.lua` contains tools for a particular plugin to have its configuration modified by external plugins i.e. to add extensions
+- `keymaps.lua` separates out plugin keymaps and provides `keys` lazy entries when applicable
+
 ## Plugins
 
 ### [WhichKey](github.com:folke/which-key.nvim)
@@ -52,6 +67,8 @@ Lazy entry keys are listed in the following order:
 ### [Treesitter](github.com:nvim-treesitter/nvim-treesitter)
 
 ### [Telescope](github.com:nvim-telescope/telescope.nvim)
+
+#### Extensions
 
 ### Editing
 
