@@ -56,22 +56,6 @@ return {
         enable = true,
       },
     },
-    config = function(_, opts)
-      local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-      parser_config.hypr = {
-        install_info = {
-          url = "https://github.com/luckasRanarison/tree-sitter-hypr",
-          files = { "src/parser.c" },
-          branch = "master",
-
-          generate_required_npm = false,
-          requires_generate_from_grammer = false,
-        },
-        filetype = "hypr",
-      }
-
-      require("nvim-treesitter.configs").setup(opts)
-    end,
     -- init = function(plugin)
     --   -- maybe use this to load certain capabilities at startup if plugins are using them without `require`
     --   require("lazy.core.loader").add_to_rtp(plugin)
@@ -95,6 +79,19 @@ return {
           },
         }
       )
+
+      local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+      parser_config.hypr = {
+        install_info = {
+          url = "https://github.com/luckasRanarison/tree-sitter-hypr",
+          files = { "src/parser.c" },
+          branch = "master",
+
+          generate_required_npm = false,
+          requires_generate_from_grammer = false,
+        },
+        filetype = "hypr",
+      }
     end,
     ft = "hypr",
   },
