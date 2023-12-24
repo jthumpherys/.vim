@@ -1,6 +1,8 @@
 local extensions = require("plugins.telescope.utils").extensions
 local extension_opts = require("plugins.telescope.utils").extension_opts
 
+local map = require("plugins.telescope.keymap")
+
 return {
   {
     "nvim-telescope/telescope.nvim",
@@ -12,9 +14,12 @@ return {
       for _, extension in pairs(extensions) do
         require("telescope").load_extension(extension)
       end
+
+      require("which-key").register(map.telescope)
     end,
     dependencies = { "plenary" },
-    event = "VeryLazy",
+    cmd = "Telescope",
+    keys = map.prefixes,
   },
 
   {
