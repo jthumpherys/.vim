@@ -3,7 +3,7 @@
 shell_profile=${XDG_CONFIG_HOME:-$HOME/.config}/shell/profile
 [ -f "$shell_profile" ] && source "$shell_profile"
 
-typeset shells=( shell sh bash zsh )
+export shells=( shell sh bash zsh )
 
 for file in "$XDG_CONFIG_HOME"/*/env; do
   typeset to_source=true
@@ -18,8 +18,6 @@ for file in "$XDG_CONFIG_HOME"/*/env; do
   else
   fi
 done
-
-export rc_source=()
 
 typeset -U path
 path=( ~/.local/bin ~/.local/sbin ~/.local/share/cargo/bin $path )

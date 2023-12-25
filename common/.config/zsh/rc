@@ -90,4 +90,18 @@ ZPLUGDIR=$XDG_DATA_HOME/zsh/plugins
 eval "$(zoxide init zsh)"
 
 # source other local stuff I might have
+for file in "$XDG_CONFIG_HOME"/*/rc; do
+  typeset to_source=true
+  for shell in "${shells[@]}"; do
+    if [[ $file == $XDG_CONFIG_HOME/$shell/rc ]]; then
+      to_source=false
+      break
+    fi
+  done
+  if "$to_source"; then
+    source "$file"
+  else
+  fi
+done
+
 [ -f $ZDOTDIR/rc.local ] && source $ZDOTDIR/rc.local
