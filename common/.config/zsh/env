@@ -1,8 +1,24 @@
-#!/usr/bin/env sh
+#!/usr/bin/env zsh
 
 shell_env=${XDG_CONFIG_HOME:-$HOME/.config}/shell/env
 [ -f "$shell_env" ] && . "$shell_env"
 
 ZDOTDIR=${XDG_CONFIG_HOME:-$HOME/.config}/zsh
+
+export shells=( shell sh bash zsh )
+
+for file in "$XDG_CONFIG_HOME"/*/env; do
+  typeset to_source=true
+  for shell in "${shells[@]}"; do
+    if [[ $file == $XDG_CONFIG_HOME/$shell/env ]]; then
+      to_source=false
+      break
+    fi
+  done
+  if "$to_source"; then
+    source "$file"
+  else
+  fi
+done
 
 [ -f "$ZDOTDIR"/env.local ] && . "$ZDOTDIR"/env.local

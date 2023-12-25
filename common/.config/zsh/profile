@@ -3,22 +3,6 @@
 shell_profile=${XDG_CONFIG_HOME:-$HOME/.config}/shell/profile
 [ -f "$shell_profile" ] && source "$shell_profile"
 
-export shells=( shell sh bash zsh )
-
-for file in "$XDG_CONFIG_HOME"/*/env; do
-  typeset to_source=true
-  for shell in "${shells[@]}"; do
-    if [[ $file == $XDG_CONFIG_HOME/$shell/env ]]; then
-      to_source=false
-      break
-    fi
-  done
-  if "$to_source"; then
-    source "$file"
-  else
-  fi
-done
-
 typeset -U path
 path=( ~/.local/bin ~/.local/sbin ~/.local/share/cargo/bin $path )
 
@@ -30,9 +14,5 @@ manpath=( "$XDG_DATA_HOME"/man $manpath )
 
 typeset -U infopath
 infopath=( "$XDG_DATA_HOME"/info $infopath )
-
-export HISTFILE=$XDG_STATE_HOME/zsh/history
-export HISTSIZE=10000
-export SAVEHIST=10000
 
 [ -f "$DOTDIR"/profile.local ] && source "$DOTDIR"/profile.local

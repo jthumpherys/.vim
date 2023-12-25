@@ -44,6 +44,10 @@ setopt hist_lex_words
 setopt hist_reduce_blanks
 setopt inc_append_history_time
 
+export HISTFILE=$XDG_STATE_HOME/zsh/history
+export HISTSIZE=10000
+export SAVEHIST=10000
+
 # io
 setopt no_clobber
 setopt clobber_empty
