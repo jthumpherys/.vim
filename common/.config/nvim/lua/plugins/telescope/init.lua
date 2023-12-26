@@ -1,7 +1,7 @@
 local extensions = require("plugins.telescope.utils").extensions
 local extension_opts = require("plugins.telescope.utils").extension_opts
 
-local map = require("plugins.telescope.keymap")
+local map = require("plugins.telescope.keymaps")
 
 return {
   {

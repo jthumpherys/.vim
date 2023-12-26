@@ -1,4 +1,4 @@
-local map = require("plugins.lsp.keymap")
+local map = require("plugins.lsp.keymaps")
 
 M = {}
 
