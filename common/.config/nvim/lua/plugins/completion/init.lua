@@ -71,6 +71,13 @@ return {
     init = function()
       require("plugins.lsp.language_servers").default_opts.capabilities = require("cmp_nvim_lsp").default_capabilities()
     end,
+    dependencies = {
+      { "tzachar/fuzzy.nvim" },
+      { "lukas-reineke/cmp-under-comparator" },
+      { "onsails/lspkind.nvim" },
+
+      sources.plugins,
+    },
     event = { "CmdlineEnter", "InsertEnter" },
   },
 
@@ -83,9 +90,4 @@ return {
     dependencies = { "honza/vim-snippets" },
   },
 
-  { "tzachar/fuzzy.nvim" },
-  { "lukas-reineke/cmp-under-comparator" },
-  { "onsails/lspkind.nvim" },
-
-  sources.plugins,
 }
