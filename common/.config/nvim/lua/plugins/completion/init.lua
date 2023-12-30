@@ -46,7 +46,7 @@ return {
             mode = "symbol",
             menu = sources.menu,
             maxwidth = 50,
-            ellipsis_char = '…',
+            ellipsis_char = '……',
           })
         },
       }
