@@ -27,6 +27,7 @@ return {
 
   {
     "nvim-telescope/telescope-fzf-native.nvim",
+    name = "telescope-fzf",
     build = "make",
     init = function()
       table.insert(extensions, "fzf")
