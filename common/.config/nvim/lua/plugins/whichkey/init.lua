@@ -13,6 +13,10 @@ return {
     vim.tbl_deep_extend("keep", utils.operators, opts.operators or {})
     opts.operators = utils.operators
     require("which-key").setup(opts)
+
+    for _, keymap in pairs(utils.to_register) do
+      require("which-key").register(unpack(keymap))
+    end
   end,
   init = function()
     vim.o.timeout = true

@@ -1,30 +1,23 @@
-local config = require("plugins.editing.config")
+local map = require("plugins.editing.keymaps")
 
 return {
   {
     "numToStr/Comment.nvim",
     name = "comment",
     opts = function() return {
+      mappings = {
+        basic = false,
+        extra = false,
+      },
       pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
       ignore = '^$',  -- ignore empty lines
     } end,
-    end,
-  },
-
-  {
-    "gbprod/yanky.nvim",
-    name = "yanky",
-    opts = {
-      ring = {
-        storage = "sqlite",
-      },
-    },
-    config = config.yanky,
+    config = true,
     init = function()
-      table.insert(require("plugins.telescope.utils").extensions, "yank_history")
+      local wk = require("plugins.whichkey.utils")
+      wk.operators['<leader>c'] = "Comment"
+      table.insert(wk.to_register, map.comment)
     end,
-    dependencies = { "sqlite" },
-    keys = config.yanky_keys,
   },
 
   {
