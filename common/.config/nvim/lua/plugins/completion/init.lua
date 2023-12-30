@@ -57,7 +57,6 @@ return {
       cmp.setup(opts)
 
       for _, srcs in pairs(sources.filetypes) do
-        require("utils").warn(vim.inspect(srcs.filetype))
         cmp.setup.filetype(srcs.filetype, { sources = srcs.sources })
       end
 
