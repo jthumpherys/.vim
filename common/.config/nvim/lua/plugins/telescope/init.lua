@@ -15,19 +15,28 @@ return {
         require("telescope").load_extension(extension)
       end
 
-      require("which-key").register(map.telescope)
+      map.set_telescope()
     end,
     dependencies = { "plenary" },
     cmd = "Telescope",
-    keys = map.prefixes,
+    keys = {
+      { '<leader>/', desc = "+search" },
+      { '<leader>f', desc = "+files" },
+    },
   },
 
   {
-
     "nvim-telescope/telescope-fzf-native.nvim",
     build = "make",
     init = function()
       table.insert(extensions, "fzf")
+    end,
+  },
+
+  {
+    "jvgrootveld/telescope-zoxide",
+    init = function()
+      table.insert(extensions, "zoxide")
     end,
   },
 }
