@@ -1,5 +1,28 @@
 M = {}
 
+M.telescope = {
+  module = "telescope.builtin",
+  search = {
+    prefix = '/',
+    default = { "live_grep", "on_repeat" },
+
+    ["under cursor"]= { prefix = 'c', default = { "grep_string", "on_prefix" } },
+    f = { "current_buffer_fuzzy_find" },
+    [':'] = { "command_history" },
+    b = { modifier = true, args = { {grep_open_files = true} } },
+  },
+
+  files = {
+    prefix = 'f',
+    default = { "find_files", "on_repeat" },
+    g = { "git_files" },
+    p = { "old_files" },
+    b = { "buffers" },
+  },
+
+  z = { {"zoxide", "list"}, module = {"telescope", "extensions"} },
+}
+
 function M.set_telescope()
   require("which-key").register({
     ['/'] = {

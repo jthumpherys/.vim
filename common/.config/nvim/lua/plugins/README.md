@@ -73,3 +73,21 @@ Lazy entry keys are listed in the following order:
 ### Editing
 
 #### Comments
+
+## Keymaps
+
+```lua
+plugin_name = {
+  module = "plugin",  -- gets all functions from `require("plugin")`
+  prefix = '<leader>',
+  group_name = {
+    key = 'k',
+    execute,
+    subgroup_name = { ... },
+    modifiers = {
+      m = { args = { "arg1", "arg2" } },
+      o = { args = { {option_a = 'a'} } },
+    }
+  }
+}
+```
