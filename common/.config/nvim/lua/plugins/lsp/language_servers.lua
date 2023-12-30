@@ -6,7 +6,7 @@ local function on_attach(_, bufnr)
   require("which-key").register(map.on_attach, { buffer = bufnr })
 end
 
-local default_opts = {
+M.default_opts = {
   on_attach = on_attach,
 }
 
@@ -62,9 +62,5 @@ M.language_servers = {
     },
   },
 }
-
-for _, opts in pairs(M.language_servers) do
-  vim.tbl_deep_extend("keep", opts, default_opts)
-end
 
 return M

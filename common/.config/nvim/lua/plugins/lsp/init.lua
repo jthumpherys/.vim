@@ -3,8 +3,9 @@ return {
     "neovim/nvim-lspconfig",
     name = "lspconfig",
     config = function()
-      local servers = require("plugins.lsp.language_servers").language_servers
-      for server_name, server_opts in pairs(servers) do
+      local servers = require("plugins.lsp.language_servers")
+      for server_name, server_opts in pairs(servers.language_servers) do
+        vim.tbl_deep_extend("keep", server_opts, servers.default_opts)
         require("lspconfig")[server_name].setup(server_opts)
       end
     end,
