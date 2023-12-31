@@ -8,12 +8,14 @@ function M.setup()
   vim.g.loaded_netrwPlugin = 1
 
   vim.opt.expandtab = true
-  vim.opt.shiftwidth=2
-  vim.opt.softtabstop=-1
+  vim.opt.shiftwidth = 2
+  vim.opt.softtabstop = -1
 
   vim.opt.incsearch = true
   vim.opt.termguicolors = true
   vim.opt.wrap = false
+
+  vim.opt.number = true
 end
 
 return M
