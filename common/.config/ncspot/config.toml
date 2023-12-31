@@ -1,0 +1,5 @@
+use_nerdfont = true
+
+[credentials]
+username_cmd = "bw get username spotify"
+password_cmd = "bw get password spotify"
