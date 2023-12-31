@@ -66,6 +66,8 @@ return {
         end
         cmp.setup.cmdline(type, { mapping = cmp.mapping.preset.cmdline(), sources = srcs })
       end
+
+      cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
     end,
     init = function()
       require("plugins.lsp.language_servers").default_opts.capabilities = function()
@@ -91,4 +93,14 @@ return {
     dependencies = { "honza/vim-snippets" },
   },
 
+  {
+    "windwp/nvim-autopairs",
+    name = "pairs",
+    opts = {
+      disable_in_visualblock = true,
+      enable_check_bracket_line = true,
+      check_ts = true,
+    },
+    event = "InsertEnter",
+  },
 }
