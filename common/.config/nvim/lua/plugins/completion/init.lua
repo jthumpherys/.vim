@@ -68,12 +68,14 @@ return {
       end
     end,
     init = function()
-      require("plugins.lsp.language_servers").default_opts.capabilities = require("cmp_nvim_lsp").default_capabilities()
+      require("plugins.lsp.language_servers").default_opts.capabilities = function()
+        return require("cmp_nvim_lsp").default_capabilities()
+      end
     end,
     dependencies = {
-      { "tzachar/fuzzy.nvim" },
-      { "lukas-reineke/cmp-under-comparator" },
-      { "onsails/lspkind.nvim" },
+      "tzachar/cmp-fuzzy-path",
+      "lukas-reineke/cmp-under-comparator",
+      "onsails/lspkind.nvim",
 
       sources.plugins,
     },
