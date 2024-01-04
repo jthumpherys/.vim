@@ -16,7 +16,7 @@ return {
         "gitcommit",
         "gitignore",
         "html",
-        "hypr",
+        -- "hypr",
         "json",
         "json5",
         "julia",

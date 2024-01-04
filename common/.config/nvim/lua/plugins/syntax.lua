@@ -1,19 +1,20 @@
 return {
-  {
-    "theRealCarneiro/hyprland-vim-syntax",
-    dependencies = { "treesitter" },
-    ft = "hypr",
-  },
+  -- {
+  --   "theRealCarneiro/hyprland-vim-syntax",
+  --   dependencies = { "treesitter" },
+  --   ft = "hypr",
+  -- },
 
   {
-    "luckasRanarison/tree-sitter-hypr",
-    ft = "hypr",
-    config = function() require("Comment.ft").set("hypr", '#%s') end,
+    "luckasRanarison/tree-sitter-hyprlang",
+    ft = "hyprlang",
+    build = ":TSInstall hyprlang",
+    -- config = function() require("Comment.ft").set("hypr", '#%s') end,
     init = function()
       vim.filetype.add(
         {
           pattern = {
-            [".*/hypr/.*%.conf"] = "hypr",
+            [".*/hypr/.*%.conf"] = "hyprlang",
           },
         }
       )
