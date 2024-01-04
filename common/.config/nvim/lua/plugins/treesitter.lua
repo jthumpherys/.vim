@@ -22,7 +22,6 @@ return {
         "gitignore",
         "haskell",
         "html",
-        "hypr",
         "ini",
         "javascript",
         "json",
@@ -70,30 +69,18 @@ return {
   },
 
   {
-    "luckasRanarison/tree-sitter-hypr",
+    "luckasRanarison/tree-sitter-hyprlang",
+    build = ":TSInstall hyprlang",
     init = function()
       vim.filetype.add(
         {
           pattern = {
-            [".*/hypr/.*%.conf"] = "hypr",
+            [".*/hypr/.*%.conf"] = "hyprlang",
           },
         }
       )
-
-      local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-      parser_config.hypr = {
-        install_info = {
-          url = "https://github.com/luckasRanarison/tree-sitter-hypr",
-          files = { "src/parser.c" },
-          branch = "master",
-
-          generate_required_npm = false,
-          requires_generate_from_grammer = false,
-        },
-        filetype = "hypr",
-      }
     end,
-    ft = "hypr",
+    ft = "hyprlang",
   },
 
   {
