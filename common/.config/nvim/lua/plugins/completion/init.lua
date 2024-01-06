@@ -101,6 +101,68 @@ return {
       enable_check_bracket_line = true,
       check_ts = true,
     },
+    config = function(_, opts)
+      local autopairs = require("nvim-autopairs")
+      autopairs.setup(opts)
+
+      local Rule = require("nvim-autopairs.rule")
+      local cond = require("nvim-autopairs.conds")
+      local tscond = require("nvim-autopairs.ts-conds")
+
+      -- add spaces between brackets
+      local brackets = { { '(', ')' }, { '[', ']' }, { '{', '}' } }
+      autopairs.add_rule(
+        Rule(' ', ' ', { "-markdown", "-text" })
+          :with_pair(
+            function (pair_opts)
+              local pair = pair_opts.line:sub(pair_opts.col - 1, pair_opts.col)
+              return vim.tbl_contains(
+                {
+                  brackets[1][1]..brackets[1][2],
+                  brackets[2][1]..brackets[2][2],
+                  brackets[3][1]..brackets[3][2],
+                },
+                pair
+              )
+            end
+          )
+      )
+      for _, bracket in pairs(brackets) do
+        autopairs.add_rule(
+          Rule(bracket[1]..' ', ' '..bracket[2], { "-markdown", "-text" })
+            :with_pair(cond.none())
+            :with_move(
+              function(pair_opts)
+                return pair_opts.prev_char:match('.%'..bracket[2]) ~= nil
+              end
+            )
+            :use_key(bracket[2])
+        )
+      end
+
+      -- Add comma after closing bracket in lua if within a table
+      autopairs.add_rule(
+        Rule('{', '},', "lua")
+          :with_pair(tscond.is_ts_node({"table_constructor"}))
+      )
+
+      -- latex pairs
+      -- `\[ \]` handled with snippets
+      autopairs.add_rule(
+        Rule('$', '$', {"tex", "latex"})
+          :with_pair(cond.not_before_text('\\'))
+          :with_cr(cond.none())
+      )
+
+      -- markdown pairs
+      autopairs.add_rule(
+        Rule('*', '*', "markdown")
+          :with_cr(cond.none())
+      )
+      autopairs.add_rule(
+        Rule('**', '*', "markdown")
+      )
+    end,
     event = "InsertEnter",
   },
 }
