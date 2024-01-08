@@ -2,41 +2,27 @@ local map = require("plugins.lsp.keymaps")
 
 M = {}
 
-local function on_attach(_, bufnr)
+function M.on_attach(_, bufnr)
   require("which-key").register(map.on_attach, { buffer = bufnr })
 end
 
 M.default_opts = {
-  on_attach = on_attach,
+  on_attach = M.on_attach,
 }
 
 M.language_servers = {
   clangd = {},
-  lua_ls = {
-    single_file_support = true,
-    settings = {
-      Lua = {
-        runtime = {
-          version = 'LuaJIT',
-        },
-        workspace = {
-          checkThirdParty = false,
-        },
-      },
-    },
-  },
   jsonls = {},
   julials = {},
   pylsp = {
     on_attach = function(_, bufnr)
-      vim.api.nvim_buf_set_keymap(
-        bufnr,
-        'v',
-        '<leader>la',
-        "<cmd>lua vim.lsp.buf.range_code_action()<CR>",  -- for rope
-        { noremap = true, silent = true }
+      M.on_attach(_, bufnr)
+      require("which-key").register(
+        {
+          ['<leader>la'] = { vim.lsp.buf.range_code_action, "Code Action" },
+        },
+        { buffer = bufnr, mode = 'v', noremap = true, silent = true }
       )
-      on_attach(_, bufnr)
     end,
     settings = {
       pylsp = {
@@ -60,6 +46,9 @@ M.language_servers = {
         },
       },
     },
+  },
+  typst_lsp = {
+    settings = { exportPdf = "onSave" },
   },
 }
 
