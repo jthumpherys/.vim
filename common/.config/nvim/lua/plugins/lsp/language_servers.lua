@@ -16,7 +16,7 @@ M.language_servers = {
   julials = {},
   pylsp = {
     on_attach = function(_, bufnr)
-      M.on_attach(_, bufnr)
+      require("plugins.lsp.language_servers").on_attach(_, bufnr)
       require("which-key").register(
         {
           ['<leader>la'] = { vim.lsp.buf.range_code_action, "Code Action" },
