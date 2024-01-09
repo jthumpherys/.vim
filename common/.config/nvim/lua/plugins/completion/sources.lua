@@ -79,7 +79,7 @@ local lsp = {
 
 local source_data = {
   all = {
-    { lsp_signature },
+    -- { lsp_signature },
     { snippet, lsp },
     { fuzzy_buffer, ripgrep, fuzzy_path },
     { spell },

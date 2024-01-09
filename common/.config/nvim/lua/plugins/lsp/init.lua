@@ -49,6 +49,17 @@ return {
   },
 
   {
+    "ray-x/lsp_signature.nvim",
+    opts = {
+      bind = true,
+      hint_enable = false,
+      select_signature_key = '<tab>',
+    },
+    config = function(_, opts) require("lsp_signature").on_attach(opts) end,
+    event = "LspAttach",
+  },
+
+  {
     "folke/neodev.nvim",
     opts = {
       override = function(root_dir, library)
