@@ -38,6 +38,7 @@ M.language_servers = {
       },
     },
   },
+  ruff_lsp = {},
   typst_lsp = {
     settings = { exportPdf = "onSave" },
   },
