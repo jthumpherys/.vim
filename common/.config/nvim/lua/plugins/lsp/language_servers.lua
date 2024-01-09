@@ -1,14 +1,6 @@
-local map = require("plugins.lsp.keymaps")
-
 M = {}
 
-function M.on_attach(_, bufnr)
-  require("which-key").register(map.on_attach, { buffer = bufnr })
-end
-
-M.default_opts = {
-  on_attach = M.on_attach,
-}
+M.default_opts = {}
 
 M.language_servers = {
   clangd = {},
@@ -16,7 +8,6 @@ M.language_servers = {
   julials = {},
   pylsp = {
     on_attach = function(_, bufnr)
-      M.on_attach(_, bufnr)
       require("which-key").register(
         {
           ['<leader>la'] = { vim.lsp.buf.range_code_action, "Code Action" },

@@ -11,6 +11,14 @@ return {
         require("lspconfig")[server_name].setup(server_opts)
       end
     end,
+    init = function()
+      vim.api.nvim_create_autocmd("LspAttach", {
+        group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+        callback = function(env)
+          require("which-key").register(map.on_attach, {buffer = env.buf})
+        end,
+      })
+    end,
     dependencies = {
       {
         "williamboman/mason-lspconfig.nvim",
@@ -55,7 +63,6 @@ return {
       require("neodev").setup(opts)
       require("lspconfig").lua_ls.setup(
         {
-          on_attach = servers.on_attach,
           single_file_support = true,
           settings = {
             Lua = {
