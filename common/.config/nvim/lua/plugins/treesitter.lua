@@ -54,6 +54,9 @@ return {
       highlight = {
         enable = true,
       },
+      indent = {
+        enable = true,
+      },
     },
     -- init = function(plugin)
     --   -- maybe use this to load certain capabilities at startup if plugins are using them without `require`
