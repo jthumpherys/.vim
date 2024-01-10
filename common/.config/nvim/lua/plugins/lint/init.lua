@@ -24,12 +24,20 @@ return {
       python = { "mypy", "ruff" },
     },
     config = function(_, opts)
-      local lint = require("lint")
-      lint.linters_by_ft = opts
-      vim.api.nvim_create_autocmd("TextChanged", {
-        callback = function() lint.try_lint() end,
+      require("lint").linters_by_ft = opts
+    end,
+    init = function()
+      vim.api.nvim_create_autocmd("filetype", {
+        pattern = { "python" },
+        callback = function(env)
+          local lint = require("lint")
+          vim.api.nvim_create_autocmd({"TextChanged", "BufWritePre"}, {
+            callback = function() lint.try_lint() end,
+            buffer = env.buf,
+          })
+          lint.try_lint()
+        end,
       })
-      lint.try_lint()
     end,
     ft = { "python" },
   },
