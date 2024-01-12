@@ -15,14 +15,9 @@ function M.setup()
   )
 
   -- Set wrap for latex and markdown
-  vim.api.nvim_create_autocmd(
-    "FileType",
-    {
-      pattern = {"markdown", "tex"},
-      callback = function()
-        vim.wo.wrap = true
-      end,
-    }
+  require("utils").set_ft_window_option(
+    {"markdown", "tex", "latex"},
+    { wrap = true, linebreak = true, breakindent = true, breakindentopt = "list:-1,shift:2" }
   )
 
   vim.api.nvim_create_user_command(
