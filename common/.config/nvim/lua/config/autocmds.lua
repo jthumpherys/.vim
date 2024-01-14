@@ -14,9 +14,9 @@ function M.setup()
     }
   )
 
-  -- Set wrap for latex and markdown
+  -- Set wrap for typst, latex and markdown
   require("utils").set_ft_window_option(
-    {"markdown", "tex", "latex"},
+    {"markdown", "typst", "tex", "latex"},
     { wrap = true, linebreak = true, breakindent = true, breakindentopt = "list:-1,shift:2" }
   )
 
