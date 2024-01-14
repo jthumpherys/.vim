@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+ignore='--ignore-glob=__*__|__init__.py|*.pyc --git-ignore'
+alias ls='eza --icons --group-directories-first'
+alias lr='ls --recurse $ignore'
+alias lt='ls --tree $ignore'
+alias la='ls --all'
+alias lA='la --all'
+alias ll='la --long --header --git'
+alias lla='ll --all'

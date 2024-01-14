@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+alias fd='fd --hidden -X bat'
+alias fa='fd --no-ignore'

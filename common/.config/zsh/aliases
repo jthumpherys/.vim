@@ -12,29 +12,6 @@ alias supac='sudo pacman'
 alias sue='sudoedit'
 alias please='sudo $(fc -ln -1)'  # rerun previous command as sudo
 
-# ls
-# alias ls='ls -h --color=auto --group-directories-first'
-# alias ll='ls -lA'
-# alias lr='ls -R'
-# alias la='ls -A'
-# alias lla='ll -a'
-ignore='--ignore-glob=__*__|__init__.py|*.pyc --git-ignore'
-alias ls='eza --icons --group-directories-first'
-alias lr='ls --recurse $ignore'
-alias lt='ls --tree $ignore'
-alias la='ls --all'
-alias lA='la --all'
-alias ll='la --long --header --git'
-alias lla='ll --all'
-
-# bat
-alias cat='bat'
-alias rg='batgrep'
-
-# fd
-alias fd='fd --hidden -X bat'
-alias fa='fd --no-ignore'
-
 alias grep='grep --color=auto'
 alias df='df -h'
 alias du='du -ch'
