@@ -6,6 +6,7 @@ M.language_servers = {
   clangd = {},
   jsonls = {},
   julials = {},
+  marksman = {},
   pylsp = {
     on_attach = function(_, bufnr)
       require("which-key").register(
