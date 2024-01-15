@@ -11,7 +11,7 @@ M.on_attach = {
   ["<leader>l"] = {
     name = "+lsp",
     r = { vim.lsp.buf.rename, "Rename" },
-    a = { vim.lsp.buf.code_action, "Code Action" },
+    a = { "<cmd>Lspsaga code_action<CR>", "Code Action" },
     i = { "<cmd>LspInfo<CR>", "Lsp Info" },
     f = { vim.lsp.buf.format, "Format" },
   },
@@ -34,15 +34,27 @@ M.on_attach = {
     l = { vim.lsp.buf.list_workspace_folders, "List workspace folders" },
   },
 
-  K = { vim.lsp.buf.hover, "Hover action" },
-
   ["<leader>d"] = {
     name = "+diagnostics",
     d = { vim.diagnostic.open_float, "Line Diagnostics" },
-    n = { vim.diagnostic.goto_next, "Next error" },
-    p = { vim.diagnostic.goto_prev, "Previous error" },
+    n = { function() require("lspsaga.diagnostic"):goto_next() end, "Next diagnostic" },
+    p = { function() require("lspsaga.diagnostic"):goto_prev() end, "Previous diagnostic" },
+    N = {
+      function() require("lspsaga.diagnostic"):goto_next({ severity = vim.diagnostic.severity.ERROR }) end,
+      "Next error",
+    },
+    P = {
+      function() require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.ERROR }) end,
+      "Previous error",
+    },
     q = { vim.diagnostic.setloclist, "Set loc list" },
-  }
+  },
+
+  K = { "<cmd>Lspsaga hover_doc<CR>", "Hover action" },
+  ['<leader>'] = {
+    K = { "<cmd>Lspsaga hover_doc ++keep<CR>", "Pinned Docs" },
+    t = { "<cmd>Lspsaga term_toggle<CR>", "Terminal" },
+  },
 }
 
 return M

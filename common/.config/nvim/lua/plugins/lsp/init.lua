@@ -39,6 +39,11 @@ return {
   },
 
   {
+    "hinell/lsp-timeout.nvim",
+    event = "LspAttach",
+  },
+
+  {
     "rmagatti/goto-preview",
     name = "goto-preview",
     -- opts = function()
@@ -56,6 +61,22 @@ return {
       select_signature_key = '<tab>',
     },
     config = function(_, opts) require("lsp_signature").on_attach(opts) end,
+    event = "LspAttach",
+  },
+
+  {
+    "nvimdev/lspsaga.nvim",
+    opts = {
+      symbol_in_winbar = { enable = true },
+      implement = { enable = false },
+      diagnostic = {
+        extend_relatedInformation = true,
+        show_layout = "normal",
+        -- show_code_action = false,
+      },
+    },
+    config = true,
+    dependencies = { "devicons" },
     event = "LspAttach",
   },
 
