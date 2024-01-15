@@ -14,6 +14,7 @@ function M.setup()
   vim.opt.termguicolors = true
   vim.opt.wrap = false
   vim.opt.number = true
+  vim.opt.signcolumn = "yes"
 
   vim.opt.incsearch = true
   vim.opt.smartcase = true
