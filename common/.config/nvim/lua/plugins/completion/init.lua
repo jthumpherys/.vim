@@ -147,11 +147,15 @@ return {
       )
 
       -- latex pairs
-      -- `\[ \]` handled with snippets
-      autopairs.add_rule(
-        Rule('$', '$', {"tex", "latex"})
-          :with_pair(cond.not_before_text('\\'))
-          :with_cr(cond.none())
+      -- `\[ \]` handle with snippets
+      local typesetters = { "tex", "latex", "typst" }
+      autopairs.add_rules(
+        {
+          Rule('$', '$', typesetters)
+            :with_pair(cond.not_before_text('\\')),
+          Rule(' ', ' ', typesetters)
+            :with_pair(cond.before_text('$') and cond.after_text('$')),
+        }
       )
 
       -- markdown pairs
