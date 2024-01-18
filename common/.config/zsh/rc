@@ -93,7 +93,7 @@ ZPLUGDIR=$XDG_DATA_HOME/zsh/plugins
 # for zoxide completions to work
 eval "$(zoxide init zsh)"
 
-typeset ignore=( pnpm )
+typeset ignore_rc=( pnpm )
 # source other local stuff I might have
 for file in "$XDG_CONFIG_HOME"/*/rc; do
   typeset to_source=true
@@ -103,7 +103,7 @@ for file in "$XDG_CONFIG_HOME"/*/rc; do
       break
     fi
   done
-  for program in "${ignore[@]}"; do
+  for program in "${ignore_rc[@]}"; do
     if [[ $file == $XDG_CONFIG_HOME/$program/rc ]]; then
       to_source=false
       break
