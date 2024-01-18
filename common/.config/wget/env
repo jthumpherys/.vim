@@ -1,3 +1,7 @@
 #!/usr/bin/env sh
 
-export WGETRC="$XDG_CONFIG_HOME"/wget/wgetrc
+wgetrc="${XDG_CONFIG_HOME}/wget/wgetrc"
+
+if [[ -f $wgetrc  ]]; then
+  export WGETRC=$wgetrc
+fi
