@@ -21,11 +21,11 @@ M.comment = {
           function() require("Comment.api").toggle.linewise.current() end,
           "Current Line",
         },
-        I = {
+        O = {
           function() require("Comment.api").insert.linewise.above() end,
           "Insert Previous Line",
         },
-        J = {
+        o = {
           function() require("Comment.api").insert.linewise.below() end,
           "Insert Next Line",
         },
@@ -39,11 +39,11 @@ M.comment = {
           function() require("Comment.api").toggle.blockwise.current() end,
           "Current Line",
         },
-        I = {
+        O = {
           function() require("Comment.api").insert.blockwise.above() end,
           "Insert Previous Line",
         },
-        J = {
+        o = {
           function() require("Comment.api").insert.blockwise.below() end,
           "Insert Next Line",
         },
