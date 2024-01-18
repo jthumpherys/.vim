@@ -83,11 +83,11 @@ return {
   {
     "folke/neodev.nvim",
     opts = {
-      override = function(root_dir, library)
+      override = function(root_dir, options)
         if root_dir:find("/home/jade/.dotfiles", 1, true)
             or root_dir:find("/home/jade/projects/nvim-dev", 1, true) then
-          library.enabled = true
-          library.plugins = true
+          options.library.enabled = true
+          options.library.plugins = true
         end
       end
     },
