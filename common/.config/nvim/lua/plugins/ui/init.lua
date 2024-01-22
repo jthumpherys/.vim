@@ -25,4 +25,16 @@ return {
     version = "*",
     event = { "BufReadPost", "BufNewFile" },
   },
+
+  {
+    "lewis6991/gitsigns.nvim",
+    opts = {
+      numhl = true,
+      -- on_attach = function(bufnr)
+      --   require("which-key").register({}, {bufnr=bufnr})
+      -- end,
+    },
+    config = true,
+    event = "VeryLazy",
+  },
 }
