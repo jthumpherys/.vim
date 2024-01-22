@@ -58,7 +58,7 @@ return {
     opts = {
       bind = true,
       hint_enable = false,
-      select_signature_key = '<tab>',
+      select_signature_key = '<c-j>',
     },
     config = function(_, opts) require("lsp_signature").on_attach(opts) end,
     event = "LspAttach",
