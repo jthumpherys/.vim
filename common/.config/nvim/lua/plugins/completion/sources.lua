@@ -127,7 +127,7 @@ local source_data = {
           {
             entry = { "KadoBOT/cmp-plugins",
               opts = {
-                files = { "/home/jade/.config/nvim/lua", "/home/jade/.dotfiles/common/.config/nvim/lua" },
+                files = { vim.fn.stdpath("data") .. "/lazy/" },
               },
             },
             source = { name = "plugins" },
