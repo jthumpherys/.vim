@@ -5,6 +5,18 @@ shell_env=${XDG_CONFIG_HOME:-$HOME/.config}/shell/env
 
 ZDOTDIR=${XDG_CONFIG_HOME:-$HOME/.config}/zsh
 
+typeset -U path
+path=( ~/.local/bin ~/.local/sbin ~/.local/share/cargo/bin $path )
+
+typeset -U fpath
+fpath=( "$ZDOTDIR"/funcs/**/ $fpath )
+
+typeset -U manpath
+manpath=( "$XDG_DATA_HOME"/man $manpath )
+
+typeset -U infopath
+infopath=( "$XDG_DATA_HOME"/info $infopath )
+
 export shells=( shell sh bash zsh )
 
 for file in "$XDG_CONFIG_HOME"/*/env; do
