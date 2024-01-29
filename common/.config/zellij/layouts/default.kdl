@@ -1,6 +1,0 @@
-layout {
-    tab split_direction="horizontal" {
-        pane focus=true size="90%"
-        pane size="10%"
-    }
-}
