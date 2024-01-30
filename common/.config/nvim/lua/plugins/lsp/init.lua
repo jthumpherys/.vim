@@ -74,6 +74,7 @@ return {
         show_layout = "normal",
         -- show_code_action = false,
       },
+      lightbulb = { enable = false },
     },
     config = true,
     dependencies = { "devicons" },
