@@ -1,0 +1,15 @@
+[keybinds]
+enter = "enter"
+exit = "escape"
+mode_algebraic = "a"
+mode_rpn = "r"
+quit = "q"
+rpn_drop = '\'
+rpn_redo = "~"
+rpn_roll_down = "page_down"
+rpn_roll_up = "page_up"
+rpn_swap = "tab"
+rpn_undo = "`"
+
+[system]
+start_mode = "rpn"
