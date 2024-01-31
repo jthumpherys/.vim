@@ -1,3 +1,3 @@
 #!/usr/bin/env sh
 
-export GNUPG="$XDG_DATA_HOME"/gnupg
+export GNUPGHOME="$XDG_DATA_HOME"/gnupg
