@@ -40,6 +40,18 @@ local language_servers = {
     },
   },
   ruff_lsp = {},
+  rust_analyzer = {
+    settings = {
+      ["rust-analyzer"] = {
+        checkOnSave = { command = "clippy" },
+        -- cargo = {
+        --   buildScripts = {
+        --     rebuildOnSave = true,
+        --   },
+        -- },
+      },
+    },
+  },
   typst_lsp = {},
 }
 

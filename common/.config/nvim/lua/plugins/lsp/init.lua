@@ -107,30 +107,4 @@ return {
     end,
     ft = "lua",
   },
-
-  {
-    "mrcjkb/rustaceanvim",
-    version = "*",
-    config = function(bufnr)
-      require("which-key").register(
-        {
-          ['<leader>l'] = {
-            m = { vim.cmd.RustLsp("expandMacro"), "Expand Macro" },
-            c = { vim.cmd.RustLsp("openCargo"), "Open Cargo File" },
-            p = { vim.cmd.RustLsp("parentModule"), "Open Parent Module" },
-          },
-          K = { vim.cmd.RustLsp({"hover", "range"}), "Hover", mode = 'v' },
-        },
-        {buffer = bufnr}
-      )
-    end,
-    init = function()
-      vim.g.rustaceanvim = {
-        server = {
-          on_attach = servers.on_attach,
-        },
-      }
-    end,
-    ft = "rust",
-  },
 }
