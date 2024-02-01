@@ -1,39 +1,5 @@
 return {
   {
-    "mrcjkb/rustaceanvim",
-    version = "*",
-    enabled = false,
-    init = function()
-      vim.g.rustaceanvim = {
-        server = {
-          settings = {
-            ["rust-analyzer"] = {
-              checkOnSave = { command = "clippy" },
-            },
-          },
-          on_attach = function(_, bufnr)
-            require("which-key").register(
-              {
-              require("plugins.lsp.keymaps").on_attach,
-              {
-                ['<leader>l'] = {
-                  m = { vim.cmd.RustLsp("expandMacro"), "Expand Macro" },
-                  c = { vim.cmd.RustLsp("openCargo"), "Open Cargo File" },
-                  p = { vim.cmd.RustLsp("parentModule"), "Open Parent Module" },
-                },
-                K = { vim.cmd.RustLsp({"hover", "range"}), "Hover", mode = 'v' },
-              },
-              },
-              { buffer = bufnr }
-            )
-          end,
-        },
-      }
-    end,
-    ft = "rust",
-  },
-
-  {
     "vxpm/ferris.nvim",
     config = true,
     init = function()
