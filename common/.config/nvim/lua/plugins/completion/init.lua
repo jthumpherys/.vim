@@ -70,9 +70,9 @@ return {
       cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
     end,
     init = function()
-      require("plugins.lsp.language_servers").default_opts.capabilities = function()
-        return require("cmp_nvim_lsp").default_capabilities()
-      end
+      require("plugins.lsp.language_servers").extend_capabilities(
+        require("cmp_nvim_lsp").default_capabilities
+      )
     end,
     dependencies = {
       "tzachar/cmp-fuzzy-path",

@@ -1,8 +1,8 @@
 M = {}
 
-M.default_opts = {}
+local general_capabilities = nil
 
-M.language_servers = {
+local language_servers = {
   clangd = {},
   jsonls = {},
   julials = {},
@@ -42,5 +42,38 @@ M.language_servers = {
   ruff_lsp = {},
   typst_lsp = {},
 }
+
+function M.extend_capabilities(capabilities)
+  local preexisting = general_capabilities
+  if preexisting == nil then
+    general_capabilities = capabilities
+  else
+    general_capabilities = function()
+      vim.tbl_deep_extend("keep", preexisting(), capabilities())
+    end
+  end
+end
+
+function M.extend_on_attach(server_name, func)
+  local server = language_servers[server_name]
+  local preexisting = server.on_attach
+  if preexisting ~= nil then
+    server.on_attach = function(client, bufnr)
+      preexisting(client, bufnr)
+      func(client, bufnr)
+    end
+  else
+    server.on_attach = func
+  end
+end
+
+function M.setup()
+  for server_name, server_opts in pairs(language_servers) do
+    if server_opts.capabilites == nil then
+      server_opts.capabilites = general_capabilities
+    end
+    require("lspconfig")[server_name].setup(server_opts)
+  end
+end
 
 return M

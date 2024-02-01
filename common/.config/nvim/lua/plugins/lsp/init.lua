@@ -5,17 +5,12 @@ return {
   {
     "neovim/nvim-lspconfig",
     name = "lspconfig",
-    config = function()
-      for server_name, server_opts in pairs(servers.language_servers) do
-        vim.tbl_deep_extend("keep", server_opts, servers.default_opts)
-        require("lspconfig")[server_name].setup(server_opts)
-      end
-    end,
+    config = servers.setup,
     init = function()
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),
         callback = function(env)
-          require("which-key").register(map.on_attach, {buffer = env.buf})
+          require("which-key").register(map.on_attach, { buffer = env.buf })
         end,
       })
     end,
