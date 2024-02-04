@@ -1,35 +1,18 @@
-local M = {}
+local general_capabilities = nil
 
-M.language_servers = {
-  -- bashls = {},
+local language_servers = {
   clangd = {},
-  lua_ls = {
-    single_file_support = true,
-    settings = {
-      Lua = {
-        runtime = {
-          version = 'LuaJIT',
-        },
-        workspace = {
-          checkThirdParty = false,
-        },
-      },
-    },
-  },
   jsonls = {},
   julials = {},
-  -- ltex = {},
+  marksman = {},
   pylsp = {
     on_attach = function(_, bufnr)
-      vim.api.nvim_buf_set_keymap(
-        bufnr,
-        'v',
-        '<leader>la',
-        "<cmd>lua vim.lsp.buf.range_code_action()<CR>",  -- for rope
-        { noremap = true, silent = true }
+      require("which-key").register(
+        {
+          ['<leader>la'] = { vim.lsp.buf.range_code_action, "Code Action" },
+        },
+        { buffer = bufnr, mode = 'v', noremap = true, silent = true }
       )
-      local config = require("plugins.lsp.config").get_default_server_options()
-      config.on_attach(_, bufnr)
     end,
     settings = {
       pylsp = {
@@ -54,8 +37,53 @@ M.language_servers = {
       },
     },
   },
-  -- pylyzer = {},
-  -- texlab = {},
+  ruff_lsp = {},
+  rust_analyzer = {
+    settings = {
+      ["rust-analyzer"] = {
+        checkOnSave = { command = "clippy" },
+        -- cargo = {
+        --   buildScripts = {
+        --     rebuildOnSave = true,
+        --   },
+        -- },
+      },
+    },
+  },
+  typst_lsp = {},
 }
+
+function M.extend_capabilities(capabilities)
+  local preexisting = general_capabilities
+  if preexisting == nil then
+    general_capabilities = capabilities
+  else
+    general_capabilities = function()
+      vim.tbl_deep_extend("keep", preexisting(), capabilities())
+    end
+  end
+end
+
+function M.extend_on_attach(server_name, func)
+  local server = language_servers[server_name]
+  local preexisting = server.on_attach
+  if preexisting ~= nil then
+    server.on_attach = function(client, bufnr)
+      preexisting(client, bufnr)
+      func(client, bufnr)
+    end
+  else
+    server.on_attach = func
+  end
+end
+
+function M.setup()
+  for server_name, server_opts in pairs(language_servers) do
+    if server_opts.capabilities == nil then
+      server_opts.capabilities = general_capabilities
+    end
+    require("lspconfig")[server_name].setup(server_opts)
+  end
+end
 
 return M

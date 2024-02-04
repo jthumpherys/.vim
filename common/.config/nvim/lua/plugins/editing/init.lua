@@ -1,95 +1,34 @@
-local config = require("plugins.editing.config")
+local map = require("plugins.editing.keymaps")
 
 return {
   {
     "numToStr/Comment.nvim",
     name = "comment",
-    opts = {
-      toggler = {
-        line = '<leader>cc',
-        block = '<leader>bc',
+    opts = function() return {
+      mappings = {
+        basic = false,
+        extra = false,
       },
-      opleader = {
-        line = '<leader>c',
-        block = '<leader>b',
-      },
-      extra = {
-        above = '<leader>c0',
-        below = '<leader>co',
-        eol = '<leader>cA',
-      },
-
+      pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
       ignore = '^$',  -- ignore empty lines
-    },
+    } end,
     config = true,
-    version = "*",
-    keys = config.comment_keys,
-    event = "VeryLazy",
-    dependencies = { "treesitter" },
-  },
-
-  {
-    "gbprod/yanky.nvim",
-    name = "yanky",
-    opts = {
-      picker = {
-        telescope = {
-          use_default_mappings = false,
-        },
-      },
-    },
-    config = config.yanky_config_function,
-    dependencies = { "telescope" },
-    event = "VeryLazy",
-  },
-
-  {
-    "s1n7ax/nvim-search-and-replace",
-    config = true,
-  },
-
-  {
-    "gbprod/substitute.nvim",
-    opts = function()
-      return {
-        on_substitute = require("yanky.integration").substitute(),
-      }
+    init = function()
+      local wk = require("plugins.whichkey.utils")
+      wk.operators['<leader>c'] = "Comment"
+      table.insert(wk.to_register, map.comment)
     end,
-    dependencies = { "yanky" },
   },
 
   {
     "willothy/moveline.nvim",
-    config = config.moveline_config_function,
     build = "make",
-    event = "VeryLazy",
-  },
+    keys = {
+      { '<C-j>', function() require("moveline").down() end, desc = "Move line down" },
+      { '<C-k>', function() require("moveline").up() end, desc = "Move line up" },
 
-  {
-    "Wansmer/sibling-swap.nvim",
-    config = config.swap_config_function,
-    dependencies = { "Wansmer/binary-swap.nvim", "treesitter" },
-    keys = config.swap_keys,
-  },
-
-  {
-    "kylechui/nvim-surround",
-    version = "*",
-    opts = {
-      keymaps = {
-        normal = "<leader>s",
-        normal_cur = "<leader>ss",
-        normal_line = "<leader>S",
-        normal_cur_line = "<leader>SS",
-        visual = "s",
-        visual_line = "S",
-        delete = "<leader>sd",
-        change = "<leader>sc",
-        change_line = "<leader>Sc",
-      },
+      { '<C-j>', function() require("moveline").block_down() end, mode = 'v', desc = "Move block down" },
+      { '<C-k>', function() require("moveline").block_up() end, mode = 'v', desc = "Move block up" },
     },
-    config = true,
-    dependencies = { "treesitter", "ts-textobjects" },
-    keys = config.swap_keys,
   },
 }

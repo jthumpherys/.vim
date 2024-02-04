@@ -14,14 +14,28 @@ function M.setup()
     }
   )
 
-  -- Set wrap for latex and markdown
   vim.api.nvim_create_autocmd(
     "FileType",
     {
-      pattern = {"markdown", "tex"},
+      pattern = "help",
       callback = function()
-        vim.wo.wrap = true
-      end,
+        vim.keymap.set('n', 'gd', function() vim.cmd.tag(vim.fn.expand("<cword>")) end, {buffer=true})
+      end
+    }
+  )
+
+  -- Set wrap for typst, latex and markdown
+  require("utils").set_ft_window_option(
+    {"markdown", "typst", "tex", "latex"},
+    { wrap = true, linebreak = true, breakindent = true, breakindentopt = "list:-1,shift:2,min:20" }
+  )
+
+  -- identify `- [ ]` as a list expression so indentation happens at the beginning of text when soft wrapping
+  vim.api.nvim_create_autocmd(
+    "FileType",
+    {
+      pattern = "markdown",
+      callback = function() vim.opt.formatlistpat:prepend("^\\s*- \\[[x ]\\]\\s\\+\\|") end,
     }
   )
 

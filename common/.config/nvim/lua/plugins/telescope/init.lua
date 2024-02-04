@@ -1,28 +1,43 @@
-local config = require("plugins.telescope.config")
+local extensions = require("plugins.telescope.utils").extensions
+local extension_opts = require("plugins.telescope.utils").extension_opts
+
+local map = require("plugins.telescope.keymaps")
 
 return {
   {
     "nvim-telescope/telescope.nvim",
     name = "telescope",
-    opts = {
-      defaults = {
-        mapping = {
-          n = { ['<leader>t'] = require("trouble.providers.telescope").open_with_trouble },
-        },
-      },
-    },
-    config = config.telescope,
-    version = "*",
-    -- dependencies = { "treesitter", "plenary", "devicons" },
+    config = function(_, opts)
+      opts.extensions = extension_opts
+      require("telescope").setup(opts)
+
+      for _, extension in pairs(extensions) do
+        require("telescope").load_extension(extension)
+      end
+
+      map.set_telescope()
+    end,
     dependencies = { "plenary" },
-    -- event = "VeryLazy",
+    cmd = "Telescope",
+    keys = {
+      { '<leader>/', desc = "+search" },
+      { '<leader>f', desc = "+files" },
+    },
   },
 
-  unpack(require("plugins.telescope.extensions").plugins),
+  {
+    "nvim-telescope/telescope-fzf-native.nvim",
+    name = "telescope-fzf",
+    build = "make",
+    init = function()
+      table.insert(extensions, "fzf")
+    end,
+  },
 
-  -- {
-  --   "prochri/telescope-all-recent.nvim",
-  --   config = true,
-  --   dependencies = { "telescope" },
-  -- }
+  {
+    "jvgrootveld/telescope-zoxide",
+    init = function()
+      table.insert(extensions, "zoxide")
+    end,
+  },
 }

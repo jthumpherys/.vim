@@ -1,25 +1,29 @@
-return {
-  {
-    "folke/which-key.nvim",
-    name = "which-key",
-    opts = {
-      -- operators = { ['<leader>c'] = "Comments", ['<leader>b'] = "BlockComments" },
+local utils = require("plugins.whichkey.utils")
 
-      plugins = {
-        presets = { operators = false },
-      },
-      key_labels = {
-        ['<space>'] = "␣",
-        ['<cr>'] = "↵ ",
-        ['<tab>'] = "⇥ ",
-      },
+return {
+  "folke/which-key.nvim",
+  opts = {
+    key_labels = {
+      ['<space>'] = "␣",
+      ['<cr>'] = "↵ ",
+      ['<tab>'] = "⇥ ",
     },
-    config = require("plugins.whichkey.config").whichkey_config_function,
-    init = function()
-      vim.o.timeout = true
-      vim.o.timeoutlen = 1000
-    end,
-    dependencies = { "telescope" },  -- until I fix yanky keybinds
-    event = "VeryLazy",
+    presets = {
+      operators = false,
+    },
   },
+  config = function(_, opts)
+    vim.tbl_deep_extend("keep", utils.operators, opts.operators or {})
+    opts.operators = utils.operators
+    require("which-key").setup(opts)
+
+    for _, keymap in pairs(utils.to_register) do
+      require("which-key").register(unpack(keymap))
+    end
+  end,
+  init = function()
+    vim.o.timeout = true
+    vim.o.timeoutlen = 500
+  end,
+  event = "VeryLazy",
 }

@@ -1,71 +1,110 @@
+local servers = require("plugins.lsp.language_servers")
+local map = require("plugins.lsp.keymaps")
+
 return {
   {
     "neovim/nvim-lspconfig",
     name = "lspconfig",
+    config = servers.setup,
     init = function()
-      -- disable lsp watcher, apparently it's slow on linux? idk what it is
-      local ok, wf = pcall(require, "vim.lsp._watchfiles")
-      if ok then
-        wf._watchfunc = function()
-          return function() end
-        end
-      end
+      vim.api.nvim_create_autocmd("LspAttach", {
+        group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+        callback = function(env)
+          require("which-key").register(map.on_attach, { buffer = env.buf })
+        end,
+      })
     end,
-    config = require("plugins.lsp.config").config_function,
     dependencies = {
-      "mason",
-      "mason-lspconfig",
-      "hrsh7th/cmp-nvim-lsp",
-      { "folke/neodev.nvim", config = true },
-      "goto-preview",
+      {
+        "williamboman/mason-lspconfig.nvim",
+        opts = { automatic_installation = true },
+        config = true,
+        dependencies = { "mason" },
+      },
     },
     event = { "BufReadPre", "BufNewFile" },
   },
 
   {
-    "rmagatti/goto-preview",
-    name = "goto-preview",
-    opts = function()
-      local ok, module = pcall(require, "plugins.lsp.local")
-      if ok then return module.goto_preview_opts else return {} end
-    end,
-    config = true,
-  },
-
-  {
     "williamboman/mason.nvim",
     name = "mason",
-    version = "*",
-    lazy = false,
-    config = function()
-      require("mason").setup()
-      local reg = require("mason-registry")
-      reg.refresh()
-      reg.update()
-    end,
     build = ":MasonUpdate",
+    config = true,
+    cmd = { "Mason", "MasonUpdate", "MasonInstall", "MasonUninstall" },
   },
 
   {
-    "williamboman/mason-lspconfig.nvim",
-    name = "mason-lspconfig",
+    "hinell/lsp-timeout.nvim",
+    event = "LspAttach",
+  },
+
+  {
+    "rmagatti/goto-preview",
+    name = "goto-preview",
+    -- opts = function()
+    --   local ok, module = pcall(require, "plugins.lsp.local")
+    --   if ok then return module.goto_preview_opts else return {} end
+    -- end,
+    config = true,
+  },
+
+  {
+    "ray-x/lsp_signature.nvim",
     opts = {
-      automatic_installation = true,
+      bind = true,
+      hint_enable = false,
+      select_signature_key = '<c-j>',
+    },
+    config = function(_, opts) require("lsp_signature").on_attach(opts) end,
+    event = "LspAttach",
+  },
+
+  {
+    "nvimdev/lspsaga.nvim",
+    opts = {
+      symbol_in_winbar = { enable = true },
+      implement = { enable = false },
+      diagnostic = {
+        extend_relatedInformation = true,
+        show_layout = "normal",
+        -- show_code_action = false,
+      },
+      lightbulb = { enable = false },
     },
     config = true,
-    version = "*",
-    dependencies = { "mason" },
+    dependencies = { "devicons" },
+    event = "LspAttach",
   },
 
   {
-    "jose-elias-alvarez/null-ls.nvim",
-    name = "null-ls",
+    "folke/neodev.nvim",
     opts = {
-      diagnostics_format = "[#{s}] #{m} (#{c})",
+      override = function(root_dir, options)
+        if root_dir:find("/home/jade/.dotfiles", 1, true)
+            or root_dir:find("/home/jade/projects/nvim-dev", 1, true) then
+          options.library.enabled = true
+          options.library.plugins = true
+        end
+      end
     },
-    config = require("plugins.lsp.config").null_config_function,
-    dependencies = { "plenary", "mason", "lspconfig" },
-    -- event = { "BufReadPre", "BufNewFile" },
-    ft = require("plugins.lsp.null").filetypes,
+    config = function(_, opts)
+      require("neodev").setup(opts)
+      require("lspconfig").lua_ls.setup(
+        {
+          single_file_support = true,
+          settings = {
+            Lua = {
+              runtime = {
+                version = 'LuaJIT',
+              },
+              workspace = {
+                checkThirdParty = false,
+              },
+            },
+          },
+        }
+      )
+    end,
+    ft = "lua",
   },
 }

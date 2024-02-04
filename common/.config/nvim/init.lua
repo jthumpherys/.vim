@@ -21,15 +21,17 @@ local opts = {
     lazy = true,
   },
   install = {
-    colorscheme = { "carbonfox" },
+    colorscheme = { "tokyonight" },
   },
-  browser = "firefox",
   custom_keys = false,
   diff = { cmd = "diffview.nvim" },
   checker = {
     enabled = true,
     notify = false,
-    -- concurrency = 1,
+    concurrency = 1,
+  },
+  change_detection = {
+    notify = false,
   },
   performance = {
     rtp = {

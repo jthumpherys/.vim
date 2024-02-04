@@ -3,7 +3,7 @@ return {
     "mcauley-penney/tidy.nvim",
     name = "tidy",
     opts = {
-      filetype_exclude = { "diff" },
+      filetype_exclude = { "diff", "markdown" },
     },
     config = true,
     event = { "BufWritePre" },
