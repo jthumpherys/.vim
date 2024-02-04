@@ -1,8 +1,30 @@
 return {
   {
+    "nvim-lualine/lualine.nvim",
+    config = true,
+    lazy = false,
+    dependencies = { "devicons" },
+  },
+
+  {
     "sitiom/nvim-numbertoggle",
     name = "numbertoggle",
     event = { "BufReadPost", "BufNewFile" },
+  },
+
+  {
+    "mawkler/modicator.nvim",
+    -- enabled = false,
+    config = true,
+    opts = {
+      highlights = {
+        defaults = {
+          bold = true,
+          bg = require("tokyonight.colors").default.bg_highlight,
+        },
+      },
+    },
+    event = { "BufEnter", "VeryLazy" },
   },
 
   {
