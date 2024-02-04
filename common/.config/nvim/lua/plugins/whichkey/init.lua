@@ -8,6 +8,9 @@ return {
       ['<cr>'] = "↵ ",
       ['<tab>'] = "⇥ ",
     },
+    presets = {
+      operators = false,
+    },
   },
   config = function(_, opts)
     vim.tbl_deep_extend("keep", utils.operators, opts.operators or {})
