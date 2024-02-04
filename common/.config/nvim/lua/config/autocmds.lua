@@ -14,6 +14,16 @@ function M.setup()
     }
   )
 
+  vim.api.nvim_create_autocmd(
+    "FileType",
+    {
+      pattern = "help",
+      callback = function()
+        vim.keymap.set('n', 'gd', function() vim.cmd.tag(vim.fn.expand("<cword>")) end, {buffer=true})
+      end
+    }
+  )
+
   -- Set wrap for typst, latex and markdown
   require("utils").set_ft_window_option(
     {"markdown", "typst", "tex", "latex"},

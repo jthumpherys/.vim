@@ -12,6 +12,7 @@ function M.setup()
   vim.opt.softtabstop = -1
 
   vim.opt.termguicolors = true
+  vim.opt.cursorline = true
   vim.opt.wrap = false
   vim.opt.number = true
   vim.opt.signcolumn = "yes"
@@ -20,6 +21,8 @@ function M.setup()
   vim.opt.smartcase = true
 
   vim.g.markdown_recommended_style = 0
+
+  vim.opt.cpoptions:remove('_')
 end
 
 return M
