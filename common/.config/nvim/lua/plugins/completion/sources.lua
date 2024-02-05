@@ -150,20 +150,6 @@ local source_data = {
       sources = { { fuzzy_buffer, spell } },
     },
 
-    toml = {
-      filetype = "toml",
-      use_all = true,
-      sources = {
-        {
-          {
-            entry = "crates",
-            source = { name = "crates" },
-            display = "Crates",
-          },
-        },
-      },
-    },
-
     zsh = {
       filetype = "zsh",
       use_all = true,
