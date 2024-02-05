@@ -21,7 +21,7 @@
 [init]
   defaultBranch = main
 [pull]
-  rebase = merge
+  rebase = true
 [fetch]
   prune = true
 [merge]
