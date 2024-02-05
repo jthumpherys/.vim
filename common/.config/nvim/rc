@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+alias vt="NVIM_APPNAME=nvim-dev nvim -u ${XDG_CONFIG_DIR}/nvim-dev/init.lua"
