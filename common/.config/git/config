@@ -1,8 +1,9 @@
 [include]
   path = ~/.config/git/user
+  path = ~/.local/share/nvim/lazy/tokyonight.nvim/extras/delta/tokyonight_night.gitconfig
 
 [init]
-	defaultBranch = main
+  defaultBranch = main
 [pull]
   rebase = false
 

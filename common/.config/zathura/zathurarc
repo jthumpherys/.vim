@@ -1,0 +1,2 @@
+include ../../.local/share/nvim/lazy/tokyonight.nvim/extras/zathura/tokyonight_night.zathurarc
+set selection-clipboard clipboard

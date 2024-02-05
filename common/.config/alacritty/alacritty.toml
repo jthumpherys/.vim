@@ -1,14 +1,13 @@
 live_config_reload = true
 
 # Theme
-import = ["~/.config/alacritty/duskfox.toml"]
+import = ["~/.local/share/nvim/lazy/tokyonight.nvim/extras/alacritty/tokyonight_night.toml"]
 
 
 [window]
 decorations = "None"
 title = "Alacritty"
 dynamic_title = true
-# option_as_alt = "OnlyRight"
 
 [window.class]
 instance = "alacritty"
@@ -42,15 +41,11 @@ unfocused_hollow = true
 [cursor.style]
 shape = "Beam"
 
-[color.cursor]
-text = "CellForeground"
-cursor = "CellForeground"
-
 # Motion cursor
 [cursor.vi_mode_style]
 shape = "Block"
 
-[color.vi_mode_cursor]
+[colors.vi_mode_cursor]
 text = "CellBackground"
 cursor = "CellForeground"
 
