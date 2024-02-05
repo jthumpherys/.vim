@@ -2,30 +2,49 @@
   path = ~/.config/git/user
   path = ~/.local/share/nvim/lazy/tokyonight.nvim/extras/delta/tokyonight_night.gitconfig
 
-[init]
-  defaultBranch = main
-[pull]
-  rebase = false
+[core]
+  editor = nvim
+  pager = delta
 
 [alias]
   s = status
+  ss = status --short
   d = diff
   a = add
-  ap = add -p
+  aa = add .
+  ap = add --patch
   c = commit
-  cm = commit -m
-  ca = commit -a
-  cam = commit -am
+  cm = commit --message
+  ca = commit --all
+  cam = commit --all --message
 
-[core]
-  pager = delta
-[interactive]
-  diffFilter = delta --color-only --features=interactive
+[init]
+  defaultBranch = main
+[pull]
+  rebase = merge
+[fetch]
+  prune = true
+[merge]
+  ff = false
+  log = true
+  conflictstyle = diff3
+  tool = nvimdiff
+[mergetool "vimdiff"]
+  path = nvim
+[diff]
+  colorMoved = default
+  tool = nvimdiff
+[difftool]
+  prompt = true
+  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+
 [delta]
   navigate = true
-  ; features = decorations
+  features = decorations
   side-by-side = true
   line-numbers = true
+[interactive]
+  diffFilter = delta --color-only --features=interactive
 [delta "interactive"]
   keep-plus-minus-markers = false
 [delta "decorations"]
@@ -36,18 +55,3 @@
   hunk-header-file-style = red
   hunk-header-line-number-style = "#6e6a86"
   hunk-header-style = file line-number syntax
-
-[merge]
-  conflictstyle = diff3
-
-[difftool]
-  prompt = true
-[diff]
-  colorMoved = default
-  tool = nvimdiff
-[difftool]
-  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
-[merge]
-  tool = nvimdiff
-[mergetool "vimdiff"]
-  path = nvim
