@@ -40,7 +40,7 @@ return {
         show_start = false,
         show_end = false,
         highlight = "Label",
-        exclude = { language = { "toml" }, },
+        exclude = { language = { "toml", "gitconfig" }, },
       },
     },
     confic = true,
@@ -67,7 +67,7 @@ return {
   {
     "lewis6991/gitsigns.nvim",
     opts = {
-      numhl = true,
+      -- numhl = true,
       -- on_attach = function(bufnr)
       --   require("which-key").register({}, {bufnr=bufnr})
       -- end,
