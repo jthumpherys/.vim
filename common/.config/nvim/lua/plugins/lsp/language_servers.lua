@@ -80,7 +80,7 @@ end
 function M.setup()
   for server_name, server_opts in pairs(language_servers) do
     if server_opts.capabilities == nil then
-      server_opts.capabilities = general_capabilities
+      server_opts.capabilities = general_capabilities()
     end
     require("lspconfig")[server_name].setup(server_opts)
   end
