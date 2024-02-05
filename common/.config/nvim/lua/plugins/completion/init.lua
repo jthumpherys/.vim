@@ -100,6 +100,7 @@ return {
       disable_in_visualblock = true,
       enable_check_bracket_line = true,
       check_ts = true,
+      map_cr = true,
     },
     config = function(_, opts)
       local autopairs = require("nvim-autopairs")
@@ -113,30 +114,42 @@ return {
       local brackets = { { '(', ')' }, { '[', ']' }, { '{', '}' } }
       autopairs.add_rule(
         Rule(' ', ' ', { "-markdown", "-text" })
-          :with_pair(
-            function (pair_opts)
+          :with_pair(function (pair_opts)
               local pair = pair_opts.line:sub(pair_opts.col - 1, pair_opts.col)
               return vim.tbl_contains(
                 {
-                  brackets[1][1]..brackets[1][2],
-                  brackets[2][1]..brackets[2][2],
-                  brackets[3][1]..brackets[3][2],
+                  brackets[1][1] .. brackets[1][2],
+                  brackets[2][1] .. brackets[2][2],
+                  brackets[3][1] .. brackets[3][2],
                 },
                 pair
               )
             end
           )
+          :with_del(
+            function(pair_opts)
+              local context = pair_opts.line:sub(pair_opts.col - 1, pair_opts.col + 2)
+              return vim.tbl_contains(
+                {
+                  brackets[1][1] .. '  ' .. brackets[1][2],
+                  brackets[2][1] .. '  ' .. brackets[2][2],
+                  brackets[3][1] .. '  ' .. brackets[3][2],
+                },
+                context
+              )
+            end
+          )
+          :with_move(cond.none())
+          :with_cr(cond.none())
       )
       for _, bracket in pairs(brackets) do
         autopairs.add_rule(
           Rule(bracket[1]..' ', ' '..bracket[2], { "-markdown", "-text" })
-            :with_pair(cond.none())
-            :with_move(
-              function(pair_opts)
-                return pair_opts.prev_char:match('.%'..bracket[2]) ~= nil
-              end
-            )
             :use_key(bracket[2])
+            :with_move(function(pair_opts) return pair_opts.char == bracket[2] end)
+            :with_pair(cond.none())
+            :with_del(cond.none())
+            :with_cr(cond.none())
         )
       end
 
@@ -152,9 +165,14 @@ return {
       autopairs.add_rules(
         {
           Rule('$', '$', typesetters)
-            :with_pair(cond.not_before_text('\\')),
+            :with_pair(function(pair_opts) return pair_opts.line:sub(pair_opts.col - 1, pair_opts.col - 1) ~= '\\' end),
           Rule(' ', ' ', typesetters)
-            :with_pair(cond.before_text('$') and cond.after_text('$')),
+            :with_pair(
+              function(pair_opts)
+                local prev_char = pair_opts.line:sub(pair_opts.col - 1, pair_opts.col - 1)
+                return prev_char == '$' and pair_opts.next_char == '$'
+              end
+            ),
         }
       )
 
