@@ -1,4 +1,5 @@
 local map = require("plugins.editing.keymaps")
+local wk = require("plugins.whichkey.utils")
 
 return {
   {
@@ -14,7 +15,6 @@ return {
     } end,
     config = true,
     init = function()
-      local wk = require("plugins.whichkey.utils")
       wk.operators['<leader>c'] = "Comment"
       table.insert(wk.to_register, map.comment)
     end,
@@ -30,5 +30,17 @@ return {
       { '<C-j>', function() require("moveline").block_down() end, mode = 'v', desc = "Move block down" },
       { '<C-k>', function() require("moveline").block_up() end, mode = 'v', desc = "Move block up" },
     },
+  },
+
+  {
+    "kylechui/nvim-surround",
+    version = '*',
+    config = true,
+    init = function()
+      wk.operators['<leader>s'] = "Surround"
+      wk.operators['<leader>s'] = "Surround New Lines"
+      table.insert(wk.to_register, map.surround)
+    end,
+    keys = map.surround_keys,
   },
 }
