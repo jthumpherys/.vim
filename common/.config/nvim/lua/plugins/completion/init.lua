@@ -81,7 +81,7 @@ return {
 
       sources.plugins,
     },
-    event = { "CmdlineEnter", "InsertEnter" },
+    event = { "CmdlineEnter", "CursorHoldI" },
   },
 
   {
@@ -167,6 +167,6 @@ return {
         Rule('**', '*', "markdown")
       )
     end,
-    event = "InsertEnter",
+    event = "CursorHoldI",
   },
 }
