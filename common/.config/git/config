@@ -7,19 +7,19 @@
   pager = delta
 
 [alias]
+  a = add
+  aa = add .
+  ap = add --patch
+  b = branch
+  c = commit
+  ca = commit --all
+  cm = commit --message
+  cam = commit --all --message
+  d = diff
   s = status
   ss = status --short
   sw = switch
   swl = switch -
-  d = diff
-  a = add
-  aa = add .
-  ap = add --patch
-  c = commit
-  cm = commit --message
-  ca = commit --all
-  cam = commit --all --message
-  b = branch
 
 [init]
   defaultBranch = main
