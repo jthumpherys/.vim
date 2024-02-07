@@ -16,6 +16,12 @@
   cm = commit --message
   cam = commit --all --message
   d = diff
+  l = log -n 5
+  logdiff = log --graph --all --decorate
+  logdiffshort = logdiff --oneline
+  ls = ls-files
+  m = merge
+  rb = rebase
   s = status
   ss = status --short
   sw = switch
