@@ -50,7 +50,11 @@ local language_servers = {
       },
     },
   },
-  typst_lsp = {},
+  typst_lsp = {
+    settings = {
+      exportPdf = "onType",
+    },
+  },
 }
 
 function M.extend_capabilities(capabilities)
