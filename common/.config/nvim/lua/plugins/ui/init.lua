@@ -29,7 +29,7 @@ return {
 
   {
     "lukas-reineke/indent-blankline.nvim",
-    name = "indent",
+    name = "view-indent",
     main = "ibl",
     opts = {
       indent = {
