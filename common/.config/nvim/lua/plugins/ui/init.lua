@@ -29,7 +29,7 @@ return {
 
   {
     "lukas-reineke/indent-blankline.nvim",
-    name = "indent",
+    name = "view-indent",
     main = "ibl",
     opts = {
       indent = {
@@ -40,10 +40,10 @@ return {
         show_start = false,
         show_end = false,
         highlight = "Label",
-        exclude = { language = { "toml", "gitconfig" }, },
       },
+      exclude = { filetypes = { "gitconfig" }, },
     },
-    confic = true,
+    config = true,
     version = "*",
     event = { "BufReadPost", "BufNewFile" },
   },
