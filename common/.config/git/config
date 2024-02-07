@@ -16,6 +16,7 @@
   cm = commit --message
   cam = commit --all --message
   d = diff
+  dt = difftool
   l = log -n 5
   logdiff = log --graph --all --decorate
   logdiffshort = logdiff --oneline
