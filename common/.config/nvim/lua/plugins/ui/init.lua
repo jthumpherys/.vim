@@ -43,7 +43,7 @@ return {
         exclude = { language = { "toml", "gitconfig" }, },
       },
     },
-    confic = true,
+    config = true,
     version = "*",
     event = { "BufReadPost", "BufNewFile" },
   },
