@@ -9,6 +9,8 @@
 [alias]
   s = status
   ss = status --short
+  sw = switch
+  swl = switch -
   d = diff
   a = add
   aa = add .
@@ -17,6 +19,7 @@
   cm = commit --message
   ca = commit --all
   cam = commit --all --message
+  b = branch
 
 [init]
   defaultBranch = main
