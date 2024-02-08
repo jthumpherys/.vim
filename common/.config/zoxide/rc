@@ -1,4 +1,0 @@
-#!/usr/bin/env sh
-
-# `z. somedir` will look for subdirectories of the current working directory
-alias z.="z $(pwd)"
