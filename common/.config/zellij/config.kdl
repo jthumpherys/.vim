@@ -13,6 +13,13 @@ keybinds clear-defaults=true {
     locked {
         bind "Alt q" "Alt ;" { SwitchToMode "normal"; TogglePaneFrames; }
         bind "Ctrl a" "Ctrl b" { SwitchToMode "tmux"; TogglePaneFrames; }
+        bind "Alt s" {
+            LaunchOrFocusPlugin "zellij:session-manager" {
+                floating true
+                move_to_focused_tab true
+            };
+        }
+        bind "Alt t" { TogglePaneFrames; }
     }
     pane {
         bind "h" { MovePane "Left"; }
@@ -95,7 +102,7 @@ keybinds clear-defaults=true {
         bind "K" { HalfPageScrollUp; }
     }
     shared {
-        bind "Alt s" { ToggleActiveSyncTab; }
+        bind "Alt y" { ToggleActiveSyncTab; }
         bind "Alt d" { Detach; }
         bind "Alt D" { Quit; }
         bind "Alt h" { MoveFocus "Left"; }
@@ -116,6 +123,14 @@ keybinds clear-defaults=true {
     }
     shared_except "tmux" "entersearch" "renamepane" "renametab" "locked" {
         bind "Esc" ";" "Enter" { SwitchToMode "locked"; TogglePaneFrames; }
+        bind "Alt s" {
+            LaunchOrFocusPlugin "zellij:session-manager" {
+                floating true
+                move_to_focused_tab true
+            };
+            SwitchToMode "locked";
+            TogglePaneFrames;
+        }
         bind "m" "w" { SwitchToMode "normal"; }
         bind "/" { SwitchToMode "entersearch"; }
         bind "s" { SwitchToMode "pane"; }
@@ -146,6 +161,14 @@ keybinds clear-defaults=true {
         bind "0" { GoToTab 10; }
     }
     tmux {
+        bind "s" {
+            LaunchOrFocusPlugin "zellij:session-manager" {
+                floating true
+                move_to_focused_tab true
+            };
+            SwitchToMode "locked";
+            TogglePaneFrames;
+        }
         bind "o" { FocusNextPane; SwitchToMode "locked"; TogglePaneFrames; }
         bind "O" { FocusPreviousPane; SwitchToMode "locked"; TogglePaneFrames; }
         bind "h" { MoveFocus "Left"; SwitchToMode "locked"; TogglePaneFrames; }
@@ -183,6 +206,7 @@ plugins {
     status-bar { path "status-bar"; }
     strider { path "strider"; }
     compact-bar { path "compact-bar"; }
+    session-manager { path "session-manager"; }
 }
 
 themes {
