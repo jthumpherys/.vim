@@ -16,6 +16,7 @@ function M.setup()
   vim.opt.wrap = false
   vim.opt.number = true
   vim.opt.signcolumn = "yes"
+  vim.opt.foldcolumn = '0'
 
   vim.opt.incsearch = true
   vim.opt.ignorecase = true
