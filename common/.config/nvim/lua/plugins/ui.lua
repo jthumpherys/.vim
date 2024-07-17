@@ -20,7 +20,7 @@ return {
       highlights = {
         defaults = {
           bold = true,
-          bg = require("tokyonight.colors").default.bg_highlight,
+          bg = require("tokyonight.colors").bg_highlight,
         },
       },
     },
