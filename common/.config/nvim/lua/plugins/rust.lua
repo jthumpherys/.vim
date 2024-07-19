@@ -6,19 +6,16 @@ return {
       require("plugins.lsp.language_servers").extend_on_attach(
         "rust_analyzer",
         function(_, bufnr)
-          require("which-key").register(
+          require("which-key").add(
             {
-              ['<leader>l'] = {
-                m = { require("ferris.methods.expand_macro"), "Expand Macro" },
-                d = { require("ferris.methods.open_documentation"), "Documentation" },
-                l = { require("ferris.methods.reload_workspace"), "Reload Workspace" },
-              },
-              g = {
-                c = { require("ferris.methods.open_cargo_toml"), "Cargo.toml" },
-                p = { require("ferris.methods.open_parent_module"), "Parent Module" },
-              },
-            },
-            { buffer = bufnr }
+              buffer = bufnr,
+              { '<leader>lm', require("ferris.methods.expand_macro"), desc = "Expand Macro" },
+              { '<leader>ld', require("ferris.methods.open_documentation"), desc = "Documentation" },
+              { '<leader>ll', require("ferris.methods.reload_workspace"), desc = "Reload Workspace" },
+
+              { '<leader>gc', require("ferris.methods.open_cargo_toml"), desc = "Cargo.toml" },
+              { '<leader>gp', require("ferris.methods.open_parent_module"), desc = "Parent Module" },
+            }
           )
         end
       )
@@ -38,17 +35,15 @@ return {
         "rust_analyzer",
         function(_, bufnr)
           local bacon = require("bacon")
-          require("which-key").register(
+          require("which-key").add(
             {
-              ['<leader>b'] = {
-                name = "Bacon",
-                n = { bacon.bacon_next, "Next" },
-                p = { bacon.bacon_previous, "Previous" },
-                l = { bacon.bacon_list, "List" },
-                b = { bacon.open_selected_location, "Open Under Cursor" },
-              },
-            },
-            { buffer = bufnr }
+              buffer = bufnr,
+              { '<leader>b', group = "Bacon" },
+              { '<leader>bn', bacon.bacon_next, desc = "Next" },
+              { '<leader>bp', bacon.bacon_previous, desc = "Previous" },
+              { '<leader>bl', bacon.bacon_list, desc = "List" },
+              { '<leader>bb', bacon.open_selected_location, desc = "Open Under Cursor" },
+            }
           )
           vim.api.nvim_create_autocmd("BufWritePost",
             {

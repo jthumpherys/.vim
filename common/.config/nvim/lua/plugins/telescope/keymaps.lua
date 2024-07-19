@@ -1,41 +1,36 @@
-M = {}
+local M = {}
 
-function M.set_telescope()
-  require("which-key").register({
-    ['/'] = {
-      name = "+search",
-      ['/'] = { require("telescope.builtin").live_grep, "Working Directory" },
-      b = { function() require("telescope.builtin").live_grep({grep_open_files = true}) end, "Open Buffers" },
-      c = {
-        name = "+under cursor",
-        ['/'] = { require("telescope.builtin").grep_string, "Working Directory" },
-        b = {
-          function() require("telescope.builtin").grep_string({ grep_open_files = true }) end,
-          "Open Buffers"
-        },
-      },
-      f = { require("telescope.builtin").current_buffer_fuzzy_find, "Current Buffer (fuzzy)" },
-      [':'] = { require("telescope.builtin").command_history, "Commands" },
-    },
-    f = {
-      name = "+files",
-      f = { require("telescope.builtin").find_files, "Find" },
-      g = { require("telescope.builtin").git_files, "Find Git" },
-      a = {
-        function()
-          require("telescope.builtin").find_files(
-            { hidden = true, no_ignore = true, no_ignore_parent = true }
-          )
-        end,
-        "Find All"
-      },
-      p = { require("telescope.builtin").old_files, "Find Previous" },
-      b = { require("telescope.builtin").buffers, "Find Buffers" },
+M.telescope = {
+  { '<leader>/', group = "search" },
+  { '<leader>//', "live_grep", desc = "Working Directory" },
+  { '<leader>/b', { "live_grep", {grep_open_files = true} }, desc = "Open Buffers" },
+  { '<leader>/f', "current_buffer_fuzzy_find", desc = "Current Buffer (fuzzy)" },
+  { '<leader>/:', "command_history", desc = "Commands" },
 
-      z = { require("telescope").extensions.zoxide.list, "Zoxide" },
-    },
+  { '<leader>/c', group = "under cursor" },
+  { '<leader>/c/', "grep_string", desc = "Working Directory" },
+  { '<leader>/cb', { "grep_string", {grep_open_files = true} }, desc = "Open Buffers" },
+
+  { '<leader>f', group = "files" },
+  { '<leader>ff', "find_files", desc = "Find" },
+  { '<leader>fg', "git_files", desc = "Find Git" },
+  {
+    '<leader>fa',
+    { "find_files", { hidden = true, no_ignore = true, no_ignore_parent = true } },
+    desc = "Find All",
   },
-  { prefix = '<leader>' })
+  { '<leader>fp', "old_files", desc = "Find Previous" },
+  { '<leader>fb', "buffers", desc = "Find Buffers" },
+  { '<leader>fz', "extensions.zoxide.list", desc = "Zoxide" },
+}
+
+for _, item in pairs(M.telescope) do
+  local fn = item[2]
+  if type(fn) == "string" then
+    item[2] = function() return require("telescope.builtin")[fn]() end
+  elseif type(fn) == "table" then
+    item[2] = function() return require("telescope.builtin")[fn[1]](fn[2]) end
+  end
 end
 
 return M
