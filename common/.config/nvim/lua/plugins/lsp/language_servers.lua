@@ -7,11 +7,16 @@ local language_servers = {
   marksman = {},
   pylsp = {
     on_attach = function(_, bufnr)
-      require("which-key").register(
+      require("which-key").add(
         {
-          ['<leader>la'] = { vim.lsp.buf.range_code_action, "Code Action" },
-        },
-        { buffer = bufnr, mode = 'v', noremap = true, silent = true }
+          '<leader>la',
+          vim.lsp.buf.range_code_action,
+          desc = "Code Action",
+          buffer = bufnr,
+          mode = 'v',
+          noremap = true,
+          silent = true,
+        }
       )
     end,
     settings = {

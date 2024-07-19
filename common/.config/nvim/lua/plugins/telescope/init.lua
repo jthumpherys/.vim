@@ -15,14 +15,11 @@ return {
         require("telescope").load_extension(extension)
       end
 
-      map.set_telescope()
+      -- map.set_telescope()
     end,
+    init = require("plugins.whichkey.utils").add(map.telescope),
     dependencies = { "plenary" },
     cmd = "Telescope",
-    keys = {
-      { '<leader>/', desc = "+search" },
-      { '<leader>f', desc = "+files" },
-    },
   },
 
   {

@@ -13,11 +13,7 @@ return {
       ignore = '^$',  -- ignore empty lines
     } end,
     config = true,
-    init = function()
-      local wk = require("plugins.whichkey.utils")
-      wk.operators['<leader>c'] = "Comment"
-      table.insert(wk.to_register, map.comment)
-    end,
+    init = require("plugins.whichkey.utils").add(map.comment),
   },
 
   {
