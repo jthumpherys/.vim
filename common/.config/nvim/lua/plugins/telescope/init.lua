@@ -17,7 +17,10 @@ return {
 
       -- map.set_telescope()
     end,
-    init = require("plugins.whichkey.utils").add(map.telescope),
+    init = function()
+      local wk = require("plugins.whichkey.utils")
+      wk.add(wk.prepare_keybinds(map.telescope))
+    end,
     dependencies = { "plenary" },
     cmd = "Telescope",
   },
