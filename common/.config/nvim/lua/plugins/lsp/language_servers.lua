@@ -2,7 +2,7 @@ local general_capabilities = nil
 
 local language_servers = {
   clangd = {},
-  jsonls = {},
+  -- jsonls = {},
   julials = {},
   marksman = {},
   pylsp = {

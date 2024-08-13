@@ -73,6 +73,14 @@ return {
       -- end,
     },
     config = true,
+    init = function()
+      require("plugins.whichkey.utils").add(
+        {
+          { '<leader>t', group = "git" },
+          { '<leader>ta', gitsigns.stage_hunk },
+        }
+      )
+    end,
     event = "VeryLazy",
   },
 }

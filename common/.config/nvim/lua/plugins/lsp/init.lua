@@ -69,6 +69,7 @@ return {
         show_layout = "normal",
         -- show_code_action = false,
       },
+      code_action = { extend_gitsigns = true },
       lightbulb = { enable = false },
     },
     config = true,
