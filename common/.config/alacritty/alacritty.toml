@@ -59,3 +59,13 @@ mods = "Shift"
 chars = "\u001B[13;5u"
 key = "Return"
 mods = "Control"
+
+[[keyboard.bindings]]
+key = "NumpadEnter"
+mods = "None"
+action = "ReceiveChar"
+
+[[keyboard.bindings]]
+key = "NumpadEnter"
+mods = "Shift"
+action = "ReceiveChar"
