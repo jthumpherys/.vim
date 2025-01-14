@@ -112,7 +112,7 @@ return {
       -- add spaces between brackets
       local brackets = { { '(', ')' }, { '[', ']' }, { '{', '}' } }
       autopairs.add_rule(
-        Rule(' ', ' ', { "-markdown", "-text" })
+        Rule(' ', ' ', { "-markdown", "-text", "-typst" })
           :with_pair(
             function (pair_opts)
               local pair = pair_opts.line:sub(pair_opts.col - 1, pair_opts.col)
