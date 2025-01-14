@@ -42,7 +42,7 @@ local language_servers = {
       },
     },
   },
-  ruff_lsp = {},
+  ruff = {},
   rust_analyzer = {
     settings = {
       ["rust-analyzer"] = {
@@ -55,11 +55,16 @@ local language_servers = {
       },
     },
   },
-  typst_lsp = {
+  tinymist = {
     settings = {
       exportPdf = "onType",
     },
   },
+  -- typst_lsp = {
+  --   settings = {
+  --     exportPdf = "onType",
+  --   },
+  -- },
 }
 
 function M.extend_capabilities(capabilities)
