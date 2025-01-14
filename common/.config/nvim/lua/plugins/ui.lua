@@ -67,7 +67,7 @@ return {
   {
     "lewis6991/gitsigns.nvim",
     opts = {
-      -- numhl = true,
+      numhl = true,
       -- on_attach = function(bufnr)
       --   require("which-key").register({}, {bufnr=bufnr})
       -- end,
