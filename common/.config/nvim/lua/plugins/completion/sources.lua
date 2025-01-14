@@ -41,6 +41,7 @@ local fuzzy_path = {
         -- '--glob',
         '--exclude', "'*.pyc'",
         '--exclude', "'__*__'",
+        '--exclude', "'*.pdf'",
       },
     },
   },
