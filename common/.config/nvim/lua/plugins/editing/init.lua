@@ -4,14 +4,16 @@ return {
   {
     "numToStr/Comment.nvim",
     name = "comment",
-    opts = function() return {
-      mappings = {
-        basic = false,
-        extra = false,
-      },
-      pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
-      ignore = '^$',  -- ignore empty lines
-    } end,
+    opts = function()
+      return {
+        mappings = {
+          basic = false,
+          extra = false,
+        },
+        pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+        ignore = '^$',  -- ignore empty lines
+      }
+    end,
     config = true,
     init = require("plugins.whichkey.utils").add(map.comment),
   },
