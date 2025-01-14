@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+export TYPST_FONT_PATHS="$XDG_DATA_HOME"/typst/fonts
