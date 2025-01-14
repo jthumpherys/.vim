@@ -16,6 +16,7 @@ return {
     end,
     config = true,
     init = require("plugins.whichkey.utils").add(map.comment),
+    event = "VeryLazy"
   },
 
   {
