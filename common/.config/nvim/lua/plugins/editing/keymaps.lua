@@ -28,4 +28,21 @@ M.comment = {
   { '<leader>bA', function() require("Comment.api").locked("insert.blockwise.eol")() end, desc = "Insert End of Line" },
 }
 
+M.ufo = {
+  { 'zR', function() require("ufo").openAllFolds() end, desc = "Open all folds" },
+  { 'zM', function() require("ufo").closeAllFolds() end, desc = "Close all folds" },
+  { 'zr', function() require("ufo").openFoldsExceptKinds() end, desc = "Fold less" },
+  { 'zm', function() require("ufo").closeFoldsWith() end, desc = "Fold less" },
+  {
+    'K',
+    function()
+      local winid = require("ufo").peekFoldedLinesUnderCursor()
+      if not winid then
+        require("lspsaga").hover_doc()
+      end
+    end,
+    desc = "Hover action",
+  },
+}
+
 return M

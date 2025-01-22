@@ -45,7 +45,7 @@ M.on_attach = {
   },
   { '<leader>dq', vim.diagnostic.setloclist, desc = "Set loc list" },
 
-  { 'K', "<cmd>Lspsaga hover_doc<CR>", desc = "Hover action" },
+  -- { 'K', "<cmd>Lspsaga hover_doc<CR>", desc = "Hover action" },
   { '<leader>K', "<cmd>Lspsaga hover_doc ++keep<CR>", desc = "Pinned Docs" },
   { '<leader>t', "<cmd>Lspsaga term_toggle<CR>", desc = "Terminal" },
 }

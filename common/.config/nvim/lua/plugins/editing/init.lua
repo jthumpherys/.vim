@@ -30,4 +30,33 @@ return {
       { '<C-k>', function() require("moveline").block_up() end, mode = 'v', desc = "Move block up" },
     },
   },
+
+  {
+    "kevinhwang91/nvim-ufo",
+    config = true,
+    init = function()
+      vim.o.foldcolumn = '0'
+      vim.o.foldlevel = 99
+      vim.o.foldlevelstart = 99
+      vim.o.foldenable = true
+
+      require("plugins.lsp.language_servers").extend_capabilities(
+        function()
+          return {
+            textDocument = {
+              foldingRange = {
+                dynamicRegistration = false,
+                lineFoldingOnly = true,
+              },
+            },
+          }
+        end
+      )
+
+      require("plugins.whichkey.utils").add(map.ufo)
+    end,
+    dependencies = {
+      "kevinhwang91/promise-async"
+    },
+  },
 }
