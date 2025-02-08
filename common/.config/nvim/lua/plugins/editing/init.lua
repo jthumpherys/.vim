@@ -58,5 +58,6 @@ return {
     dependencies = {
       "kevinhwang91/promise-async"
     },
+    keys = { 'z' },
   },
 }
