@@ -38,7 +38,7 @@ M.ufo = {
     function()
       local winid = require("ufo").peekFoldedLinesUnderCursor()
       if not winid then
-        require("lspsaga").hover_doc()
+        vim.cmd([[Lspsaga hover_doc]])
       end
     end,
     desc = "Hover action",
