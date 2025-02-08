@@ -23,7 +23,7 @@ return {
     event = "VeryLazy",
     dependencies = {
       {
-        "RRethy/nvim-treesitter-endwise",
+        "metiulekm/nvim-treesitter-endwise",
         init = function() utils.options.endwise = { enable = true } end,
       },
     },
